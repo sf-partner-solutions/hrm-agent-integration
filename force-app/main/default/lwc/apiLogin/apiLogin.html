@@ -1,0 +1,95 @@
+<template>
+    <lightning-card>
+        <!-- Existing Row: Image + Text -->
+        <div class="slds-p-around_small">
+            <div class="slds-grid slds-align_absolute-center slds-gutters_small">
+                <!-- Logo Image (30x30) -->
+                <div style="padding-right: 8px;">
+                    <img src={logoUrl} alt="API Integration Logo" style="height: 30px; width: 30px;" />
+                </div>
+                <!-- Text -->
+                <div>
+                    <template if:true={showInitialForm}>
+                        <p class="slds-text-body_regular">{textValue}</p>
+                    </template>
+                    <template if:true={showConnectedState}>
+                        <p class="slds-text-body_regular">{connectedText}</p>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conditional Content Row -->
+        <template if:true={showInitialForm}>
+            <!-- Connection Message and Button -->
+            <div class="slds-p-around_small">
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <p class="slds-text-body_small slds-text-align_center">
+                        Authorize and connect your API account to search for companies and contacts, and fetch enriched data directly within Salesforce.
+                    </p>
+                </div>
+
+                <!-- Connect Button Row -->
+                <div class="slds-text-align_center">
+                    <lightning-button 
+                        variant="brand" 
+                        label="Connect API" 
+                        title="Connect to API" 
+                        onclick={handleConnect}
+                        disabled={isConnecting}
+                        class="slds-m-left_x-small">
+                    </lightning-button>
+                </div>
+            </div>
+        </template>
+
+        <!-- Connected State: Success Message with Disconnect Button -->
+        <template if:true={showConnectedState}>
+            <div class="slds-p-around_small slds-text-align_center">
+                <!-- Success Icon -->
+                <div class="slds-m-bottom_small">
+                    <lightning-icon 
+                        icon-name="utility:check" 
+                        alternative-text="Connected" 
+                        size="large" 
+                        variant="success">
+                    </lightning-icon>
+                </div>
+                
+                <!-- Status Text -->
+                <p class="slds-text-body_small slds-m-bottom_medium">
+                    Status: Connected
+                </p>
+
+                <!-- Disconnect Button -->
+                <lightning-button 
+                    variant="destructive" 
+                    label="Disconnect API" 
+                    title="Disconnect from API" 
+                    onclick={handleDisconnect}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+            </div>
+        </template>
+
+        <!-- Loading State -->
+        <template if:true={isConnecting}>
+            <div class="slds-p-around_small slds-text-align_center">
+                <lightning-spinner alternative-text="Connecting..." size="small"></lightning-spinner>
+                <p class="slds-text-body_small slds-m-top_small slds-m-bottom_small">
+                    Connecting to API...
+                </p>
+                <p class="slds-text-body_small slds-text-color_weak slds-m-bottom_small">
+                    Complete authentication in the popup window
+                </p>
+                <lightning-button 
+                    variant="neutral" 
+                    label="Cancel" 
+                    title="Cancel Authentication" 
+                    onclick={handleCancel}
+                    class="slds-m-top_small">
+                </lightning-button>
+            </div>
+        </template>
+    </lightning-card>
+</template>

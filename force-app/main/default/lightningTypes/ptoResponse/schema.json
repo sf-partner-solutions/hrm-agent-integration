@@ -1,0 +1,5 @@
+{
+"title": "My Card Response Logo",
+"description": "My Card Response Logo Schema",
+"lightning:type": "@apexClassType/c__CardResponseLogoController$ResponseList"
+}

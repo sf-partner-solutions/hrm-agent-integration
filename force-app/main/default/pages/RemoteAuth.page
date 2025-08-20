@@ -1,0 +1,31 @@
+<apex:page controller="RemoteAuthController" showHeader="false" standardStylesheets="false">
+    <script>
+        function storeTokenRemote(token, callback) {
+            try {
+                console.log('Calling RemoteAction with token:', token ? 'PROVIDED' : 'MISSING');
+                
+                RemoteAuthController.storeToken(token, function(result, event) {
+                    console.log('RemoteAction result:', result);
+                    console.log('RemoteAction event status:', event.status);
+                    
+                    if (event.status) {
+                        callback(null, result);
+                    } else {
+                        callback(event.message, null);
+                    }
+                });
+            } catch (error) {
+                console.error('RemoteAction error:', error);
+                callback(error.toString(), null);
+            }
+        }
+        
+        // Make function available globally
+        window.storeTokenRemote = storeTokenRemote;
+        
+        // Signal that the page is ready
+        if (window.parent && window.parent.postMessage) {
+            window.parent.postMessage({type: 'REMOTE_AUTH_READY'}, '*');
+        }
+    </script>
+</apex:page>

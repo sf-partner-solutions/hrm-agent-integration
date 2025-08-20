@@ -1,0 +1,78 @@
+/* Custom styles for API Login component */
+
+.slds-text-align_center {
+    text-align: center;
+}
+
+.slds-m-bottom_small {
+    margin-bottom: 0.5rem;
+}
+
+.slds-m-bottom_medium {
+    margin-bottom: 1rem;
+}
+
+.slds-m-top_small {
+    margin-top: 0.5rem;
+}
+
+/* Success icon styling */
+.slds-icon_container {
+    display: inline-flex;
+}
+
+/* Custom button hover effects */
+lightning-button.connect-button {
+    --slds-c-button-brand-color-background: #0176d3;
+    --slds-c-button-brand-color-background-hover: #014486;
+}
+
+lightning-button.disconnect-button {
+    --slds-c-button-destructive-color-background: #ba0517;
+    --slds-c-button-destructive-color-background-hover: #8e030f;
+}
+
+/* Loading spinner container */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+}
+
+/* Status text styling */
+.status-text {
+    font-weight: 500;
+    color: #080707;
+}
+
+/* Success state styling */
+.success-state {
+    color: #027e46;
+}
+
+/* Connection description text */
+.connection-description {
+    color: #3e3e3c;
+    line-height: 1.4;
+}
+
+/* Logo container */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .slds-grid {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .logo-container {
+        justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+}

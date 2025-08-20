@@ -1,0 +1,22 @@
+<template>
+    <lightning-card>
+        <!-- Existing Row: Image + Text -->
+        <div class="slds-p-around_small">
+            <div class="slds-grid slds-align_absolute-center slds-gutters_small">
+                <!-- Logo Image (30x30) -->
+                <div style="padding-right: 8px;">
+                    <img src={logoUrl} alt="Workday Logo" style="height: 30px; width: 30px;" />
+                </div>
+                <!-- Text -->
+                <div>
+                    <p class="slds-text-body_regular">{textValue}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Row: Button with Logo + Text -->
+        <div class="slds-p-around_small slds-text-align_center">
+            <lightning-button variant="brand" label="View on Workday" title="View on Workday" icon-name="action:preview" class="slds-m-left_x-small"></lightning-button>
+        </div>
+    </lightning-card>
+</template>

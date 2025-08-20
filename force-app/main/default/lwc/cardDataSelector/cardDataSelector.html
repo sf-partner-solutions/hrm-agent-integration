@@ -1,0 +1,86 @@
+<template>
+    <lightning-card>
+        <!-- Existing Row: Image + Text -->
+        <div class="slds-p-around_small">
+            <div class="slds-grid slds-align_absolute-center slds-gutters_small">
+                <!-- Logo Image (30x30) -->
+                <div style="padding-right: 8px;">
+                    <img src={logoUrl} alt="Workday Logo" style="height: 30px; width: 30px;" />
+                </div>
+                <!-- Text -->
+                <div>
+                    <template if:true={showInitialForm}>
+                        <p class="slds-text-body_regular">{textValue}</p>
+                    </template>
+                    <template if:true={showConfirmation}>
+                        <p class="slds-text-body_regular">{confirmationText}</p>
+                    </template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conditional Content Row -->
+        <template if:true={showInitialForm}>
+            <!-- Date Selection Form -->
+            <div class="slds-p-around_small">
+                <div class="slds-form-element slds-m-bottom_medium">
+                    <label class="slds-form-element__label slds-text-body_small" for="date-range">
+                        Date
+                    </label>
+                    <div class="slds-form-element__control">
+                        <div class="slds-grid slds-gutters_small slds-wrap">
+                            <!-- Start Date -->
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input
+                                    type="date"
+                                    name="startDate"
+                                    value={startDate}
+                                    onchange={handleStartDateChange}
+                                    variant="label-hidden"
+                                    placeholder="Select start date...">
+                                </lightning-input>
+                            </div>
+                            <!-- End Date -->
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-input
+                                    type="date"
+                                    name="endDate"
+                                    value={endDate}
+                                    onchange={handleEndDateChange}
+                                    variant="label-hidden"
+                                    placeholder="Select end date...">
+                                </lightning-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Schedule Button Row -->
+                <div class="slds-text-align_center">
+                    <lightning-button 
+                        variant="brand" 
+                        label="Schedule" 
+                        title="Schedule PTO" 
+                        onclick={handleSchedule}
+                        disabled={isScheduleDisabled}
+                        class="slds-m-left_x-small">
+                    </lightning-button>
+                </div>
+            </div>
+        </template>
+
+        <!-- Confirmation Row: Button with Logo + Text -->
+        <template if:true={showConfirmation}>
+            <div class="slds-p-around_small slds-text-align_center">
+                <lightning-button 
+                    variant="brand" 
+                    label="View in Workday" 
+                    title="View in Workday" 
+                    icon-name="action:preview" 
+                    onclick={handleViewInWorkday}
+                    class="slds-m-left_x-small">
+                </lightning-button>
+            </div>
+        </template>
+    </lightning-card>
+</template>
