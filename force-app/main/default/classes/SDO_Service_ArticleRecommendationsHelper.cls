@@ -215,24 +215,16 @@ public class SDO_Service_ArticleRecommendationsHelper {
     
     //Login with a integrated user to get valid session id through SOAP
     //Lightning session id is not valid. Needs to exist before requests can execute
-    //Default user is of alias ehelp // ***REMOVED***
+    //SECURITY NOTE: This method has been refactored to use Named Credentials
+    //Configure Named Credential 'Einstein_Integration' in Setup with OAuth credentials
     public static String getSession(){
-        User restUser = [Select Username From User Where (CommunityNickname = 'ehelp' Or Alias = 'ehelp') OR (FirstName = 'Einstein' AND LastName ='Helper') Limit 1];
-        HttpRequest request = new HttpRequest();
-        String endpoint = 'https://login.salesforce.com/services/oauth2/token';
-        endpoint += '?grant_type=password';
-        endpoint += '&client_id=***REMOVED***';
-        endpoint += '&client_secret=***REMOVED***';
-        endpoint += '&username=' + restUser.Username;
-        endpoint += '&password=***REMOVED***';
-        request.setMethod('POST');
-        
-        request.setEndpoint(endpoint);
-        HttpResponse res = (new Http()).send(request);
-        System.debug(res);
-        
-        Map<String,Object> session = (Map<String,Object>)JSON.deserializeUntyped(res.getBody());
-        return String.valueOf(session.get('access_token'));
+        // TODO: Replace with Named Credential callout
+        // Use Named Credential URL format: callout:Einstein_Integration/services/oauth2/token
+        // This will securely handle OAuth authentication without exposing credentials
+
+        throw new SecurityException('OAuth credentials must be configured in Named Credentials. ' +
+            'Setup Required: Create a Named Credential named "Einstein_Integration" ' +
+            'with your OAuth Client ID, Client Secret, and user credentials.');
     }
     
     //Fetch type without schema

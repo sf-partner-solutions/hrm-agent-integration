@@ -1,12 +1,17 @@
+// SECURITY WARNING: This controller exposes sensitive OAuth credentials through public properties
+// DO NOT USE in production. Replace with Named Credentials.
+// TODO: Refactor to use Named Credential 'Pardot_Integration' instead of public properties
 public class SDO_Pardot_ImportDataFromCSVController {
 public Blob csvFileBody{get;set;}
 public string csvAsString{get;set;}
 public String[] csvFileLines{get;set;}
 public String businessUnitId { get; set; }
-public String username { get; set; }
-public String password { get; set; }
-public String key { get; set; }
-public String secret { get; set; } 
+// WARNING: These properties should NEVER be public - security risk
+// Use Private Named Credentials instead
+private String username { get; set; }
+private String password { get; set; }
+private String key { get; set; }
+private String secret { get; set; } 
 public List<account> acclist{get;set;}
   public SDO_Pardot_ImportDataFromCSVController(){
     csvFileLines = new String[]{};

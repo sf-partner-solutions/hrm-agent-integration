@@ -38,6 +38,18 @@ $RECYCLE.BIN/
 
 # Local environment variables
 .env
+.env.local
+.env.*.local
+
+# Credentials and secrets (SECURITY)
+**/credentials.json
+**/config/secrets.json
+*.pem
+*.key
+*.p12
+*.pfx
+**/.secrets/
+**/secrets/
 
 # Python Salesforce Functions
 **/__pycache__/

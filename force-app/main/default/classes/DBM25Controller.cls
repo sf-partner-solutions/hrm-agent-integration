@@ -9,7 +9,9 @@ public class DBM25Controller {
     public static final String METRIC_TYPE_PERCENT = 'percent';
     public static final String METRIC_TYPE_NUMBER = 'number';
     public static final String defaultReportFolderName = 'DashboardMagicReports';
-    public static final String notificationEmail = '***REMOVED***';
+    // SECURITY NOTE: Email moved to Custom Metadata for security
+    // Configure in Setup > Custom Metadata Types > DBM_Configuration
+    public static final String notificationEmail = getNotificationEmail();
 
     
     public static String packageNamespace;
@@ -565,5 +567,13 @@ public class DBM25Controller {
             }        
         }
 
+    }
+
+    // Helper method to retrieve notification email from Custom Metadata
+    // TODO: Create Custom Metadata Type 'DBM_Configuration' with field 'Notification_Email__c'
+    private static String getNotificationEmail() {
+        // Temporarily return empty string to avoid hardcoded email exposure
+        // Replace with: return DBM_Configuration__mdt.getInstance('Default').Notification_Email__c;
+        return '';
     }
 }
