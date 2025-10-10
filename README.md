@@ -13,7 +13,7 @@ The Fdesdo platform is a multi-functional Salesforce application designed to str
 ### PTO Management System
 - **PTO Balance Checking**: Real-time PTO balance retrieval for logged-in users via Agentforce
 - **PTO Request Scheduling**: Interactive date selector for scheduling new PTO requests
-- **Workday Integration**: Direct integration links to external Workday system
+- **HRM Integration**: Direct integration links to external HRM system
 - **Visual Feedback**: Modern UI with responsive date pickers and confirmation messages
 
 ### Agentforce Integration
@@ -202,7 +202,7 @@ force-app/main/default/
 4. **Review**: See calculated number of days automatically
 5. **Schedule**: Click "Schedule" button to submit request
 6. **Confirmation**: View confirmation message with scheduled days
-7. **Optional**: Click "View in Workday" to manage in external system
+7. **Optional**: Click "View in HRM" to manage in external system
 
 ### Using In-App Guidance
 
@@ -220,12 +220,12 @@ force-app/main/default/
 - Automatic day calculation (inclusive of both dates)
 - Disabled submit button until both dates selected
 - Confirmation screen with scheduled day count
-- Integration link to external Workday system
+- Integration link to external HRM system
 - Custom events for parent component communication
 
 **Events Dispatched:**
 - `schedule` - Fired when PTO is scheduled (includes startDate, endDate, days)
-- `viewworkday` - Fired when "View in Workday" is clicked
+- `viewHRM` - Fired when "View in HRM" is clicked
 
 ### Card Response Logo
 
@@ -307,7 +307,7 @@ Edit [TryourAgentforceIntegration.prompt-meta.xml](force-app/main/default/prompt
 - ✅ PTO balance checking
 - ✅ PTO request scheduling
 - ✅ Date range calculation
-- ✅ Workday integration links
+- ✅ HRM integration links
 - ✅ User-specific response retrieval
 
 ### Agentforce AI
