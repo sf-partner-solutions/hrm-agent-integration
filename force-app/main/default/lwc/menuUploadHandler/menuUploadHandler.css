@@ -1,0 +1,9 @@
+.amadeus-logo {
+    max-height: 18px;
+    width: auto;
+}
+
+:host {
+    --slds-c-button-brand-color-background: #0070d2;
+    --slds-c-button-brand-color-background-hover: #005fb2;
+}

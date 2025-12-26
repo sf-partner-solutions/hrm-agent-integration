@@ -1,0 +1,4 @@
+{
+  "title" : "Banquet Menu Response",
+  "lightning:type" : "@apexClassType/BanquetMenuAgentAction$MenuIngestionOutput"
+}

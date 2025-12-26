@@ -1,0 +1,60 @@
+<template>
+    <div class="slds-card slds-text-align_center">
+        <!-- Amadeus Logo -->
+        <div class="slds-m-top_medium">
+            <img src={amadeusLogoUrl} alt="Amadeus Delphi" class="amadeus-logo" />
+        </div>
+
+        <!-- Success Icon -->
+        <div class="slds-m-vertical_large">
+            <lightning-icon
+                icon-name="utility:success"
+                alternative-text="Success"
+                variant="success"
+                size="large">
+            </lightning-icon>
+        </div>
+
+        <!-- Success Message -->
+        <div class="slds-m-bottom_large">
+            <h2 class="slds-text-heading_medium slds-m-bottom_small">
+                {successMessage}
+            </h2>
+            <p class="slds-text-body_regular slds-text-color_weak">
+                The menu items have been successfully imported into your Item library.
+            </p>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="slds-m-bottom_large">
+            <p class="slds-text-body_regular slds-m-bottom_medium">
+                Would you like my help to insert new menu items?
+            </p>
+            <div class="slds-button-group-row slds-grid slds-grid_align-center">
+                <lightning-button
+                    variant="brand"
+                    label="Upload Another Menu"
+                    title="Upload another menu file"
+                    onclick={handleUploadMore}
+                    icon-name="utility:upload"
+                    class="slds-m-right_small">
+                </lightning-button>
+                <lightning-button
+                    if:true={showViewButton}
+                    variant="neutral"
+                    label="View Created Items"
+                    title="View the items that were created"
+                    onclick={handleViewItems}
+                    icon-name="utility:preview">
+                </lightning-button>
+            </div>
+        </div>
+
+        <!-- Help Text -->
+        <div class="slds-m-bottom_medium">
+            <p class="slds-text-body_small slds-text-color_weak">
+                You can now use these items when creating Banquet Event Orders.
+            </p>
+        </div>
+    </div>
+</template>

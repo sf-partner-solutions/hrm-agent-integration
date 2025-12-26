@@ -1,0 +1,87 @@
+<template>
+    <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open slds-modal_large">
+        <div class="slds-modal__container">
+            <!-- Header -->
+            <div class="slds-modal__header">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
+                    title="Close" onclick={handleCancel}>
+                    <lightning-icon icon-name="utility:close" alternative-text="Close" variant="inverse" size="small">
+                    </lightning-icon>
+                </button>
+                <div class="slds-media slds-media_center">
+                    <div class="slds-media__figure">
+                        <img src={amadeusLogoUrl} alt="Amadeus Delphi" class="amadeus-logo-small" />
+                    </div>
+                    <div class="slds-media__body">
+                        <h2 class="slds-text-heading_medium">Edit Menu Items</h2>
+                        <p class="slds-text-body_small slds-text-color_weak">{itemCountText}</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Body -->
+            <div class="slds-modal__content slds-p-around_medium">
+                <!-- Instructions -->
+                <div class="slds-box slds-theme_shade slds-m-bottom_medium">
+                    <p class="slds-text-body_small">
+                        <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small">
+                        </lightning-icon>
+                        Double-click any cell to edit. Use the action menu to delete items. Click Save when ready to
+                        create items in Delphi.
+                    </p>
+                </div>
+
+                <!-- Editable Data Table -->
+                <div if:true={hasItems} class="slds-scrollable_y" style="height: 450px;">
+                    <lightning-datatable
+                        key-field="id"
+                        data={editableItems}
+                        columns={columns}
+                        onsave={handleSave}
+                        oncellchange={handleCellChange}
+                        draft-values={draftValues}
+                        onrowaction={handleRowAction}
+                        hide-checkbox-column
+                        suppress-bottom-bar>
+                    </lightning-datatable>
+                </div>
+
+                <!-- No Items Message -->
+                <div if:false={hasItems} class="slds-align_absolute-center slds-m-vertical_large">
+                    <div class="slds-text-align_center">
+                        <lightning-icon icon-name="utility:info" size="large" class="slds-m-bottom_small">
+                        </lightning-icon>
+                        <p class="slds-text-heading_small">No items to edit</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="slds-modal__footer">
+                <lightning-button
+                    label="Cancel"
+                    title="Cancel editing"
+                    onclick={handleCancel}
+                    disabled={isLoading}
+                    class="slds-m-right_small">
+                </lightning-button>
+                <lightning-button
+                    variant="brand"
+                    label="Save & Create Items"
+                    title="Save changes and create items"
+                    onclick={handleSave}
+                    disabled={isLoading}
+                    icon-name="utility:save">
+                </lightning-button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Backdrop -->
+    <div class="slds-backdrop slds-backdrop_open"></div>
+
+    <!-- Loading Spinner -->
+    <div if:true={isLoading} class="slds-is-relative">
+        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    </div>
+</template>

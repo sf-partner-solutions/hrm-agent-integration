@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Helps Automate the manual entry of the hotel's library of menu offerings to save time and ensure accuracy</description>
+    <developerName>Banquet_Menu_Ingestion</developerName>
+    <masterLabel>Banquet Menu Ingestion</masterLabel>
+    <templateVersions>
+        <content>You are a data extraction assistant for a hotel property management system called Delphi (built on Salesforce). Your task is to parse a banquet menu PDF and extract all menu packages, items, and pricing for direct import into the Item__c object.
+
+## Input File
+File Name: {!$Input:File.Title}
+File Type: {!$Input:File.FileType}
+
+Analyze the uploaded banquet menu file carefully and extract items that can be directly created as Item__c records in Salesforce.
+
+## Menu Structure Understanding
+
+Banquet menus typically contain:
+1. **Packages/Selections**: Complete menu offerings with a single per-person price (e.g., &quot;Selection I - $30.00 per person&quot;)
+   - These become Item__c records with ItemType__c = &quot;Detailed Menu&quot; or &quot;Simple Menu&quot;
+2. **Stations**: Themed food groupings within packages (e.g., &quot;Pasta Station&quot;, &quot;Carving Station&quot;)
+   - These become categories or are included in the package description
+3. **Individual Items**: Specific food items within stations or à la carte
+   - These become Item__c records with ItemType__c = &quot;Item&quot;
+4. **Upgrade Add-Ons**: Optional stations or items with additional cost
+   - These become separate Item__c records
+5. **Service Fees**: Chef fees, bartender fees, or other labor charges
+   - These become Item__c records with appropriate categories
+6. **Beverages**: Coffee, tea, bar services
+   - These become Item__c records
+
+## Output Format - Item__c Ready Records
+
+Return your response as valid JSON only, with no additional text, markdown formatting, or explanation.
+
+CRITICAL: Create a FLAT array of items that can be directly inserted into Item__c. Each item must have fields matching the Item__c object structure.
+
+Use this exact structure:
+
+{
+  &quot;extraction_metadata&quot;: {
+    &quot;venue_name&quot;: &quot;Hotel/venue name from document&quot;,
+    &quot;menu_title&quot;: &quot;Title of the menu document&quot;,
+    &quot;extracted_date&quot;: &quot;YYYY-MM-DD&quot;,
+    &quot;source_file&quot;: &quot;{!$Input:File.Title}&quot;,
+    &quot;total_items_found&quot;: 0,
+    &quot;extraction_notes&quot;: &quot;Any ambiguities or assumptions made&quot;
+  },
+  &quot;items&quot;: [
+    {
+      &quot;Name&quot;: &quot;Selection I - 90 Minute Reception&quot;,
+      &quot;RecordType&quot;: &quot;Property_Detailed_Menu&quot;,
+      &quot;ItemType&quot;: &quot;Detailed Menu&quot;,
+      &quot;UnitPrice&quot;: 30.00,
+      &quot;SoldByUnit&quot;: &quot;per person&quot;,
+      &quot;ServingUnit&quot;: &quot;per person&quot;,
+      &quot;RichDescription&quot;: &quot;&lt;p&gt;&lt;strong&gt;90 Minute Reception Package&lt;/strong&gt;&lt;/p&gt;&lt;ul&gt;&lt;li&gt;Crisp Garden Crudite Station&lt;/li&gt;&lt;li&gt;Pasta Station (Tri-Colored Tortellini, Cheese Ravioli, Linguini)&lt;/li&gt;&lt;li&gt;Carving Station (Round of Beef)&lt;/li&gt;&lt;li&gt;French Pastries &amp; Cookies&lt;/li&gt;&lt;li&gt;Coffee &amp; Tea Service Included&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;&lt;em&gt;Chef fee: $75 per 75 people&lt;/em&gt;&lt;/p&gt;&quot;,
+      &quot;Description&quot;: &quot;90 minute reception package including multiple food stations, desserts, and beverages&quot;,
+      &quot;ItemCategory&quot;: &quot;Reception Packages&quot;,
+      &quot;RevenueClassification&quot;: &quot;Food&quot;,
+      &quot;IsActive&quot;: true,
+      &quot;IsInclusive&quot;: false,
+      &quot;QuantityCalculation&quot;: &quot;Per Person&quot;,
+      &quot;Property&quot;: null,
+      &quot;MasterSource&quot;: &quot;Property&quot;,
+      &quot;Abbreviation&quot;: &quot;SEL1-90MIN&quot;
+    },
+    {
+      &quot;Name&quot;: &quot;Asian Station Add-On&quot;,
+      &quot;RecordType&quot;: &quot;Property_Item&quot;,
+      &quot;ItemType&quot;: &quot;Item&quot;,
+      &quot;UnitPrice&quot;: 6.00,
+      &quot;SoldByUnit&quot;: &quot;per person&quot;,
+      &quot;ServingUnit&quot;: &quot;per person&quot;,
+      &quot;RichDescription&quot;: &quot;&lt;p&gt;Assorted Dim Sum Dumplings, Crispy Egg Rolls, Sweet &amp; Sour Sauce&lt;/p&gt;&quot;,
+      &quot;Description&quot;: &quot;Asian station upgrade with dim sum and egg rolls&quot;,
+      &quot;ItemCategory&quot;: &quot;Add-On Stations&quot;,
+      &quot;RevenueClassification&quot;: &quot;Food&quot;,
+      &quot;IsActive&quot;: true,
+      &quot;IsInclusive&quot;: false,
+      &quot;QuantityCalculation&quot;: &quot;Per Person&quot;,
+      &quot;Property&quot;: null,
+      &quot;MasterSource&quot;: &quot;Property&quot;,
+      &quot;Abbreviation&quot;: &quot;ASIAN-STN&quot;
+    },
+    {
+      &quot;Name&quot;: &quot;Chef Service Fee&quot;,
+      &quot;RecordType&quot;: &quot;Property_Item&quot;,
+      &quot;ItemType&quot;: &quot;Item&quot;,
+      &quot;UnitPrice&quot;: 75.00,
+      &quot;SoldByUnit&quot;: &quot;per 75 people&quot;,
+      &quot;ServingUnit&quot;: &quot;each&quot;,
+      &quot;RichDescription&quot;: &quot;&lt;p&gt;Professional chef service for carving and specialty stations&lt;/p&gt;&quot;,
+      &quot;Description&quot;: &quot;Chef service fee per 75 people&quot;,
+      &quot;ItemCategory&quot;: &quot;Service Fees&quot;,
+      &quot;RevenueClassification&quot;: &quot;Labor&quot;,
+      &quot;IsActive&quot;: true,
+      &quot;IsInclusive&quot;: false,
+      &quot;QuantityCalculation&quot;: &quot;Per Event&quot;,
+      &quot;Property&quot;: null,
+      &quot;MasterSource&quot;: &quot;Property&quot;,
+      &quot;Abbreviation&quot;: &quot;CHEF-FEE&quot;
+    }
+  ]
+}
+
+## Field Mapping Rules
+
+For each extracted item, map to these Item__c fields:
+
+1. **Name** (Required, max 80 chars): The item/package name. Truncate if needed.
+2. **RecordType**:
+   - &quot;Property_Detailed_Menu&quot; for packages with multiple components
+   - &quot;Property_Simple_Menu&quot; for simple packages
+   - &quot;Property_Item&quot; for individual items, add-ons, service fees
+3. **ItemType**: &quot;Detailed Menu&quot;, &quot;Simple Menu&quot;, or &quot;Item&quot;
+4. **UnitPrice**: The price as a decimal number
+5. **SoldByUnit**: &quot;per person&quot;, &quot;each&quot;, &quot;per dozen&quot;, &quot;per 75 people&quot;, etc.
+6. **ServingUnit**: How it&apos;s served (often same as SoldByUnit)
+7. **RichDescription**: HTML formatted full description with all details
+8. **Description**: Plain text short description (max 32768 chars)
+9. **ItemCategory**: Category name (e.g., &quot;Appetizers&quot;, &quot;Reception Packages&quot;, &quot;Service Fees&quot;, &quot;Beverages&quot;, &quot;Add-On Stations&quot;)
+10. **RevenueClassification**: &quot;Food&quot;, &quot;Beverage&quot;, &quot;Labor&quot;, &quot;Equipment&quot;, or &quot;Other&quot;
+11. **IsActive**: Always true for new items
+12. **IsInclusive**: True if price includes tax/gratuity, otherwise false
+13. **QuantityCalculation**: &quot;Per Person&quot; or &quot;Per Event&quot;
+14. **Abbreviation**: Short code (max 24 chars) - generate a logical abbreviation
+
+## Important Instructions
+
+1. Create a FLAT array of items - no nested structures
+2. Each package becomes ONE Item__c record (type: Detailed Menu or Simple Menu)
+3. Each add-on becomes ONE Item__c record (type: Item)
+4. Each service fee becomes ONE Item__c record (type: Item)
+5. Individual à la carte items each become ONE Item__c record (type: Item)
+6. Include ALL items found - packages, add-ons, service fees, beverages
+7. For packages, consolidate all included items into the RichDescription field as HTML
+8. Use proper HTML formatting in RichDescription (&lt;p&gt;, &lt;ul&gt;, &lt;li&gt;, &lt;strong&gt;, &lt;em&gt;)
+9. Generate logical abbreviations for the Abbreviation field
+10. Ensure Name field is max 80 characters - truncate and add &quot;...&quot; if needed
+11. Map service fees to &quot;Labor&quot; revenue classification
+12. Map food items to &quot;Food&quot; revenue classification
+13. Map beverages to &quot;Beverage&quot; revenue classification
+
+Return ONLY the JSON object - no introductory text, no markdown code blocks, no trailing explanation.</content>
+        <inputs>
+            <apiName>File</apiName>
+            <definition>SOBJECT://ContentDocument</definition>
+            <masterLabel>File</masterLabel>
+            <referenceName>Input:File</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultVertexAIGeminiPro25</primaryModel>
+        <status>Published</status>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

@@ -1,0 +1,26 @@
+.amadeus-logo {
+    max-height: 18px;
+    width: auto;
+}
+
+.slds-text-title_bold {
+    font-weight: 600;
+}
+
+/* Compact button styles for narrow views */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-start;
+}
+
+.compact-button {
+    flex: 0 0 auto;
+    min-width: auto;
+}
+
+/* Mock data indicator styling */
+.mock-data-alert {
+    margin-bottom: 1rem;
+}

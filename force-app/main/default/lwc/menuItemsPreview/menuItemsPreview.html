@@ -1,0 +1,119 @@
+<template>
+    <div class="slds-card">
+        <!-- Header with Logo -->
+        <div class="slds-card__header">
+            <div class="slds-grid slds-grid_vertical-align-center">
+                <div class="slds-col slds-m-right_small">
+                    <img src={amadeusLogoUrl} alt="Amadeus Delphi" class="amadeus-logo" />
+                </div>
+                <div class="slds-col">
+                    <p class="slds-text-body_regular">{totalItemsText}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metadata Info -->
+        <div if:true={hasItems} class="slds-card__body">
+            <!-- Mock Data Indicator -->
+            <div if:true={isUsingMockData} class="mock-data-alert">
+                <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
+                    <span class="slds-assistive-text">info</span>
+                    <lightning-icon icon-name="utility:info" size="x-small" variant="warning" class="slds-m-right_x-small"></lightning-icon>
+                    <h2 class="slds-text-body_regular">
+                        Mock data - Connect API unavailable
+                    </h2>
+                </div>
+            </div>
+
+            <div class="slds-grid slds-wrap slds-m-bottom_small">
+                <div if:true={showVenueName} class="slds-col slds-size_1-of-2 slds-m-bottom_x-small">
+                    <span class="slds-text-title">Venue:</span>
+                    <span class="slds-m-left_x-small">{extractionMetadata.venue_name}</span>
+                </div>
+                <div if:true={showMenuTitle} class="slds-col slds-size_1-of-2 slds-m-bottom_x-small">
+                    <span class="slds-text-title">Menu:</span>
+                    <span class="slds-m-left_x-small">{extractionMetadata.menu_title}</span>
+                </div>
+            </div>
+
+            <!-- Extraction Notes -->
+            <div if:true={extractionNotes} class="slds-box slds-theme_shade slds-m-bottom_medium">
+                <p class="slds-text-body_small">
+                    <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                    <span>{extractionNotes}</span>
+                </p>
+            </div>
+
+            <!-- Data Table -->
+            <div class="slds-scrollable_y" style="max-height: 400px;">
+                <lightning-datatable
+                    key-field="Name"
+                    data={displayItems}
+                    columns={columns}
+                    onrowselection={handleRowSelection}
+                    max-row-selection="200"
+                    show-row-number-column>
+                </lightning-datatable>
+            </div>
+
+            <!-- Instructions -->
+            <div class="slds-m-top_medium slds-text-body_small slds-text-color_weak">
+                <p>Review the extracted menu items above. You can:</p>
+                <ul class="slds-list_dotted">
+                    <li>Select specific items to import (or import all)</li>
+                    <li>Make changes to edit items before importing</li>
+                    <li>Cancel to abort the import process</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- No Items Message -->
+        <div if:false={hasItems} class="slds-card__body">
+            <div class="slds-illustration slds-illustration_small">
+                <div class="slds-text-longform">
+                    <h3 class="slds-text-heading_medium">No Items Found</h3>
+                    <p class="slds-text-body_regular">No menu items were extracted from the uploaded file.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="slds-card__footer">
+            <div class="button-container">
+                <lightning-button
+                    variant="brand"
+                    label={insertButtonLabel}
+                    title="Create selected items in Delphi"
+                    onclick={handleInsertItems}
+                    disabled={isLoading}
+                    class="compact-button">
+                </lightning-button>
+                <lightning-button
+                    variant="neutral"
+                    label="Make Changes"
+                    title="Edit items before importing"
+                    onclick={handleMakeChanges}
+                    disabled={isLoading}
+                    icon-name="utility:edit"
+                    class="compact-button">
+                </lightning-button>
+                <lightning-button
+                    variant="neutral"
+                    label="Cancel"
+                    title="Cancel import"
+                    onclick={handleCancel}
+                    disabled={isLoading}
+                    class="compact-button">
+                </lightning-button>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div if:true={isLoading} class="slds-is-relative">
+            <lightning-spinner
+                alternative-text="Loading"
+                size="medium">
+            </lightning-spinner>
+        </div>
+    </div>
+</template>

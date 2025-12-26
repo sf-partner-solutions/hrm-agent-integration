@@ -1,0 +1,13 @@
+.amadeus-logo-small {
+    max-height: 30px;
+    width: auto;
+}
+
+.slds-text-title_bold {
+    font-weight: 600;
+}
+
+.slds-modal_large .slds-modal__container {
+    width: 90%;
+    max-width: 1200px;
+}
