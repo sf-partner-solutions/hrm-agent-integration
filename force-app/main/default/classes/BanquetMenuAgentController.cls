@@ -201,6 +201,34 @@ public with sharing class BanquetMenuAgentController {
     }
 
     /**
+     * @description Get ContentVersion ID from ContentDocument ID
+     * @param contentDocumentId The ContentDocument ID
+     * @return The latest ContentVersion ID for the document
+     */
+    @AuraEnabled(cacheable=true)
+    public static String getContentVersionId(String contentDocumentId) {
+        try {
+            // Query for the latest ContentVersion of this ContentDocument
+            List<ContentVersion> versions = [
+                SELECT Id
+                FROM ContentVersion
+                WHERE ContentDocumentId = :contentDocumentId
+                    AND IsLatest = true
+                LIMIT 1
+            ];
+
+            if (!versions.isEmpty()) {
+                return versions[0].Id;
+            }
+        } catch (Exception e) {
+            System.debug('Error getting ContentVersion ID: ' + e.getMessage());
+        }
+
+        // Return the original ID if conversion fails
+        return contentDocumentId;
+    }
+
+    /**
      * @description Get revenue classifications for dropdown
      * @return List of revenue classification names
      */

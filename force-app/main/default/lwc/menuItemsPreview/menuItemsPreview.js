@@ -1,5 +1,6 @@
 import { LightningElement, api, track } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { NavigationMixin } from 'lightning/navigation';
 import AMADEUS_LOGO from '@salesforce/resourceUrl/AmadeusLogo';
 import createMenuItems from '@salesforce/apex/BanquetMenuAgentController.createMenuItems';
 import validateMenuItems from '@salesforce/apex/BanquetMenuAgentController.validateMenuItems';
@@ -16,9 +17,12 @@ const columns = [
     }
 ];
 
-export default class MenuItemsPreview extends LightningElement {
+export default class MenuItemsPreview extends NavigationMixin(LightningElement) {
     @api menuItems = [];
     @api extractionMetadata = {};
+    @api contentDocumentId;
+    @api propertyId;
+    @api propertyName;
     @track displayItems = [];
     columns = columns;
     amadeusLogoUrl = AMADEUS_LOGO;
@@ -68,11 +72,19 @@ export default class MenuItemsPreview extends LightningElement {
 
         try {
             // Get selected items or all items
-            const itemsToInsert = this.selectedRows.length > 0
+            let itemsToInsert = this.selectedRows.length > 0
                 ? this.menuItems.filter(item =>
                     this.selectedRows.includes(this.menuItems.indexOf(item).toString())
                   )
                 : this.menuItems;
+
+            // Add property ID to all items if available
+            if (this.propertyId) {
+                itemsToInsert = itemsToInsert.map(item => ({
+                    ...item,
+                    Location__c: this.propertyId
+                }));
+            }
 
             // Validate items
             const validationErrors = await validateMenuItems({ menuItems: itemsToInsert });
@@ -108,14 +120,19 @@ export default class MenuItemsPreview extends LightningElement {
     }
 
     handleMakeChanges() {
-        // Dispatch event to open editor modal
-        const editEvent = new CustomEvent('openeditor', {
-            detail: {
-                items: this.menuItems,
-                metadata: this.extractionMetadata
+        // Navigate to the editor page with menu items and content document ID
+        this[NavigationMixin.Navigate]({
+            type: 'standard__component',
+            attributes: {
+                componentName: 'c__menuItemsEditor'
+            },
+            state: {
+                c__menuItems: JSON.stringify(this.menuItems),
+                c__contentDocumentId: this.contentDocumentId,
+                c__propertyId: this.propertyId,
+                c__propertyName: this.propertyName
             }
         });
-        this.dispatchEvent(editEvent);
     }
 
     handleCancel() {

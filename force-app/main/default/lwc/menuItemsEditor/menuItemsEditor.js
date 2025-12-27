@@ -1,56 +1,107 @@
-import { LightningElement, api, track } from 'lwc';
+import { LightningElement, api, track, wire } from 'lwc';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
+import { NavigationMixin, CurrentPageReference } from 'lightning/navigation';
 import AMADEUS_LOGO from '@salesforce/resourceUrl/AmadeusLogo';
 import createMenuItems from '@salesforce/apex/BanquetMenuAgentController.createMenuItems';
-import getItemCategories from '@salesforce/apex/BanquetMenuAgentController.getItemCategories';
-import getRevenueClassifications from '@salesforce/apex/BanquetMenuAgentController.getRevenueClassifications';
+import getContentVersionId from '@salesforce/apex/BanquetMenuAgentController.getContentVersionId';
 
-export default class MenuItemsEditor extends LightningElement {
-    @api menuItems = [];
+export default class MenuItemsEditor extends NavigationMixin(LightningElement) {
     @track editableItems = [];
     @track draftValues = [];
+    @track contentDocumentId;
+    @track contentVersionId; // Store the ContentVersion ID for PDF display
+    @track menuItems = [];
+    @track propertyId;
+    @track propertyName;
+
     amadeusLogoUrl = AMADEUS_LOGO;
     isLoading = false;
-    categories = [];
-    revenueClasses = [];
 
-    columns = [
+    // Get state parameters from navigation
+    @wire(CurrentPageReference)
+    getPageReference(pageRef) {
+        if (pageRef && pageRef.state) {
+            // Get the passed state
+            const state = pageRef.state;
+
+            if (state.c__menuItems) {
+                try {
+                    this.menuItems = JSON.parse(state.c__menuItems);
+                    this.prepareEditableItems();
+                } catch (e) {
+                    console.error('Error parsing menu items:', e);
+                }
+            }
+
+            if (state.c__contentDocumentId) {
+                this.contentDocumentId = state.c__contentDocumentId;
+                console.log('Received contentDocumentId:', this.contentDocumentId);
+                // Fetch the ContentVersion ID for PDF display
+                this.fetchContentVersionId();
+            }
+
+            if (state.c__propertyId) {
+                this.propertyId = state.c__propertyId;
+            }
+
+            if (state.c__propertyName) {
+                this.propertyName = state.c__propertyName;
+            }
+        }
+    }
+
+    // All columns including hidden fields
+    allColumns = [
         {
             label: 'Item Name',
             fieldName: 'Name',
             type: 'text',
             editable: true,
-            cellAttributes: { class: { fieldName: 'nameClass' } }
+            wrapText: true,
+            cellAttributes: {
+                class: { fieldName: 'nameClass' }
+            }
         },
         {
             label: 'Type',
             fieldName: 'ItemType__c',
-            type: 'picklist',
+            type: 'text',
             editable: true,
-            typeAttributes: {
-                placeholder: 'Choose Type',
-                options: [
-                    { label: 'Item', value: 'Item' },
-                    { label: 'Detailed Menu', value: 'Detailed Menu' },
-                    { label: 'Simple Menu', value: 'Simple Menu' }
-                ]
-            },
-            initialWidth: 140
+            initialWidth: 120
         },
         {
             label: 'Price',
-            fieldName: 'UnitPrice__c',
+            fieldName: 'UnitPrice',
             type: 'currency',
             editable: true,
-            typeAttributes: { currencyCode: 'USD' },
+            typeAttributes: {
+                currencyCode: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            },
             initialWidth: 100
+        },
+        {
+            label: 'Description',
+            fieldName: 'Description__c',
+            type: 'text',
+            editable: true,
+            wrapText: true,
+            initialWidth: 200
         },
         {
             label: 'Unit',
             fieldName: 'SoldByUnit__c',
             type: 'text',
             editable: true,
-            initialWidth: 120
+            initialWidth: 100
+        },
+        {
+            label: 'Serving Unit',
+            fieldName: 'ServingUnit__c',
+            type: 'text',
+            editable: true,
+            initialWidth: 100
         },
         {
             label: 'Category',
@@ -64,7 +115,43 @@ export default class MenuItemsEditor extends LightningElement {
             fieldName: 'RevenueClassification__c',
             type: 'text',
             editable: true,
-            initialWidth: 130
+            initialWidth: 150
+        },
+        {
+            label: 'Quantity Calc',
+            fieldName: 'QuantityCalculation__c',
+            type: 'text',
+            editable: true,
+            initialWidth: 120
+        },
+        {
+            label: 'Service Factor',
+            fieldName: 'Service_Factor__c',
+            type: 'number',
+            editable: true,
+            initialWidth: 120
+        },
+        {
+            label: 'Gratuity',
+            fieldName: 'Gratuity__c',
+            type: 'percent',
+            editable: true,
+            typeAttributes: {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            },
+            initialWidth: 100
+        },
+        {
+            label: 'Admin Charge',
+            fieldName: 'AdminCharge__c',
+            type: 'percent',
+            editable: true,
+            typeAttributes: {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2
+            },
+            initialWidth: 120
         },
         {
             label: 'Active',
@@ -74,46 +161,48 @@ export default class MenuItemsEditor extends LightningElement {
             initialWidth: 70
         },
         {
+            label: 'Inclusive',
+            fieldName: 'IsInclusive__c',
+            type: 'boolean',
+            editable: true,
+            initialWidth: 80
+        },
+        {
             type: 'action',
-            typeAttributes: { rowActions: this.getRowActions }
+            typeAttributes: {
+                rowActions: [
+                    { label: 'Delete', name: 'delete' }
+                ]
+            }
         }
     ];
 
-    getRowActions = [
-        { label: 'Delete', name: 'delete' }
-    ];
-
     connectedCallback() {
-        this.loadPicklistValues();
         this.prepareEditableItems();
     }
 
-    @api
-    openModal(items) {
-        this.menuItems = items || [];
-        this.prepareEditableItems();
-        // Modal will be opened by parent
-    }
+    async fetchContentVersionId() {
+        if (!this.contentDocumentId) return;
 
-    async loadPicklistValues() {
         try {
-            const [categoriesResult, revenueResult] = await Promise.all([
-                getItemCategories(),
-                getRevenueClassifications()
-            ]);
-            this.categories = categoriesResult;
-            this.revenueClasses = revenueResult;
+            const versionId = await getContentVersionId({ contentDocumentId: this.contentDocumentId });
+            this.contentVersionId = versionId;
+            console.log('Got ContentVersion ID:', this.contentVersionId);
         } catch (error) {
-            console.error('Error loading picklist values:', error);
+            console.error('Error fetching ContentVersion ID:', error);
+            // Fallback to using ContentDocument ID
+            this.contentVersionId = this.contentDocumentId;
         }
     }
 
     prepareEditableItems() {
+        if (!this.menuItems || this.menuItems.length === 0) return;
+
         // Create editable copy with row IDs
         this.editableItems = this.menuItems.map((item, index) => ({
             ...item,
-            id: index.toString(),
-            nameClass: item.ItemType__c === 'Detailed Menu' || item.ItemType__c === 'Simple Menu'
+            id: `row-${index}`,
+            nameClass: (item.ItemType__c === 'Detailed Menu' || item.ItemType__c === 'Simple Menu')
                 ? 'slds-text-color_success slds-text-title_bold' : ''
         }));
     }
@@ -129,73 +218,138 @@ export default class MenuItemsEditor extends LightningElement {
 
     deleteRow(rowId) {
         this.editableItems = this.editableItems.filter(item => item.id !== rowId);
-        // Also update menuItems
+        this.updateMenuItems();
+    }
+
+    handleCellSave(event) {
+        const draftValues = event.detail.draftValues;
+
+        // Apply draft values to items
+        const updatedItems = [...this.editableItems];
+
+        draftValues.forEach(draft => {
+            const index = updatedItems.findIndex(item => item.id === draft.id);
+            if (index !== -1) {
+                updatedItems[index] = { ...updatedItems[index], ...draft };
+                // Update name class if type changed
+                if (draft.ItemType__c) {
+                    updatedItems[index].nameClass = (draft.ItemType__c === 'Detailed Menu' ||
+                                                    draft.ItemType__c === 'Simple Menu')
+                        ? 'slds-text-color_success slds-text-title_bold' : '';
+                }
+            }
+        });
+
+        this.editableItems = updatedItems;
+        this.draftValues = [];
+        this.updateMenuItems();
+    }
+
+    updateMenuItems() {
+        // Update menuItems for creation (remove UI-specific fields)
         this.menuItems = this.editableItems.map(item => {
             const { id, nameClass, ...menuItem } = item;
             return menuItem;
         });
     }
 
-    handleCellChange(event) {
-        this.draftValues = event.detail.draftValues;
-    }
-
-    handleSave() {
-        // Apply draft values to items
-        const updatedItems = [...this.editableItems];
-
-        this.draftValues.forEach(draft => {
-            const index = updatedItems.findIndex(item => item.id === draft.id);
-            if (index !== -1) {
-                updatedItems[index] = { ...updatedItems[index], ...draft };
-            }
-        });
-
-        this.editableItems = updatedItems;
-
-        // Update menuItems for creation
-        this.menuItems = updatedItems.map(item => {
-            const { id, nameClass, ...menuItem } = item;
-            return menuItem;
-        });
-
-        // Clear draft values
-        this.draftValues = [];
-
-        // Create items
-        this.createItems();
-    }
-
     handleCancel() {
-        // Clear draft values
-        this.draftValues = [];
-        // Dispatch cancel event
-        const cancelEvent = new CustomEvent('editcancel');
-        this.dispatchEvent(cancelEvent);
+        // Navigate back to the property page if we have the ID
+        if (this.propertyId) {
+            this[NavigationMixin.Navigate]({
+                type: 'standard__recordPage',
+                attributes: {
+                    recordId: this.propertyId,
+                    objectApiName: 'Location__c',
+                    actionName: 'view'
+                }
+            });
+        } else {
+            // Fallback: Navigate to items home
+            this[NavigationMixin.Navigate]({
+                type: 'standard__objectPage',
+                attributes: {
+                    objectApiName: 'Item__c',
+                    actionName: 'home'
+                }
+            });
+        }
     }
 
-    async createItems() {
+    async handleSaveAndCreate() {
+        if (!this.menuItems || this.menuItems.length === 0) {
+            this.showToast('Warning', 'No items to create', 'warning');
+            return;
+        }
+
         this.isLoading = true;
 
         try {
+            // Add property ID to all menu items if available
+            if (this.propertyId) {
+                this.menuItems = this.menuItems.map(item => ({
+                    ...item,
+                    Location__c: this.propertyId
+                }));
+            }
+
             const result = await createMenuItems({ menuItems: this.menuItems });
 
             if (result.success) {
-                this.showToast('Success', result.message, 'success');
+                // Show success toast with item count
+                const itemCount = result.successCount || this.menuItems.length;
+                const propertyText = this.propertyName ? ` for ${this.propertyName}` : '';
+                this.showToast(
+                    'Success',
+                    `Successfully created ${itemCount} menu item${itemCount !== 1 ? 's' : ''}${propertyText}`,
+                    'success'
+                );
 
-                // Dispatch success event
-                const successEvent = new CustomEvent('itemscreated', {
-                    detail: {
-                        createdCount: result.successCount,
-                        createdItemIds: result.createdItemIds
-                    }
-                });
-                this.dispatchEvent(successEvent);
+                // Navigate back to the property page if we have the ID
+                if (this.propertyId) {
+                    // Small delay to ensure toast is visible
+                    setTimeout(() => {
+                        this[NavigationMixin.Navigate]({
+                            type: 'standard__recordPage',
+                            attributes: {
+                                recordId: this.propertyId,
+                                objectApiName: 'Location__c',
+                                actionName: 'view'
+                            },
+                            state: {
+                                // Try to select the related list tab
+                                selectedTab: 'related'
+                            }
+                        });
+                    }, 1500);
+                } else if (result.createdItemIds && result.createdItemIds.length > 0) {
+                    // Fallback: Navigate to the first created item
+                    this[NavigationMixin.Navigate]({
+                        type: 'standard__recordPage',
+                        attributes: {
+                            recordId: result.createdItemIds[0],
+                            objectApiName: 'Item__c',
+                            actionName: 'view'
+                        }
+                    });
+                } else {
+                    // Fallback: Navigate to items list
+                    this[NavigationMixin.Navigate]({
+                        type: 'standard__objectPage',
+                        attributes: {
+                            objectApiName: 'Item__c',
+                            actionName: 'list'
+                        }
+                    });
+                }
             } else if (result.hasErrors) {
                 this.showErrors(result.errors);
             }
         } catch (error) {
-            this.showToast('Error', 'Failed to create items: ' + error.body?.message || error.message, 'error');
+            console.error('Error creating items:', error);
+            this.showToast('Error',
+                'Failed to create items: ' + (error.body?.message || error.message),
+                'error');
         } finally {
             this.isLoading = false;
         }
@@ -219,12 +373,22 @@ export default class MenuItemsEditor extends LightningElement {
         this.dispatchEvent(evt);
     }
 
+    // Getters
     get hasItems() {
         return this.editableItems && this.editableItems.length > 0;
     }
 
     get itemCountText() {
-        const count = this.editableItems.length;
-        return `Editing ${count} item${count !== 1 ? 's' : ''}`;
+        const count = this.editableItems ? this.editableItems.length : 0;
+        return `${count} item${count !== 1 ? 's' : ''} extracted from menu`;
+    }
+
+    get pdfUrl() {
+        // We need the ContentVersion ID for this to work
+        if (!this.contentVersionId) return '';
+
+        // Use the version download URL which works in Lightning Experience
+        // This pattern avoids CORS issues
+        return `/sfc/servlet.shepherd/version/download/${this.contentVersionId}`;
     }
 }

@@ -1,87 +1,133 @@
 <template>
-    <section role="dialog" tabindex="-1" aria-modal="true" class="slds-modal slds-fade-in-open slds-modal_large">
-        <div class="slds-modal__container">
-            <!-- Header -->
-            <div class="slds-modal__header">
-                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse"
-                    title="Close" onclick={handleCancel}>
-                    <lightning-icon icon-name="utility:close" alternative-text="Close" variant="inverse" size="small">
-                    </lightning-icon>
-                </button>
-                <div class="slds-media slds-media_center">
-                    <div class="slds-media__figure">
-                        <img src={amadeusLogoUrl} alt="Amadeus Delphi" class="amadeus-logo-small" />
+    <!-- Full Page Layout -->
+    <div class="slds-grid slds-wrap full-height-container">
+        <!-- Header -->
+        <div class="slds-col slds-size_1-of-1 page-header">
+            <div class="slds-page-header">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <img src={amadeusLogoUrl} alt="Amadeus Delphi" class="amadeus-logo-header" />
+                            </div>
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate">Review and Edit Menu Items</h1>
+                                <p class="slds-text-body_small">{itemCountText}</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="slds-media__body">
-                        <h2 class="slds-text-heading_medium">Edit Menu Items</h2>
-                        <p class="slds-text-body_small slds-text-color_weak">{itemCountText}</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Body -->
-            <div class="slds-modal__content slds-p-around_medium">
-                <!-- Instructions -->
-                <div class="slds-box slds-theme_shade slds-m-bottom_medium">
-                    <p class="slds-text-body_small">
-                        <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small">
-                        </lightning-icon>
-                        Double-click any cell to edit. Use the action menu to delete items. Click Save when ready to
-                        create items in Delphi.
-                    </p>
-                </div>
-
-                <!-- Editable Data Table -->
-                <div if:true={hasItems} class="slds-scrollable_y" style="height: 450px;">
-                    <lightning-datatable
-                        key-field="id"
-                        data={editableItems}
-                        columns={columns}
-                        onsave={handleSave}
-                        oncellchange={handleCellChange}
-                        draft-values={draftValues}
-                        onrowaction={handleRowAction}
-                        hide-checkbox-column
-                        suppress-bottom-bar>
-                    </lightning-datatable>
-                </div>
-
-                <!-- No Items Message -->
-                <div if:false={hasItems} class="slds-align_absolute-center slds-m-vertical_large">
-                    <div class="slds-text-align_center">
-                        <lightning-icon icon-name="utility:info" size="large" class="slds-m-bottom_small">
-                        </lightning-icon>
-                        <p class="slds-text-heading_small">No items to edit</p>
+                    <div class="slds-page-header__col-actions">
+                        <div class="slds-page-header__controls">
+                            <div class="slds-page-header__control">
+                                <lightning-button
+                                    label="Cancel"
+                                    title="Cancel and go back"
+                                    onclick={handleCancel}
+                                    disabled={isLoading}>
+                                </lightning-button>
+                            </div>
+                            <div class="slds-page-header__control">
+                                <lightning-button
+                                    variant="brand"
+                                    label="Save & Create Items"
+                                    title="Save changes and create items in Salesforce"
+                                    onclick={handleSaveAndCreate}
+                                    disabled={isLoading}
+                                    icon-name="utility:save">
+                                </lightning-button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Footer -->
-            <div class="slds-modal__footer">
-                <lightning-button
-                    label="Cancel"
-                    title="Cancel editing"
-                    onclick={handleCancel}
-                    disabled={isLoading}
-                    class="slds-m-right_small">
-                </lightning-button>
-                <lightning-button
-                    variant="brand"
-                    label="Save & Create Items"
-                    title="Save changes and create items"
-                    onclick={handleSave}
-                    disabled={isLoading}
-                    icon-name="utility:save">
-                </lightning-button>
             </div>
         </div>
-    </section>
 
-    <!-- Backdrop -->
-    <div class="slds-backdrop slds-backdrop_open"></div>
+        <!-- Split View Container -->
+        <div class="slds-col slds-size_1-of-1 split-view-container">
+            <div class="slds-grid slds-gutters_x-small full-height">
+                <!-- Left Panel: Editable Data Table -->
+                <div class="slds-col slds-size_1-of-2 panel-container">
+                    <div class="slds-card full-height">
+                        <div class="slds-card__header">
+                            <h2 class="slds-card__header-title">
+                                <lightning-icon icon-name="utility:table" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                Extracted Menu Items
+                            </h2>
+                        </div>
+                        <div class="slds-card__body table-container">
+                            <!-- Instructions -->
+                            <div class="slds-box slds-box_x-small slds-theme_shade slds-m-horizontal_medium slds-m-bottom_small">
+                                <p class="slds-text-body_small">
+                                    <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                    Double-click any cell to edit. Changes are saved automatically.
+                                </p>
+                            </div>
+
+                            <!-- Data Table -->
+                            <div if:true={hasItems} class="data-table-wrapper">
+                                <lightning-datatable
+                                    key-field="id"
+                                    data={editableItems}
+                                    columns={allColumns}
+                                    onsave={handleCellSave}
+                                    draft-values={draftValues}
+                                    onrowaction={handleRowAction}
+                                    hide-checkbox-column
+                                    show-row-number-column>
+                                </lightning-datatable>
+                            </div>
+
+                            <!-- No Items Message -->
+                            <div if:false={hasItems} class="slds-align_absolute-center slds-m-vertical_large">
+                                <div class="slds-text-align_center">
+                                    <lightning-icon icon-name="utility:table" size="large" class="slds-m-bottom_small"></lightning-icon>
+                                    <p class="slds-text-heading_small">No items to display</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel: PDF Viewer -->
+                <div class="slds-col slds-size_1-of-2 panel-container">
+                    <div class="slds-card full-height">
+                        <div class="slds-card__header">
+                            <h2 class="slds-card__header-title">
+                                <lightning-icon icon-name="utility:file" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                Original Menu Document
+                            </h2>
+                        </div>
+                        <div class="slds-card__body pdf-container">
+                            <div if:true={contentVersionId} class="pdf-viewer">
+                                <object
+                                    data={pdfUrl}
+                                    type="application/pdf"
+                                    width="100%"
+                                    height="100%"
+                                    aria-label="Menu PDF Document">
+                                    <embed
+                                        src={pdfUrl}
+                                        type="application/pdf"
+                                        width="100%"
+                                        height="100%" />
+                                </object>
+                            </div>
+                            <div if:false={contentVersionId} class="slds-align_absolute-center slds-m-vertical_large">
+                                <div class="slds-text-align_center">
+                                    <lightning-icon icon-name="utility:file" size="large" class="slds-m-bottom_small"></lightning-icon>
+                                    <p class="slds-text-heading_small">No document available</p>
+                                    <p class="slds-text-body_regular slds-text-color_weak">The original PDF could not be loaded</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Loading Spinner -->
-    <div if:true={isLoading} class="slds-is-relative">
-        <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+    <div if:true={isLoading} class="loading-overlay">
+        <lightning-spinner alternative-text="Processing" size="large"></lightning-spinner>
     </div>
 </template>
