@@ -36,6 +36,8 @@ public with sharing class BanquetMenuParser {
         @AuraEnabled public String Property;
         @AuraEnabled public String MasterSource;
         @AuraEnabled public String Abbreviation;
+        @AuraEnabled public String LocationId; // For property association from LWC
+
     }
 
     /**
@@ -91,8 +93,19 @@ public with sharing class BanquetMenuParser {
         item.Description__c = menuItem.Description;
         item.IsActive__c = menuItem.IsActive != null ? menuItem.IsActive : true;
         item.IsInclusive__c = menuItem.IsInclusive != null ? menuItem.IsInclusive : false;
-        item.QuantityCalculation__c = menuItem.QuantityCalculation;
-        item.MasterSource__c = menuItem.MasterSource;
+
+        // Handle QuantityCalculation__c - These picklists appear to have configuration issues
+        // where values like "Per Person" show in describe but aren't valid for insert
+        // For now, we'll leave these fields null to avoid errors
+        // TODO: Fix picklist configuration in Salesforce Setup to allow proper values
+        /*
+        if (String.isNotBlank(menuItem.QuantityCalculation)) {
+            item.QuantityCalculation__c = menuItem.QuantityCalculation;
+        }
+        if (String.isNotBlank(menuItem.MasterSource)) {
+            item.MasterSource__c = menuItem.MasterSource;
+        }
+        */
         item.Abbreviation__c = truncateString(menuItem.Abbreviation, 24);
 
         // Map ItemType__c
@@ -100,10 +113,14 @@ public with sharing class BanquetMenuParser {
             item.ItemType__c = menuItem.ItemType;
         }
 
-        // Handle ItemCategory__c - this might need to be mapped to existing SetupValue__c records
+        // Handle ItemCategory__c - this is a restricted picklist, so we need to validate the value
+        // For now, we'll skip setting this field since the picklist only has generic values
+        // TODO: Configure the ItemCategoryName__c picklist with actual category values
+        /*
         if (String.isNotBlank(menuItem.ItemCategory)) {
             item.ItemCategoryName__c = menuItem.ItemCategory;
         }
+        */
 
         // Handle RevenueClassification__c - map string to lookup
         if (String.isNotBlank(menuItem.RevenueClassification)) {
@@ -111,6 +128,11 @@ public with sharing class BanquetMenuParser {
             if (revenueClassId != null) {
                 item.RevenueClassification__c = revenueClassId;
             }
+        }
+
+        // Handle Location__c (property association from LWC)
+        if (String.isNotBlank(menuItem.LocationId)) {
+            item.Location__c = menuItem.LocationId;
         }
 
         return item;

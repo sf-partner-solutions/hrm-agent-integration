@@ -37,8 +37,21 @@ export default class MenuItemsPreview extends NavigationMixin(LightningElement) 
 
     @api
     setMenuData(data) {
+        console.log('=== menuItemsPreview: Received data ===');
+        console.log('Full data:', JSON.stringify(data, null, 2));
+
         if (data) {
             this.menuItems = data.items || [];
+            console.log('Menu items count:', this.menuItems.length);
+
+            // Log first item to see field names and values
+            if (this.menuItems.length > 0) {
+                console.log('First item fields:', JSON.stringify(this.menuItems[0], null, 2));
+                console.log('Description__c:', this.menuItems[0].Description__c);
+                console.log('RevenueClassification__c:', this.menuItems[0].RevenueClassification__c);
+                console.log('ItemType__c:', this.menuItems[0].ItemType__c);
+            }
+
             this.extractionMetadata = data.extraction_metadata || {};
             this.prepareDisplayItems();
             this.checkIfMockData();
@@ -78,13 +91,27 @@ export default class MenuItemsPreview extends NavigationMixin(LightningElement) 
                   )
                 : this.menuItems;
 
-            // Add property ID to all items if available
-            if (this.propertyId) {
-                itemsToInsert = itemsToInsert.map(item => ({
-                    ...item,
-                    Location__c: this.propertyId
-                }));
-            }
+            // Map items to match Apex MenuItem class structure exactly
+            itemsToInsert = itemsToInsert.map(item => ({
+                // Core fields that match Apex MenuItem class
+                Name: item.Name,
+                RecordType: item.RecordType,
+                ItemType: item.ItemType || item.ItemType__c,
+                UnitPrice: item.UnitPrice,
+                SoldByUnit: item.SoldByUnit,
+                ServingUnit: item.ServingUnit,
+                RichDescription: item.RichDescription,
+                Description: item.Description || item.Description__c,
+                ItemCategory: item.ItemCategory,
+                RevenueClassification: item.RevenueClassification || item.RevenueClassification__c,
+                IsActive: item.IsActive,
+                IsInclusive: item.IsInclusive,
+                QuantityCalculation: item.QuantityCalculation,
+                Property: item.Property,
+                MasterSource: item.MasterSource,
+                Abbreviation: item.Abbreviation,
+                LocationId: this.propertyId  // Add property association if available
+            }));
 
             // Validate items
             const validationErrors = await validateMenuItems({ menuItems: itemsToInsert });
@@ -101,10 +128,11 @@ export default class MenuItemsPreview extends NavigationMixin(LightningElement) 
             if (result.success) {
                 this.showToast('Success', result.message, 'success');
 
-                // Dispatch success event
-                const successEvent = new CustomEvent('itemscreated', {
+                // Dispatch success event with actual count from result
+                const successEvent = new CustomEvent('itemssaved', {
                     detail: {
-                        createdCount: result.successCount,
+                        message: result.message,
+                        itemCount: result.successCount || 0,
                         createdItemIds: result.createdItemIds
                     }
                 });
@@ -120,6 +148,10 @@ export default class MenuItemsPreview extends NavigationMixin(LightningElement) 
     }
 
     handleMakeChanges() {
+        console.log('=== Navigating to Editor ===');
+        console.log('Menu items being passed:', JSON.stringify(this.menuItems, null, 2));
+        console.log('Content Document ID:', this.contentDocumentId);
+
         // Navigate to the editor page with menu items and content document ID
         this[NavigationMixin.Navigate]({
             type: 'standard__component',
@@ -180,9 +212,10 @@ export default class MenuItemsPreview extends NavigationMixin(LightningElement) 
     }
 
     get insertButtonLabel() {
-        return this.selectedRows.length > 0
-            ? `Insert ${this.selectedRows.length} Items`
-            : `Insert All ${this.menuItems.length}`;
+        const count = this.selectedRows.length > 0
+            ? this.selectedRows.length
+            : this.menuItems.length;
+        return `Quick Save (${count})`;
     }
 
     get showVenueName() {

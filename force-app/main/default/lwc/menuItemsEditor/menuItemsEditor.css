@@ -14,7 +14,7 @@
 }
 
 .amadeus-logo-header {
-    height: 32px;
+    height: 16px;
     width: auto;
 }
 
@@ -47,16 +47,22 @@
 /* Table container */
 .table-container {
     flex: 1;
-    overflow: hidden;
+    overflow: hidden; /* Container should hide overflow */
     display: flex;
     flex-direction: column;
     padding: 0;
+    position: relative;
+    z-index: 1;
 }
 
 .data-table-wrapper {
     flex: 1;
-    overflow: auto;
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
     padding: 0 1rem 1rem 1rem;
+    position: relative;
+    min-height: 400px; /* Ensure space for dropdowns */
+    max-height: calc(100vh - 250px); /* Limit height to prevent overflow */
 }
 
 /* PDF container */
@@ -97,6 +103,17 @@
 /* Text styles */
 .slds-text-title_bold {
     font-weight: 600;
+}
+
+/* Fix text wrapping in data table cells */
+.data-table-wrapper lightning-datatable {
+    --slds-c-datatable-cell-text-overflow: ellipsis;
+    --slds-c-datatable-cell-white-space: nowrap;
+}
+
+/* Ensure text doesn't wrap in Name column */
+:host {
+    --slds-c-datatable-cell-spacing-inline: 0.5rem;
 }
 
 /* Responsive adjustments */

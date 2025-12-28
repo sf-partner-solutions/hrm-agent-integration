@@ -38,6 +38,25 @@ public with sharing class BanquetMenuAgentController {
     }
 
     /**
+     * @description Create Item__c records from the extracted menu items (with raw JSON)
+     * @param menuItemsJson JSON string of menu items
+     * @return Result object with success status and created record IDs
+     */
+    @AuraEnabled
+    public static ItemCreationResult createMenuItemsFromJson(String menuItemsJson) {
+        System.debug('=== createMenuItemsFromJson called ===');
+        System.debug('Raw JSON received: ' + menuItemsJson);
+
+        // Parse the JSON string into a list of MenuItem objects
+        List<BanquetMenuParser.MenuItem> menuItems = (List<BanquetMenuParser.MenuItem>) JSON.deserialize(
+            menuItemsJson,
+            List<BanquetMenuParser.MenuItem>.class
+        );
+
+        return createMenuItems(menuItems);
+    }
+
+    /**
      * @description Create Item__c records from the extracted menu items
      * @param menuItems List of menu items to create
      * @return Result object with success status and created record IDs
@@ -47,6 +66,22 @@ public with sharing class BanquetMenuAgentController {
         ItemCreationResult result = new ItemCreationResult();
         List<Item__c> itemsToInsert = new List<Item__c>();
         List<String> errors = new List<String>();
+
+        // Debug incoming data
+        System.debug('=== createMenuItems called ===');
+        System.debug('menuItems parameter: ' + menuItems);
+        System.debug('menuItems size: ' + (menuItems != null ? menuItems.size() : 0));
+
+        if (menuItems != null && !menuItems.isEmpty()) {
+            for (Integer i = 0; i < menuItems.size(); i++) {
+                BanquetMenuParser.MenuItem item = menuItems[i];
+                System.debug('Item ' + i + ' - Name: ' + item.Name);
+                System.debug('Item ' + i + ' - ItemType: ' + item.ItemType);
+                System.debug('Item ' + i + ' - UnitPrice: ' + item.UnitPrice);
+                System.debug('Item ' + i + ' - LocationId: ' + item.LocationId);
+                System.debug('Item ' + i + ' - Full object: ' + JSON.serialize(item));
+            }
+        }
 
         // Savepoint for transaction rollback if needed
         Savepoint sp = Database.setSavepoint();
@@ -262,6 +297,72 @@ public with sharing class BanquetMenuAgentController {
         }
 
         return classifications;
+    }
+
+    /**
+     * @description Get Item Type picklist values from schema
+     * @return List of picklist options
+     */
+    @AuraEnabled(cacheable=true)
+    public static List<Map<String, String>> getItemTypePicklistValues() {
+        List<Map<String, String>> options = new List<Map<String, String>>();
+
+        try {
+            Schema.DescribeFieldResult fieldResult = Item__c.ItemType__c.getDescribe();
+            List<Schema.PicklistEntry> picklistValues = fieldResult.getPicklistValues();
+
+            for (Schema.PicklistEntry entry : picklistValues) {
+                if (entry.isActive()) {
+                    Map<String, String> option = new Map<String, String>();
+                    option.put('label', entry.getLabel());
+                    option.put('value', entry.getValue());
+                    options.add(option);
+                }
+            }
+        } catch (Exception e) {
+            System.debug('Error getting Item Type picklist values: ' + e.getMessage());
+            // Return default values
+            options.add(new Map<String, String>{'label' => 'Item', 'value' => 'Item'});
+            options.add(new Map<String, String>{'label' => 'Simple Menu', 'value' => 'Simple Menu'});
+            options.add(new Map<String, String>{'label' => 'Detailed Menu', 'value' => 'Detailed Menu'});
+        }
+
+        return options;
+    }
+
+    /**
+     * @description Get Item Record Type options
+     * @return List of record type options
+     */
+    @AuraEnabled(cacheable=true)
+    public static List<Map<String, String>> getItemRecordTypes() {
+        List<Map<String, String>> options = new List<Map<String, String>>();
+
+        try {
+            Map<String, Schema.RecordTypeInfo> recordTypeInfos = Schema.SObjectType.Item__c.getRecordTypeInfosByDeveloperName();
+
+            for (String developerName : recordTypeInfos.keySet()) {
+                Schema.RecordTypeInfo info = recordTypeInfos.get(developerName);
+                if (info.isActive() && info.isAvailable() && !info.isMaster()) {
+                    Map<String, String> option = new Map<String, String>();
+                    option.put('label', info.getName());
+                    option.put('value', developerName);
+                    options.add(option);
+                }
+            }
+
+            // Note: Sorting of Map list is not directly supported
+            // Options will be returned unsorted
+        } catch (Exception e) {
+            System.debug('Error getting Record Type options: ' + e.getMessage());
+            // Return default values
+            options.add(new Map<String, String>{'label' => 'Corporate Item', 'value' => 'Corporate_Item'});
+            options.add(new Map<String, String>{'label' => 'Property Item', 'value' => 'Property_Item'});
+            options.add(new Map<String, String>{'label' => 'Property Simple Menu', 'value' => 'Property_Simple_Menu'});
+            options.add(new Map<String, String>{'label' => 'Property Detailed Menu', 'value' => 'Property_Detailed_Menu'});
+        }
+
+        return options;
     }
 
     /**

@@ -2,7 +2,9 @@ import { LightningElement, api } from 'lwc';
 import AMADEUS_LOGO from '@salesforce/resourceUrl/AmadeusLogo';
 
 export default class MenuIngestionSuccess extends LightningElement {
-    @api successCount = 0;
+    @api itemCount = 0;  // Primary property to use for count
+    @api successCount = 0;  // Fallback for backward compatibility
+    @api message = '';  // Optional custom message
     @api createdItemIds = [];
     amadeusLogoUrl = AMADEUS_LOGO;
 
@@ -23,8 +25,14 @@ export default class MenuIngestionSuccess extends LightningElement {
     }
 
     get successMessage() {
-        const itemText = this.successCount === 1 ? 'item' : 'items';
-        return `Successfully created ${this.successCount} ${itemText} in Delphi`;
+        // Use custom message if provided, otherwise generate from count
+        if (this.message) {
+            return this.message;
+        }
+        // Use itemCount if available, otherwise fall back to successCount
+        const count = this.itemCount || this.successCount || 0;
+        const itemText = count === 1 ? 'item' : 'items';
+        return `Successfully created ${count} ${itemText} in Delphi`;
     }
 
     get showViewButton() {

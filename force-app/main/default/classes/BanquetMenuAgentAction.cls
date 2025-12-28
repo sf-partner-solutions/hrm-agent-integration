@@ -13,6 +13,12 @@ global with sharing class BanquetMenuAgentAction {
 
         @InvocableVariable(label='User Message' description='Optional message from the user' required=false)
         public String userMessage;
+
+        @InvocableVariable(label='Current Record ID' description='The ID of the record where the agent was launched (from currentRecordId context)' required=false)
+        public String currentRecordId;
+
+        @InvocableVariable(label='Property Record ID' description='The ID of the property record where the agent was launched' required=false)
+        public String propertyId;
     }
 
     /**
@@ -50,6 +56,10 @@ global with sharing class BanquetMenuAgentAction {
         @AuraEnabled
         @InvocableVariable(label='Success' description='Overall operation success status')
         public Boolean success;
+
+        @AuraEnabled
+        @InvocableVariable(label='Property ID' description='The property ID for context')
+        public String propertyId;
     }
 
     /**
@@ -70,6 +80,20 @@ global with sharing class BanquetMenuAgentAction {
             AgentResponse response = new AgentResponse();
 
             try {
+                // Determine the property ID: use explicit propertyId first, then currentRecordId
+                String effectivePropertyId = null;
+                if (String.isNotBlank(input.propertyId)) {
+                    effectivePropertyId = input.propertyId;
+                } else if (String.isNotBlank(input.currentRecordId)) {
+                    effectivePropertyId = input.currentRecordId;
+                }
+
+                // Pass through the property ID if we have one
+                if (String.isNotBlank(effectivePropertyId)) {
+                    output.propertyId = effectivePropertyId;
+                    System.debug('Using property ID: ' + effectivePropertyId);
+                }
+
                 // If no file is provided, return upload handler response
                 if (String.isBlank(input.contentDocumentId)) {
                     output.responseType = 'UPLOAD_REQUIRED';
@@ -84,14 +108,23 @@ global with sharing class BanquetMenuAgentAction {
                 String promptResponse = callBanquetMenuPromptTemplate(input.contentDocumentId);
 
                 if (String.isNotBlank(promptResponse)) {
+                    System.debug('=== Raw prompt response ===');
+                    System.debug(promptResponse);
+
                     // Parse the response using our existing parser
                     BanquetMenuParser.MenuExtractionResponse parsedResponse =
                         BanquetMenuParser.parseMenuJSON(promptResponse);
 
+                    System.debug('=== Parsed response ===');
+                    System.debug('Items count: ' + (parsedResponse.items != null ? parsedResponse.items.size() : 0));
+
+                    // Transform the data for LWC consumption - add __c suffix to fields
+                    String transformedJson = transformMenuDataForLWC(parsedResponse);
+
                     // Prepare output
                     output.success = true;
                     output.responseType = 'ITEMS_EXTRACTED';
-                    output.extractedItemsJson = JSON.serialize(parsedResponse);
+                    output.extractedItemsJson = transformedJson;
                     output.itemCount = parsedResponse.items != null ? parsedResponse.items.size() : 0;
                     output.message = String.format(
                         'Successfully extracted {0} items from the menu. Would you like to review and import them?',
@@ -192,6 +225,38 @@ global with sharing class BanquetMenuAgentAction {
     }
 
     /**
+     * @description Transform menu data to add __c suffix for LWC field expectations
+     * @param response The parsed menu extraction response
+     * @return JSON string with transformed field names
+     */
+    private static String transformMenuDataForLWC(BanquetMenuParser.MenuExtractionResponse response) {
+        // Convert to untyped map for manipulation
+        Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(JSON.serialize(response));
+
+        // Get items array
+        List<Object> items = (List<Object>) responseMap.get('items');
+
+        if (items != null) {
+            for (Object itemObj : items) {
+                Map<String, Object> item = (Map<String, Object>) itemObj;
+
+                // Add __c suffix versions for LWC
+                if (item.containsKey('Description')) {
+                    item.put('Description__c', item.get('Description'));
+                }
+                if (item.containsKey('ItemType')) {
+                    item.put('ItemType__c', item.get('ItemType'));
+                }
+                if (item.containsKey('RevenueClassification')) {
+                    item.put('RevenueClassification__c', item.get('RevenueClassification'));
+                }
+            }
+        }
+
+        return JSON.serialize(responseMap);
+    }
+
+    /**
      * @description Returns a mock response for testing when Connect API is unavailable
      */
     private static String getMockResponse() {
@@ -204,11 +269,11 @@ global with sharing class BanquetMenuAgentAction {
                 '"extraction_notes": "Mock data - Connect API unavailable"' +
             '},' +
             '"items": [' +
-                '{"Name":"Continental Breakfast","ItemType":"Detailed Menu","UnitPrice":35.00,"SoldByUnit":"per person",' +
+                '{"Name":"Continental Breakfast","ItemType":"Item","RevenueClassification":"Food","UnitPrice":35.00,"SoldByUnit":"per person",' +
                 '"Description":"Fresh fruit, assorted pastries, yogurt parfait","IsActive":true},' +
-                '{"Name":"Coffee Service","ItemType":"Beverage","UnitPrice":5.95,"SoldByUnit":"per person",' +
+                '{"Name":"Coffee Service","ItemType":"Item","RevenueClassification":"Beverage","UnitPrice":5.95,"SoldByUnit":"per person",' +
                 '"Description":"Regular and decaf coffee with accompaniments","IsActive":true},' +
-                '{"Name":"Lunch Buffet","ItemType":"Detailed Menu","UnitPrice":45.00,"SoldByUnit":"per person",' +
+                '{"Name":"Lunch Buffet","ItemType":"Item","RevenueClassification":"Food","UnitPrice":45.00,"SoldByUnit":"per person",' +
                 '"Description":"Two entrées, salad bar, dessert selection","IsActive":true}' +
             ']' +
         '}';
@@ -287,8 +352,8 @@ global with sharing class BanquetMenuAgentAction {
      * This wraps the invocable method for direct LWC access
      */
     @AuraEnabled
-    public static MenuIngestionOutput processUploadedFile(String contentDocumentId) {
-        System.debug('processUploadedFile called with: ' + contentDocumentId);
+    public static MenuIngestionOutput processUploadedFile(String contentDocumentId, String propertyId) {
+        System.debug('processUploadedFile called with contentDocumentId: ' + contentDocumentId + ', propertyId: ' + propertyId);
 
         try {
             String actualContentDocumentId = contentDocumentId;
@@ -337,6 +402,7 @@ global with sharing class BanquetMenuAgentAction {
             // Create input for the invocable method
             MenuIngestionInput input = new MenuIngestionInput();
             input.contentDocumentId = actualContentDocumentId;
+            input.propertyId = propertyId; // Pass the property ID through
             System.debug('Calling processMenuPDF with input: ' + JSON.serialize(input));
 
             // Call the invocable method

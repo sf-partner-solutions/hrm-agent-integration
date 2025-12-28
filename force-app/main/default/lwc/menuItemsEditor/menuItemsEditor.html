@@ -16,6 +16,33 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Property Link in the middle -->
+                    <template if:true={hasPropertyInfo}>
+                        <div class="slds-page-header__col-meta">
+                            <div class="slds-media slds-media_center">
+                                <div class="slds-media__figure">
+                                    <lightning-icon
+                                        icon-name="standard:location"
+                                        size="small"
+                                        alternative-text="Property">
+                                    </lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p class="slds-text-body_regular slds-text-color_weak slds-m-bottom_xx-small">Property</p>
+                                    <h2 class="slds-text-heading_small">
+                                        <template if:true={propertyId}>
+                                            <a href="javascript:void(0);" onclick={navigateToProperty} class="slds-text-link">
+                                                {propertyDisplayText}
+                                            </a>
+                                        </template>
+                                        <template if:false={propertyId}>
+                                            <span class="slds-text-color_weak">{propertyDisplayText}</span>
+                                        </template>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
                     <div class="slds-page-header__col-actions">
                         <div class="slds-page-header__controls">
                             <div class="slds-page-header__control">
@@ -55,26 +82,50 @@
                             </h2>
                         </div>
                         <div class="slds-card__body table-container">
-                            <!-- Instructions -->
-                            <div class="slds-box slds-box_x-small slds-theme_shade slds-m-horizontal_medium slds-m-bottom_small">
-                                <p class="slds-text-body_small">
-                                    <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small"></lightning-icon>
-                                    Double-click any cell to edit. Changes are saved automatically.
-                                </p>
+                            <!-- Instructions and Add Row Button -->
+                            <div class="slds-grid slds-m-horizontal_medium slds-m-bottom_small">
+                                <div class="slds-col slds-size_2-of-3">
+                                    <div class="slds-box slds-box_x-small slds-theme_shade">
+                                        <p class="slds-text-body_small">
+                                            <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                            Double-click any cell to edit. Changes are saved automatically. Use row actions to clone or delete items.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size_1-of-3 slds-text-align_right">
+                                    <template if:true={hasSelectedRows}>
+                                        <lightning-button
+                                            label={deleteSelectedButtonLabel}
+                                            title="Delete selected rows"
+                                            onclick={deleteSelectedRows}
+                                            icon-name="utility:delete"
+                                            variant="destructive"
+                                            class="slds-m-right_x-small">
+                                        </lightning-button>
+                                    </template>
+                                    <lightning-button
+                                        label="Add Row"
+                                        title="Add a new row"
+                                        onclick={addNewRow}
+                                        icon-name="utility:add"
+                                        variant="neutral">
+                                    </lightning-button>
+                                </div>
                             </div>
 
                             <!-- Data Table -->
                             <div if:true={hasItems} class="data-table-wrapper">
-                                <lightning-datatable
+                                <c-custom-data-table
                                     key-field="id"
                                     data={editableItems}
                                     columns={allColumns}
                                     onsave={handleCellSave}
                                     draft-values={draftValues}
                                     onrowaction={handleRowAction}
-                                    hide-checkbox-column
+                                    onrowselection={handleRowSelection}
+                                    selected-rows={selectedRows}
                                     show-row-number-column>
-                                </lightning-datatable>
+                                </c-custom-data-table>
                             </div>
 
                             <!-- No Items Message -->
