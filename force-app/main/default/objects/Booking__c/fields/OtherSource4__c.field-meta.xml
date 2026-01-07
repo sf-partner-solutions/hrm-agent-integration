@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OtherSource4__c</fullName>
+    <label>Other Source 4</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>OtherSource4_Booking</relationshipName>
+    <relationshipLabel>OtherSource4 (Booking)</relationshipLabel>
+    <type>Lookup</type>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <required>false</required>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ForecastGuestroomRevenueTotal__c</fullName>
+    <label>Forecasted Guestroom Revenue Total</label>
+    <description>The sum total of all forecasted guestroom revenues, used to generate forecast reports</description>
+    <precision>18</precision>
+    <scale>2</scale>
+    <type>Currency</type>
+    <required>false</required>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OwningUser__c</fullName>
+    <label>Owning User</label>
+    <description>To change the owner, save the booking and then click the Change Owner button.</description>
+    <referenceTo>User</referenceTo>
+    <relationshipName>OwningUser_Booking</relationshipName>
+    <relationshipLabel>OwningUser (Booking)</relationshipLabel>
+    <type>Lookup</type>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <required>false</required>
+</CustomField>

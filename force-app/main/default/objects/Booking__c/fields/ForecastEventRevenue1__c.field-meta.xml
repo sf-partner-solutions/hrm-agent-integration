@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ForecastEventRevenue1__c</fullName>
+    <label>Forecasted Food Revenue</label>
+    <description>The sum total of all food revenues, calculated for each event as the event classification average check for food multiplied by the firmest  attendance value</description>
+    <precision>18</precision>
+    <scale>2</scale>
+    <type>Currency</type>
+    <required>false</required>
+</CustomField>

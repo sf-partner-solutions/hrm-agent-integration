@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ForecastEventRevenue6__c</fullName>
+    <label>Forecasted Other Revenue</label>
+    <description>The sum total of all other revenues, calculated for each event as the event classification average check for other revenue multiplied by the firmest  attendance value</description>
+    <precision>18</precision>
+    <scale>2</scale>
+    <type>Currency</type>
+    <required>false</required>
+</CustomField>

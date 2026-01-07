@@ -1,4 +1,4 @@
-import { LightningElement, api, wire } from 'lwc';
+import { LightningElement, api, wire, track } from 'lwc';
 import { getRecord, getFieldValue } from 'lightning/uiRecordApi';
 import { CurrentPageReference } from 'lightning/navigation';
 import { subscribe, unsubscribe, MessageContext } from 'lightning/messageService';
@@ -15,20 +15,18 @@ export default class BanquetMenuRouter extends LightningElement {
     @api recordId;
     @api objectApiName;
 
-    // Deprecated API properties (kept for backward compatibility)
+    // Internal properties for property tracking
     _propertyId;
     _propertyName;
 
-    @api
+    // Computed property that prioritizes recordId (from Lightning page) over manually set value
     get propertyId() {
-        // Always prioritize recordId over the deprecated property
         return this.recordId || this._propertyId;
     }
     set propertyId(value) {
         this._propertyId = value;
     }
 
-    @api
     get propertyName() {
         return this._propertyName;
     }
@@ -36,8 +34,8 @@ export default class BanquetMenuRouter extends LightningElement {
         this._propertyName = value;
     }
 
-    // Individual properties for template use
-    responseType;
+    // Individual properties for template use - @track for reactivity
+    @track responseType;
     message;
     extractedItemsJson;
     itemCount;
@@ -98,12 +96,12 @@ export default class BanquetMenuRouter extends LightningElement {
         }
     }
 
-    // Wire adapter to get the property name
-    @wire(getRecord, { recordId: '$propertyId', fields: PROPERTY_FIELDS })
+    // Wire adapter to get the property name from the current record
+    @wire(getRecord, { recordId: '$recordId', fields: PROPERTY_FIELDS })
     wiredProperty({ error, data }) {
         if (data) {
-            this.propertyName = data.fields.Name.value;
-            console.log('Property name fetched from record:', this.propertyName);
+            this._propertyName = data.fields.Name.value;
+            console.log('Property name fetched from record:', this._propertyName);
         } else if (error) {
             console.error('Error fetching property name:', error);
         }
@@ -171,7 +169,7 @@ export default class BanquetMenuRouter extends LightningElement {
     }
 
     get showUploadHandler() {
-        return this.responseType === 'UPLOAD_REQUIRED';
+        return this.responseType === 'UPLOAD_REQUIRED' || this.responseType === 'MANUAL_UPLOAD';
     }
 
     get showItemsPreview() {

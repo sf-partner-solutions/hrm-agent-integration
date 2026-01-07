@@ -13,13 +13,7 @@
         <targetConfig targets="lightning__AgentforceOutput">
             <sourceType name="c__banquetMenuResponse" />
         </targetConfig>
-        <targetConfig targets="lightning__AppPage,lightning__HomePage">
-            <property name="propertyId" type="String" label="Property ID (Deprecated)" description="This field is deprecated. The component will automatically use the record ID when placed on a record page." />
-            <property name="propertyName" type="String" label="Property Name (Deprecated)" description="This field is deprecated. The component will automatically fetch the property name." />
-        </targetConfig>
         <targetConfig targets="lightning__RecordPage">
-            <property name="propertyId" type="String" label="Property ID (Deprecated)" description="This field is deprecated. The component automatically uses the current record ID." />
-            <property name="propertyName" type="String" label="Property Name (Deprecated)" description="This field is deprecated. The component automatically fetches the property name from the record." />
             <objects>
                 <object>Location__c</object>
             </objects>

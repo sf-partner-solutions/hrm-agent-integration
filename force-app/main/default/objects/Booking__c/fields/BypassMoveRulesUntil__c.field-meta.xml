@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BypassMoveRulesUntil__c</fullName>
+    <label>Bypass Move Rules Until</label>
+    <description>Allows the manipulation of dates at the booking, room block, and event level to repair out-of-range situations.</description>
+    <type>DateTime</type>
+    <required>false</required>
+</CustomField>

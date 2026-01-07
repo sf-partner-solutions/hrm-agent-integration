@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ForecastAverageCheckFactor13__c</fullName>
+    <label>Forecast Average Check Factor 13</label>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Per Event</fullName>
+                <default>false</default>
+                <label>Per Event</label>
+            </value>
+            <value>
+                <fullName>Per Person</fullName>
+                <default>false</default>
+                <label>Per Person</label>
+            </value>
+            <value>
+                <fullName>Not Calculated</fullName>
+                <default>false</default>
+                <label>Not Calculated</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

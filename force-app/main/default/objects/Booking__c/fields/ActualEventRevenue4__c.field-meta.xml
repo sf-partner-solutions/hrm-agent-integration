@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ActualEventRevenue4__c</fullName>
+    <label>Actual AV Revenue</label>
+    <description>The sum total of all AV revenues, calculated for each event item as the actual quantity multiplied by the item price</description>
+    <precision>18</precision>
+    <scale>2</scale>
+    <type>Currency</type>
+    <required>false</required>
+</CustomField>

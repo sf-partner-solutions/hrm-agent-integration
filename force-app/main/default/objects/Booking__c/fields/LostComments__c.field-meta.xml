@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LostComments__c</fullName>
+    <label>Lost Comments</label>
+    <description>If the Booking originated from a MeetingBroker RFP, lost comments are sent to MeetingBroker and may be seen by the customer.</description>
+    <length>256</length>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

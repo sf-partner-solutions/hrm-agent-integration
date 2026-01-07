@@ -6,4 +6,27 @@
 :host {
     --slds-c-button-brand-color-background: #0070d2;
     --slds-c-button-brand-color-background-hover: #005fb2;
+    display: block;
+    width: 100%;
+}
+
+/* Center the file upload container */
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Center the lightning-file-upload component */
+.file-upload-container lightning-file-upload {
+    display: flex;
+    justify-content: center;
+}
+
+/* Center uploaded file display */
+.uploaded-file-display {
+    max-width: 400px;
+    margin: 0 auto;
 }

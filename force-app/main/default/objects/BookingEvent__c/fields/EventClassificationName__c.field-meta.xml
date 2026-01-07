@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EventClassificationName__c</fullName>
+    <label>Event Classification</label>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Default</fullName>
+                <default>false</default>
+                <label>Default</label>
+            </value>
+            <value>
+                <fullName>Unassigned</fullName>
+                <default>false</default>
+                <label>Unassigned</label>
+            </value>
+            <value>
+                <fullName>Teardown</fullName>
+                <default>false</default>
+                <label>Teardown</label>
+            </value>
+            <value>
+                <fullName>Setup</fullName>
+                <default>false</default>
+                <label>Setup</label>
+            </value>
+            <value>
+                <fullName>Lunch</fullName>
+                <default>false</default>
+                <label>Lunch</label>
+            </value>
+            <value>
+                <fullName>Dinner</fullName>
+                <default>false</default>
+                <label>Dinner</label>
+            </value>
+            <value>
+                <fullName>Continental Breakfast</fullName>
+                <default>false</default>
+                <label>Continental Breakfast</label>
+            </value>
+            <value>
+                <fullName>Breakfast</fullName>
+                <default>false</default>
+                <label>Breakfast</label>
+            </value>
+            <value>
+                <fullName>Golf Tournament</fullName>
+                <default>false</default>
+                <label>Golf Tournament</label>
+            </value>
+            <value>
+                <fullName>Meditation Session</fullName>
+                <default>false</default>
+                <label>Meditation Session</label>
+            </value>
+            <value>
+                <fullName>Yoga Session</fullName>
+                <default>false</default>
+                <label>Yoga Session</label>
+            </value>
+            <value>
+                <fullName>Meeting</fullName>
+                <default>false</default>
+                <label>Meeting</label>
+            </value>
+            <value>
+                <fullName>Reception</fullName>
+                <default>false</default>
+                <label>Reception</label>
+            </value>
+            <value>
+                <fullName>Morning Break</fullName>
+                <default>false</default>
+                <label>Morning Break</label>
+            </value>
+            <value>
+                <fullName>Afternoon Break</fullName>
+                <default>false</default>
+                <label>Afternoon Break</label>
+            </value>
+            <value>
+                <fullName>24 Hour Hold</fullName>
+                <default>false</default>
+                <label>24 Hour Hold</label>
+            </value>
+            <value>
+                <fullName>Package Breakfast</fullName>
+                <default>false</default>
+                <label>Package Breakfast</label>
+            </value>
+            <value>
+                <fullName>Package Break</fullName>
+                <default>false</default>
+                <label>Package Break</label>
+            </value>
+            <value>
+                <fullName>Package Morning Break</fullName>
+                <default>false</default>
+                <label>Package Morning Break</label>
+            </value>
+            <value>
+                <fullName>Package Lunch</fullName>
+                <default>false</default>
+                <label>Package Lunch</label>
+            </value>
+            <value>
+                <fullName>Package Afternoon Break</fullName>
+                <default>false</default>
+                <label>Package Afternoon Break</label>
+            </value>
+            <value>
+                <fullName>Package Meeting</fullName>
+                <default>false</default>
+                <label>Package Meeting</label>
+            </value>
+            <value>
+                <fullName>Package Dinner</fullName>
+                <default>false</default>
+                <label>Package Dinner</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

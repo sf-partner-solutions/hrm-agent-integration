@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HideServeTimesOnBeo__c</fullName>
+    <label>Hide Serve Times On BEO</label>
+    <description>Please download the latest BEO templates to use this functionality.</description>
+    <defaultValue>false</defaultValue>
+    <type>Checkbox</type>
+</CustomField>

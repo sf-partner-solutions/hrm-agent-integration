@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ServiceAssistant__c</fullName>
+    <label>Service Assistant</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>ServiceAssistant_Booking</relationshipName>
+    <relationshipLabel>ServiceAssistant (Booking)</relationshipLabel>
+    <type>Lookup</type>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <required>false</required>
+</CustomField>

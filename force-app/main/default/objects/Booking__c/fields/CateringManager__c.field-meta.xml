@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CateringManager__c</fullName>
+    <label>Catering Manager</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>CateringManager_Booking</relationshipName>
+    <relationshipLabel>CateringManager (Booking)</relationshipLabel>
+    <type>Lookup</type>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <required>false</required>
+</CustomField>

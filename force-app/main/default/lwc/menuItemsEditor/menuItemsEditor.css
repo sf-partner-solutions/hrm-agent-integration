@@ -1,3 +1,8 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
 /* Full height container */
 .full-height-container {
     height: 100vh;

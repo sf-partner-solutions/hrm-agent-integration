@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HasInvalidTaxGroup__c</fullName>
+    <label>Has Invalid Tax Group</label>
+    <description>Will be true if the BookingEvent Start Date falls outside of the associated Tax Group Start and End Date range</description>
+    <defaultValue>false</defaultValue>
+    <type>Checkbox</type>
+</CustomField>

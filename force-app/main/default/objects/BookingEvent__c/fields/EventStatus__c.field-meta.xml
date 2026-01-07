@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EventStatus__c</fullName>
+    <label>Event Status</label>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Prospect</fullName>
+                <default>false</default>
+                <label>Prospect</label>
+            </value>
+            <value>
+                <fullName>Tentative</fullName>
+                <default>false</default>
+                <label>Tentative</label>
+            </value>
+            <value>
+                <fullName>Definite</fullName>
+                <default>false</default>
+                <label>Definite</label>
+            </value>
+            <value>
+                <fullName>Lost</fullName>
+                <default>false</default>
+                <label>Lost</label>
+            </value>
+            <value>
+                <fullName>TurnedDown</fullName>
+                <default>false</default>
+                <label>TurnedDown</label>
+            </value>
+            <value>
+                <fullName>Booking Cancelled</fullName>
+                <default>false</default>
+                <label>Booking Cancelled</label>
+            </value>
+            <value>
+                <fullName>Event Cancelled</fullName>
+                <default>false</default>
+                <label>Event Cancelled</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

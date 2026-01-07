@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StatusReasonName__c</fullName>
+    <label>Lost Reason</label>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Default</fullName>
+                <default>false</default>
+                <label>Default</label>
+            </value>
+            <value>
+                <fullName>Dates Changed</fullName>
+                <default>false</default>
+                <label>Dates Changed</label>
+            </value>
+            <value>
+                <fullName>Disaster</fullName>
+                <default>false</default>
+                <label>Disaster</label>
+            </value>
+            <value>
+                <fullName>Entry Error</fullName>
+                <default>false</default>
+                <label>Entry Error</label>
+            </value>
+            <value>
+                <fullName>Function Space Unavailable</fullName>
+                <default>false</default>
+                <label>Function Space Unavailable</label>
+            </value>
+            <value>
+                <fullName>Guest Room Pattern Unacceptable</fullName>
+                <default>false</default>
+                <label>Guest Room Pattern Unacceptable</label>
+            </value>
+            <value>
+                <fullName>Guest Rooms Unavailable</fullName>
+                <default>false</default>
+                <label>Guest Rooms Unavailable</label>
+            </value>
+            <value>
+                <fullName>Lead Did Not Materialize</fullName>
+                <default>false</default>
+                <label>Lead Did Not Materialize</label>
+            </value>
+            <value>
+                <fullName>No Reason Provided</fullName>
+                <default>false</default>
+                <label>No Reason Provided</label>
+            </value>
+            <value>
+                <fullName>No Response</fullName>
+                <default>false</default>
+                <label>No Response</label>
+            </value>
+            <value>
+                <fullName>Other See Notes</fullName>
+                <default>false</default>
+                <label>Other See Notes</label>
+            </value>
+            <value>
+                <fullName>Rates Too High</fullName>
+                <default>false</default>
+                <label>Rates Too High</label>
+            </value>
+            <value>
+                <fullName>Selected Another City</fullName>
+                <default>false</default>
+                <label>Selected Another City</label>
+            </value>
+            <value>
+                <fullName>Selected Another Facility</fullName>
+                <default>false</default>
+                <label>Selected Another Facility</label>
+            </value>
+            <value>
+                <fullName>Group Size Guestrooms</fullName>
+                <default>false</default>
+                <label>Group Size Guestrooms</label>
+            </value>
+            <value>
+                <fullName>Group Size Function Space</fullName>
+                <default>false</default>
+                <label>Group Size Function Space</label>
+            </value>
+            <value>
+                <fullName>Contract Terms</fullName>
+                <default>false</default>
+                <label>Contract Terms</label>
+            </value>
+            <value>
+                <fullName>Amenities</fullName>
+                <default>false</default>
+                <label>Amenities</label>
+            </value>
+            <value>
+                <fullName>Renovation</fullName>
+                <default>false</default>
+                <label>Renovation</label>
+            </value>
+            <value>
+                <fullName>Competitor In-House</fullName>
+                <default>false</default>
+                <label>Competitor In-House</label>
+            </value>
+            <value>
+                <fullName>Credit Not Approved</fullName>
+                <default>false</default>
+                <label>Credit Not Approved</label>
+            </value>
+            <value>
+                <fullName>Previous Experience</fullName>
+                <default>false</default>
+                <label>Previous Experience</label>
+            </value>
+            <value>
+                <fullName>AUTO: Turndown</fullName>
+                <default>false</default>
+                <label>AUTO: Turndown</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

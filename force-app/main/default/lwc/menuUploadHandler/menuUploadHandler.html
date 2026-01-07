@@ -17,7 +17,7 @@
         </div>
 
         <!-- File Upload Component -->
-        <div if:false={hasUploadedFiles}>
+        <div if:false={hasUploadedFiles} class="file-upload-container">
             <lightning-file-upload
                 label="Select Menu PDF"
                 name="menuUploader"
@@ -29,7 +29,7 @@
         </div>
 
         <!-- Uploaded File Display -->
-        <div if:true={hasUploadedFiles} class="slds-box slds-theme_shade">
+        <div if:true={hasUploadedFiles} class="slds-box slds-theme_shade uploaded-file-display">
             <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
                 <div class="slds-col">
                     <lightning-icon

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Agency__c</fullName>
+    <label>Agency</label>
+    <referenceTo>Account</referenceTo>
+    <relationshipName>Agency_Booking</relationshipName>
+    <relationshipLabel>Agency (Booking)</relationshipLabel>
+    <type>Lookup</type>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <required>false</required>
+</CustomField>

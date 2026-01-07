@@ -1,51 +1,45 @@
 <template>
     <div class="slds-card">
-        <!-- Header with Logo -->
-        <div class="slds-card__header">
-            <div class="slds-grid slds-grid_vertical-align-center">
-                <div class="slds-col slds-m-right_small">
-                    <img src={amadeusLogoUrl} alt="Amadeus Delphi" class="amadeus-logo" />
-                </div>
-                <div class="slds-col">
-                    <p class="slds-text-body_regular">{totalItemsText}</p>
-                </div>
-            </div>
+        <!-- Header with Logo - Centered -->
+        <div class="slds-card__header header-centered">
+            <img src={amadeusLogoUrl} alt="Amadeus Delphi" class="amadeus-logo slds-m-bottom_small" />
+            <p class="slds-text-body_regular">{totalItemsText}</p>
         </div>
 
         <!-- Metadata Info -->
-        <div if:true={hasItems} class="slds-card__body">
+        <div if:true={hasItems} class="slds-card__body card-body-centered">
             <!-- Mock Data Indicator -->
             <div if:true={isUsingMockData} class="mock-data-alert">
                 <div class="slds-notify slds-notify_alert slds-alert_warning" role="alert">
                     <span class="slds-assistive-text">info</span>
-                    <lightning-icon icon-name="utility:info" size="x-small" variant="warning" class="slds-m-right_x-small"></lightning-icon>
+                    <lightning-icon icon-name="utility:info" size="x-small" variant="warning" class="slds-var-m-right_x-small"></lightning-icon>
                     <h2 class="slds-text-body_regular">
                         Mock data - Connect API unavailable
                     </h2>
                 </div>
             </div>
 
-            <div class="slds-grid slds-wrap slds-m-bottom_small">
-                <div if:true={showVenueName} class="slds-col slds-size_1-of-2 slds-m-bottom_x-small">
+            <div class="slds-grid slds-wrap slds-var-m-bottom_small slds-grid_align-center metadata-centered">
+                <div if:true={showVenueName} class="slds-col slds-var-m-bottom_x-small slds-var-m-horizontal_small">
                     <span class="slds-text-title">Venue:</span>
-                    <span class="slds-m-left_x-small">{extractionMetadata.venue_name}</span>
+                    <span class="slds-var-m-left_x-small">{extractionMetadata.venue_name}</span>
                 </div>
-                <div if:true={showMenuTitle} class="slds-col slds-size_1-of-2 slds-m-bottom_x-small">
+                <div if:true={showMenuTitle} class="slds-col slds-var-m-bottom_x-small slds-var-m-horizontal_small">
                     <span class="slds-text-title">Menu:</span>
-                    <span class="slds-m-left_x-small">{extractionMetadata.menu_title}</span>
+                    <span class="slds-var-m-left_x-small">{extractionMetadata.menu_title}</span>
                 </div>
             </div>
 
             <!-- Extraction Notes -->
-            <div if:true={extractionNotes} class="slds-box slds-theme_shade slds-m-bottom_medium">
+            <div if:true={extractionNotes} class="slds-box slds-theme_shade slds-var-m-bottom_medium extraction-notes-centered">
                 <p class="slds-text-body_small">
-                    <lightning-icon icon-name="utility:info" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                    <lightning-icon icon-name="utility:info" size="x-small" class="slds-var-m-right_x-small"></lightning-icon>
                     <span>{extractionNotes}</span>
                 </p>
             </div>
 
             <!-- Data Table -->
-            <div class="slds-scrollable_y" style="max-height: 400px;">
+            <div class="datatable-container slds-scrollable_y" style="max-height: 400px;">
                 <lightning-datatable
                     key-field="Name"
                     data={displayItems}
@@ -57,9 +51,9 @@
             </div>
 
             <!-- Instructions -->
-            <div class="slds-m-top_medium slds-text-body_small slds-text-color_weak">
+            <div class="slds-var-m-top_medium slds-text-body_small slds-text-color_weak instructions-centered">
                 <p>Review the extracted menu items above. You can:</p>
-                <ul class="slds-list_dotted">
+                <ul class="slds-list_dotted slds-text-align_left" style="display: inline-block;">
                     <li>Select specific items to import (or import all)</li>
                     <li>Make changes to edit items before importing</li>
                     <li>Cancel to abort the import process</li>
@@ -68,7 +62,7 @@
         </div>
 
         <!-- No Items Message -->
-        <div if:false={hasItems} class="slds-card__body">
+        <div if:false={hasItems} class="slds-card__body slds-text-align_center">
             <div class="slds-illustration slds-illustration_small">
                 <div class="slds-text-longform">
                     <h3 class="slds-text-heading_medium">No Items Found</h3>

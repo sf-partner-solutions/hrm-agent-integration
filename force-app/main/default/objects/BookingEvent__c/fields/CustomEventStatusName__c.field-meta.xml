@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CustomEventStatusName__c</fullName>
+    <label>Custom Event Status</label>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DefaultValue</fullName>
+                <default>false</default>
+                <label>DefaultValue</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

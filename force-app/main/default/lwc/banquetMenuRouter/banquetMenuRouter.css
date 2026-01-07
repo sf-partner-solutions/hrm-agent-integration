@@ -1,0 +1,38 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+/* Center the card content */
+.router-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Center card header */
+.router-card .slds-card__header {
+    width: 100%;
+    text-align: center;
+}
+
+/* Center card body content */
+.router-card .slds-card__body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Status box centered */
+.status-box {
+    text-align: center;
+    max-width: 400px;
+}
+
+/* Error box centered */
+.error-box {
+    text-align: center;
+    max-width: 500px;
+    margin: 0 auto;
+}

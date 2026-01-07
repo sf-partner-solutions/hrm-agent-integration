@@ -1,5 +1,5 @@
 <template>
-    <div class="slds-card">
+    <div class="slds-card router-card">
         <div class="slds-card__header">
             <h2 class="slds-text-heading_small">Menu Upload Assistant</h2>
         </div>
@@ -10,7 +10,7 @@
                 </c-menu-upload-handler>
             </template>
             <template if:false={showUploadHandler}>
-                <div class="slds-box">
+                <div class="slds-box status-box">
                     <p><strong>Status:</strong> {responseType}</p>
                     <template if:true={message}>
                         <p>{message}</p>
@@ -39,7 +39,7 @@
     </template>
 
     <template if:true={showError}>
-        <div class="slds-box slds-theme_error">
+        <div class="slds-box slds-theme_error error-box">
             <h3 class="slds-text-heading_small slds-m-bottom_x-small">Error</h3>
             <p>{errorMessage}</p>
         </div>

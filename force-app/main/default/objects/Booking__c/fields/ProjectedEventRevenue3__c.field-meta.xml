@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ProjectedEventRevenue3__c</fullName>
+    <label>Projected Resource Revenue</label>
+    <description>The sum total of all resource revenues, calculated for each event item as the booked quantity multiplied by the item price</description>
+    <precision>18</precision>
+    <scale>2</scale>
+    <type>Currency</type>
+    <required>false</required>
+</CustomField>

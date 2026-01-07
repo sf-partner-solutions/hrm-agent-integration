@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LeadSourceName__c</fullName>
+    <label>Lead Source</label>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Default</fullName>
+                <default>false</default>
+                <label>Default</label>
+            </value>
+            <value>
+                <fullName>Client Referral</fullName>
+                <default>false</default>
+                <label>Client Referral</label>
+            </value>
+            <value>
+                <fullName>Cold Call</fullName>
+                <default>false</default>
+                <label>Cold Call</label>
+            </value>
+            <value>
+                <fullName>Convention &amp; Visitors Bureau</fullName>
+                <default>false</default>
+                <label>Convention &amp; Visitors Bureau</label>
+            </value>
+            <value>
+                <fullName>Cvent</fullName>
+                <default>false</default>
+                <label>Cvent</label>
+            </value>
+            <value>
+                <fullName>Destination Management Company</fullName>
+                <default>false</default>
+                <label>Destination Management Company</label>
+            </value>
+            <value>
+                <fullName>Direct Marketing</fullName>
+                <default>false</default>
+                <label>Direct Marketing</label>
+            </value>
+            <value>
+                <fullName>Hotel Referral</fullName>
+                <default>false</default>
+                <label>Hotel Referral</label>
+            </value>
+            <value>
+                <fullName>Inquiry</fullName>
+                <default>false</default>
+                <label>Inquiry</label>
+            </value>
+            <value>
+                <fullName>National Sales Office</fullName>
+                <default>false</default>
+                <label>National Sales Office</label>
+            </value>
+            <value>
+                <fullName>Personal Office Visit</fullName>
+                <default>false</default>
+                <label>Personal Office Visit</label>
+            </value>
+            <value>
+                <fullName>Repeat Business</fullName>
+                <default>false</default>
+                <label>Repeat Business</label>
+            </value>
+            <value>
+                <fullName>Sales Blitz</fullName>
+                <default>false</default>
+                <label>Sales Blitz</label>
+            </value>
+            <value>
+                <fullName>Social Media</fullName>
+                <default>false</default>
+                <label>Social Media</label>
+            </value>
+            <value>
+                <fullName>Solicitation</fullName>
+                <default>false</default>
+                <label>Solicitation</label>
+            </value>
+            <value>
+                <fullName>Lanyon/Starcite</fullName>
+                <default>false</default>
+                <label>Lanyon/Starcite</label>
+            </value>
+            <value>
+                <fullName>Third Party</fullName>
+                <default>false</default>
+                <label>Third Party</label>
+            </value>
+            <value>
+                <fullName>Trade Show</fullName>
+                <default>false</default>
+                <label>Trade Show</label>
+            </value>
+            <value>
+                <fullName>Walk In</fullName>
+                <default>false</default>
+                <label>Walk In</label>
+            </value>
+            <value>
+                <fullName>Website</fullName>
+                <default>false</default>
+                <label>Website</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
