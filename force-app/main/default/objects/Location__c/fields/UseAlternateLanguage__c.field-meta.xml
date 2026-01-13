@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UseAlternateLanguage__c</fullName>
+    <description>System Field: Do Not Use. Specifies whether alternate language fields are used for this property&apos;s records.</description>
+    <inlineHelpText>System Field: Do Not Use. Specifies whether alternate language fields are used for this property&apos;s records.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Use Alternate Language</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UpdateBookingEventAverageChecks__c</fullName>
+    <description>Controls whether or not average checks are changed when an Event Classification is changed.</description>
+    <inlineHelpText>Controls whether or not average checks are changed when an Event Classification is changed.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Update Booking Event Average Checks</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AlternateDescription__c</fullName>
+    <description>Description in alternate language.</description>
+    <inlineHelpText>Description in alternate language.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Alternate Description</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

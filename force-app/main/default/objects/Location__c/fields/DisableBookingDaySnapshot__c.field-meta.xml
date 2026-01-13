@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DisableBookingDaySnapshot__c</fullName>
+    <description>When checked, Booking Day Snapshot data will not be generated for Bookings associated with this Property.</description>
+    <inlineHelpText>When checked, Booking Day Snapshot data will not be generated for Bookings associated with this Property.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Disable Booking Day Snapshot</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AlternateRichDescriptionFR__c</fullName>
+    <description>Rich Description in French.</description>
+    <inlineHelpText>Rich Description in French.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Alternate Rich Description FR</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

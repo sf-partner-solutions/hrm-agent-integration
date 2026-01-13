@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ItemCategory__c</fullName>
+    <description>Categorizes the item for filtering and reporting.</description>
+    <inlineHelpText>Categorizes the item for filtering and reporting.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Item Category</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>SetupValue__c</referenceTo>
+    <relationshipLabel>Items</relationshipLabel>
+    <relationshipName>ItemCategory</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

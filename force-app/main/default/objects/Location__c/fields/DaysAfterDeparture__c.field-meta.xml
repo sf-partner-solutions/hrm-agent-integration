@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DaysAfterDeparture__c</fullName>
+    <description>The number of days after the departure date where a room block will be marked pickup complete by the scheduled job, mark pickup complete, that runs once a day.</description>
+    <inlineHelpText>The number of days after the departure date where a room block will be marked pickup complete by the scheduled job, mark pickup complete, that runs once a day.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Days After Departure</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

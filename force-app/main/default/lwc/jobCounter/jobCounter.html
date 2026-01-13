@@ -1,0 +1,58 @@
+<template>
+    <div class="job-counter-container">
+        <div class="job-card">
+            <div class="job-header">
+                <div class="job-icon">
+                    <lightning-icon icon-name="standard:work_order" size="medium"></lightning-icon>
+                </div>
+                <div class="job-title">
+                    <h3>{jobTitle}</h3>
+                    <p class="job-description">{jobDescription}</p>
+                </div>
+            </div>
+            
+            <div class="job-details">
+                <div class="detail-item">
+                    <span class="detail-label">Status:</span>
+                    <span class="detail-value status-badge" data-status={jobStatus}>{jobStatus}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Priority:</span>
+                    <span class="detail-value priority-badge" data-priority={jobPriority}>{jobPriority}</span>
+                </div>
+            </div>
+
+            <div class="counter-section">
+                <div class="counter-label">
+                    <span>Job Count</span>
+                </div>
+                <div class="counter-controls">
+                    <button class="counter-btn decrease-btn" onclick={decreaseCount} disabled={isDecrementDisabled}>
+                        <lightning-icon icon-name="utility:dash" size="x-small"></lightning-icon>
+                    </button>
+                    <div class="counter-display">
+                        <span class="count-value">{count}</span>
+                    </div>
+                    <button class="counter-btn increase-btn" onclick={increaseCount} disabled={isIncrementDisabled}>
+                        <lightning-icon icon-name="utility:add" size="x-small"></lightning-icon>
+                    </button>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <lightning-button 
+                    label="Reset" 
+                    onclick={resetCount}
+                    variant="neutral"
+                    class="reset-btn">
+                </lightning-button>
+                <lightning-button 
+                    label="Save Changes" 
+                    onclick={saveChanges}
+                    variant="brand"
+                    class="save-btn">
+                </lightning-button>
+            </div>
+        </div>
+    </div>
+</template>

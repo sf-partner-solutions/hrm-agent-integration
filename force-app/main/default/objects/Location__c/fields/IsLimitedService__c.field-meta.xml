@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsLimitedService__c</fullName>
+    <description>This flag indicates that the property is Delphi Select.</description>
+    <inlineHelpText>This flag indicates that the property is Delphi Select.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Is Limited Service</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

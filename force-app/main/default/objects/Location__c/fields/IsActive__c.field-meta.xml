@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsActive__c</fullName>
+    <description>Indicates whether the record is currently visible in lookups, indicating a valid selection. Inactive records may still exist and be referenced by existing records, but no new references can be made.</description>
+    <inlineHelpText>Indicates whether the record is currently visible in lookups, indicating a valid selection. Inactive records may still exist and be referenced by existing records, but no new references can be made.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Is Active</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

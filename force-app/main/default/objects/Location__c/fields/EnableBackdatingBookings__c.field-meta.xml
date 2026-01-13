@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableBackdatingBookings__c</fullName>
+    <description>Enable or Disable backdating bookings for Location</description>
+    <inlineHelpText>Enable or Disable backdating bookings for Location</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Enable Backdating Bookings</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

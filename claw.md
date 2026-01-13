@@ -378,7 +378,267 @@ Ensure your prompt template (GenAiPromptTemplate metadata) has:
 - Visibility: Global (if calling from different contexts)
 
 ---
-Last Updated: 2025-12-26
+
+## Apex Resources for Prompt Builder (Winter '25)
+
+### Critical Requirements for Apex Classes to Appear in Prompt Builder
+
+After extensive troubleshooting, here are the EXACT requirements for creating Apex resources that will be discoverable by Einstein Prompt Builder:
+
+#### The Working Pattern
+
+```apex
+/**
+ * MUST be global class (not public)
+ */
+global with sharing class YourPromptResource {
+
+    /**
+     * Input class - REQUIRED even if not used
+     * Must follow this exact structure
+     */
+    global class PromptRequest {
+        @InvocableVariable(required=false label='Input Record')
+        global SObject targetEntity;
+    }
+
+    /**
+     * Output class - CRITICAL: Variable MUST be named 'Prompt'
+     * This is the magic that makes it discoverable in Winter '25
+     */
+    global class PromptResponse {
+        @InvocableVariable(label='Your Label Here')
+        global String Prompt;  // MUST be named 'Prompt' with capital P
+    }
+
+    /**
+     * The invocable method
+     * DO NOT include capabilityType attribute (removed in Winter '25)
+     */
+    @InvocableMethod(
+        label='Your Resource Label'
+        description='Description for Prompt Builder'
+        // NO capabilityType - causes deployment errors in Winter '25
+    )
+    global static List<PromptResponse> execute(List<PromptRequest> requests) {
+        List<PromptResponse> responses = new List<PromptResponse>();
+        PromptResponse response = new PromptResponse();
+
+        try {
+            // Your logic here to generate the prompt data
+            String data = 'Your dynamic data';
+
+            // MUST set the 'Prompt' field
+            response.Prompt = data;
+
+        } catch (Exception e) {
+            System.debug('Error: ' + e.getMessage());
+            response.Prompt = 'Default fallback value';
+        }
+
+        responses.add(response);
+        return responses;
+    }
+}
+```
+
+#### Key Requirements (Winter '25)
+
+1. **Class Visibility**: MUST be `global`, not `public`
+
+2. **Request/Response Pattern**:
+   - Must have inner classes for Request and Response
+   - Request class must have an SObject field (even if unused)
+   - Response class must have a String field named exactly `Prompt`
+
+3. **The 'Prompt' Variable**:
+   - ⚠️ **MOST CRITICAL**: The output variable MUST be named `Prompt` (capital P)
+   - This is an undocumented requirement for Winter '25
+   - Without this exact naming, the resource won't appear in Prompt Builder
+
+4. **No capabilityType**:
+   - DO NOT include `capabilityType='PromptTemplateType__Prompt'`
+   - This was required in earlier versions but causes errors in Winter '25
+   - Error: "Annotation property, the format of capabilityType on InvocableMethod is invalid"
+
+5. **Method Signature**:
+   - Must take `List<PromptRequest>` as input
+   - Must return `List<PromptResponse>` as output
+   - Even if you don't use the input, the parameter must exist
+
+#### Common Issues and Solutions
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| "Apex (None Available)" | Output variable not named 'Prompt' | Rename output variable to exactly 'Prompt' |
+| "Apex loading..." then "None Available" | Wrong class structure | Follow exact Request/Response pattern above |
+| Deployment error about capabilityType | Using old pattern | Remove capabilityType attribute |
+| Resource not appearing after deployment | Browser cache | Clear cache, use incognito, refresh Prompt Builder |
+
+#### Working Example from This Project
+
+```apex
+global with sharing class RevenueClassificationResource {
+
+    global class PromptRequest {
+        @InvocableVariable(required=false label='Input Record')
+        global SObject targetEntity;
+    }
+
+    global class PromptResponse {
+        @InvocableVariable(label='Revenue Classifications')
+        global String Prompt;  // The magic variable name!
+    }
+
+    @InvocableMethod(
+        label='Get Active Revenue Classifications'
+        description='Returns active revenue classifications for Einstein Prompt Templates'
+    )
+    global static List<PromptResponse> getActiveRevenueClassifications(List<PromptRequest> requests) {
+        List<PromptResponse> results = new List<PromptResponse>();
+
+        try {
+            // Query revenue classifications
+            List<String> classifications = new List<String>();
+            for (RevenueClassification__c rc : [
+                SELECT Name FROM RevenueClassification__c
+                WHERE IsActive__c = true
+            ]) {
+                classifications.add('"' + rc.Name + '"');
+            }
+
+            // Create response with 'Prompt' field
+            PromptResponse res = new PromptResponse();
+            res.Prompt = String.join(classifications, ', ');
+            results.add(res);
+
+        } catch (Exception e) {
+            PromptResponse errorRes = new PromptResponse();
+            errorRes.Prompt = '"Food", "Beverage", "Labor", "Equipment", "Other"';
+            results.add(errorRes);
+        }
+
+        return results;
+    }
+}
+```
+
+#### Using the Resource in Prompt Builder
+
+1. **Add Resource**:
+   - In Prompt Builder, click "Add Resource" → "Apex"
+   - Select your resource from the list
+   - Give it a reference name (e.g., `Classifications`)
+
+2. **Reference in Template**:
+   ```
+   Available Classifications: {!$Resource:Classifications.Prompt}
+   ```
+
+3. **The output will be the value of the 'Prompt' field**
+
+#### Troubleshooting Tips
+
+1. **After deployment, always**:
+   - Clear browser cache
+   - Close all Salesforce tabs
+   - Open Prompt Builder in incognito/private window
+
+2. **If still not appearing**:
+   - Verify the output variable is named exactly `Prompt`
+   - Check that all classes and variables are `global`
+   - Ensure no capabilityType attribute is present
+   - Try with a minimal example first
+
+3. **Permissions**:
+   - User needs "Author Apex" permission
+   - Einstein features must be enabled in the org
+
+---
+
+## Deployment Instructions
+
+### Deploying to Connected Salesforce Org
+
+The default connected org alias for this project is `fdesdo`.
+
+#### Deploy a Single Apex Class
+
+```bash
+sf project deploy start --source-dir force-app/main/default/classes/YourClassName.cls --target-org fdesdo
+```
+
+#### Deploy Multiple Specific Files
+
+```bash
+sf project deploy start --source-dir force-app/main/default/classes/Class1.cls --source-dir force-app/main/default/classes/Class2.cls --target-org fdesdo
+```
+
+#### Deploy an Entire Directory
+
+```bash
+# Deploy all classes
+sf project deploy start --source-dir force-app/main/default/classes --target-org fdesdo
+
+# Deploy all LWC components
+sf project deploy start --source-dir force-app/main/default/lwc --target-org fdesdo
+
+# Deploy everything in force-app
+sf project deploy start --source-dir force-app --target-org fdesdo
+```
+
+#### Deploy Using a Manifest File
+
+```bash
+sf project deploy start --manifest manifest/package.xml --target-org fdesdo
+```
+
+#### Common Deployment Scenarios
+
+| Scenario | Command |
+|----------|---------|
+| Deploy single Apex class | `sf project deploy start --source-dir force-app/main/default/classes/ClassName.cls --target-org fdesdo` |
+| Deploy LWC component | `sf project deploy start --source-dir force-app/main/default/lwc/componentName --target-org fdesdo` |
+| Deploy Lightning Type | `sf project deploy start --source-dir force-app/main/default/lightningTypes/typeName --target-org fdesdo` |
+| Deploy Prompt Template | `sf project deploy start --source-dir force-app/main/default/prompts/templateName --target-org fdesdo` |
+| Deploy GenAI Function | `sf project deploy start --source-dir force-app/main/default/genAiFunctions/functionName --target-org fdesdo` |
+| Deploy with validation only | `sf project deploy start --source-dir force-app --target-org fdesdo --dry-run` |
+| Deploy and run tests | `sf project deploy start --source-dir force-app --target-org fdesdo --test-level RunLocalTests` |
+
+#### Checking Deployment Status
+
+```bash
+# Check status of a specific deployment
+sf project deploy report --job-id <deploymentId>
+
+# Resume a failed/interrupted deployment
+sf project deploy resume --job-id <deploymentId>
+```
+
+#### Retrieve Changes from Org
+
+```bash
+# Retrieve specific metadata
+sf project retrieve start --source-dir force-app/main/default/classes/ClassName.cls --target-org fdesdo
+
+# Retrieve using manifest
+sf project retrieve start --manifest manifest/package.xml --target-org fdesdo
+```
+
+#### Troubleshooting Deployments
+
+| Issue | Solution |
+|-------|----------|
+| "Not authorized" error | Run `sf org login web --alias fdesdo` to re-authenticate |
+| Deployment timeout | Add `--wait 30` flag to wait longer (default is 33 minutes) |
+| Test failures blocking deploy | Use `--test-level NoTestRun` for non-production orgs |
+| Partial deployment needed | Use `--ignore-errors` to continue past failures |
+
+---
+
+Last Updated: 2026-01-13
 Pattern Verified Working: Yes
 Critical Value Pattern Added: Yes
 Connect API Pattern Added: Yes
+Apex Resource Pattern Added: Yes (Winter '25)
+Deployment Instructions Added: Yes

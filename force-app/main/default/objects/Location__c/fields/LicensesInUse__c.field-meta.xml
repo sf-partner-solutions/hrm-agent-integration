@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>LicensesInUse__c</fullName>
+    <description>Number of Licenses in Use on this property (DEPRECATED)</description>
+    <inlineHelpText>Number of Licenses in Use on this property (DEPRECATED)</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Licenses In Use</label>
+    <precision>10</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

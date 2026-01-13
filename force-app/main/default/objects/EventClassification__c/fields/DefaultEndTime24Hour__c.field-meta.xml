@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DefaultEndTime24Hour__c</fullName>
+    <description>Default End time for the event in 24-hour format. Example: \</description>
+    <inlineHelpText>Default End time for the event in 24-hour format. Example: \</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Default End Time24Hour</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Value1</fullName>
+                <default>false</default>
+                <label>Value 1</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

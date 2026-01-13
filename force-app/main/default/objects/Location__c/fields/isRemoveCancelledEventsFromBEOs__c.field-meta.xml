@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>isRemoveCancelledEventsFromBEOs__c</fullName>
+    <description>When an event is cancelled it will automatically be removed from all existing Booking Documents on the booking.</description>
+    <inlineHelpText>When an event is cancelled it will automatically be removed from all existing Booking Documents on the booking.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>is Remove Cancelled Events From BEOs</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

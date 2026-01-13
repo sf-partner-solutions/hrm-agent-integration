@@ -1,0 +1,4 @@
+{
+  "title" : "Booking Menu Items Response",
+  "lightning:type" : "@apexClassType/FindBookingsByMenuItemAction$FindBookingsOutput"
+}

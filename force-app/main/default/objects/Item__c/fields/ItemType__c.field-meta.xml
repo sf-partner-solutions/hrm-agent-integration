@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ItemType__c</fullName>
+    <description>Specifies whether this item is a single item, a menu, or a text item for display on a BEO.  VALUE OPTIONS ARE FIXED BY DELPHI.FDC AND SHOULD NOT BE MODIFIED.</description>
+    <inlineHelpText>Specifies whether this item is a single item, a menu, or a text item for display on a BEO.  VALUE OPTIONS ARE FIXED BY DELPHI.FDC AND SHOULD NOT BE MODIFIED.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Item Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Value1</fullName>
+                <default>false</default>
+                <label>Value 1</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

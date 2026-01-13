@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TrackInventory__c</fullName>
+    <description>If true then the Inventory field is used to indicate the total number of items available at any one time.</description>
+    <inlineHelpText>If true then the Inventory field is used to indicate the total number of items available at any one time.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Track Inventory</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

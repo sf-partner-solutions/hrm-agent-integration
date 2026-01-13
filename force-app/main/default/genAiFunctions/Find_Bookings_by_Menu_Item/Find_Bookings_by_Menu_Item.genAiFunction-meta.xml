@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiFunction xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Search for bookings that contain specific menu items by name or price. Returns matching bookings with their menu item details.</description>
+    <invocationTarget>FindBookingsByMenuItemAction</invocationTarget>
+    <invocationTargetType>apex</invocationTargetType>
+    <isConfirmationRequired>false</isConfirmationRequired>
+    <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+    <masterLabel>Find Bookings by Menu Item</masterLabel>
+    <progressIndicatorMessage>Searching for bookings with matching menu items...</progressIndicatorMessage>
+</GenAiFunction>

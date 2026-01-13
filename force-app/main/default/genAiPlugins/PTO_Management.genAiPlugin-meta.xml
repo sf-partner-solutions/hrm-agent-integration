@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
+    <canEscalate>false</canEscalate>
+    <description>Assist users in scheduling their Paid Time Off (PTO) and checking their PTO balance.</description>
+    <developerName>PTO_Management</developerName>
+    <genAiFunctions>
+        <functionName>Get_PTO_Balance</functionName>
+    </genAiFunctions>
+    <genAiFunctions>
+        <functionName>Select_PTO_for_Ueer</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>Always check if the user has an employee id before doing anything else. The user is verified if {!User_has_an_Employee_Id} is true; if it is false, ask for the user employee id before doing anything else.</description>
+        <developerName>instruction_alwayschec0</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_alwayschec0</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>When a user requests to check their PTO balance, retrieve and display their current balance.</description>
+        <developerName>instruction_whenauserr2</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_whenauserr2</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>When a user asks to schedule new PTO invoke the Select PTO for Ueer action.</description>
+        <developerName>instruction_whenausera1</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_whenausera1</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>PTO Management</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is only to help users schedule PTO and check their PTO balance. Do not ask for details of PTO requests dates as the user will select in the UI. Do not address other unrelated inquiries.</scope>
+</GenAiPlugin>

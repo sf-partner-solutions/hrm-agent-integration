@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>BeoSection__c</fullName>
+    <description>The DocumentSection where created Event Items, based on this Item will be shown.</description>
+    <inlineHelpText>The DocumentSection where created Event Items, based on this Item will be shown.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Beo Section</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>DocumentSection__c</referenceTo>
+    <relationshipLabel>Items</relationshipLabel>
+    <relationshipName>BeoSection</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

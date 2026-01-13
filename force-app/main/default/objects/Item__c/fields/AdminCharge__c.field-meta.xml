@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AdminCharge__c</fullName>
+    <description>The default administrative charge percent for this item.</description>
+    <inlineHelpText>The default administrative charge percent for this item.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Admin Charge</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

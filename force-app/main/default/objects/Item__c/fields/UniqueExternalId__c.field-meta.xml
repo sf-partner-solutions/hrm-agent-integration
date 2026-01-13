@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>UniqueExternalId__c</fullName>
+    <description>The automatically calculated org-wide unique ID for the record, comprised of the SourceSystemExternalId and ExternalId.</description>
+    <inlineHelpText>The automatically calculated org-wide unique ID for the record, comprised of the SourceSystemExternalId and ExternalId.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Unique External Id</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

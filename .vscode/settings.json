@@ -11,5 +11,6 @@
     "**/.DS_Store": true,
     "**/Thumbs.db": true,
     ".mule": true
-  }
+  },
+  "xml.preferences.showSchemaDocumentationType": "none"
 }

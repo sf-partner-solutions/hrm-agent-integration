@@ -1,0 +1,95 @@
+<template>
+    <div class="slds-card">
+        <!-- Header with Logo -->
+        <div class="slds-card__header header-centered">
+            <img src={amadeusLogoUrl} alt="Amadeus Delphi" class="amadeus-logo slds-m-bottom_small" />
+            <h2 class="slds-text-heading_medium">Booking Menu Item Search Results</h2>
+            <p class="slds-text-body_regular slds-m-top_x-small">{totalItemsText}</p>
+        </div>
+
+        <!-- Search Criteria Info -->
+        <template if:true={showSearchCriteria}>
+            <div class="slds-card__body slds-p-horizontal_medium">
+                <div class="slds-box slds-theme_shade slds-m-bottom_medium search-criteria-box">
+                    <p class="slds-text-body_small">
+                        <lightning-icon icon-name="utility:search" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                        <span class="slds-text-title_bold">Search criteria: </span>
+                        <span>{searchCriteriaUsed}</span>
+                    </p>
+                </div>
+            </div>
+        </template>
+
+        <!-- Results Data Table -->
+        <template if:true={hasResults}>
+            <div class="slds-card__body slds-p-horizontal_medium">
+                <div class="datatable-container slds-scrollable_y" style="max-height: 400px;">
+                    <lightning-datatable
+                        key-field="id"
+                        data={displayItems}
+                        columns={columns}
+                        draft-values={draftValues}
+                        oncellchange={handleCellChange}
+                        show-row-number-column>
+                    </lightning-datatable>
+                </div>
+
+                <!-- Update/Cancel Buttons (shown when there are pending changes) -->
+                <template if:true={hasChanges}>
+                    <div class="slds-m-top_medium slds-text-align_center button-container">
+                        <div class="slds-box slds-theme_shade slds-p-around_small">
+                            <p class="slds-text-body_small slds-m-bottom_small">
+                                <lightning-icon icon-name="utility:edit" size="x-small" class="slds-m-right_x-small"></lightning-icon>
+                                <strong>{changesCount}</strong> price change(s) pending
+                            </p>
+                            <lightning-button
+                                variant="brand"
+                                label="Update"
+                                title="Save price changes"
+                                onclick={handleSave}
+                                class="slds-m-right_small">
+                            </lightning-button>
+                            <lightning-button
+                                variant="neutral"
+                                label="Cancel"
+                                title="Discard changes"
+                                onclick={handleCancel}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                </template>
+
+                <!-- Instructions -->
+                <div class="slds-m-top_medium slds-text-body_small slds-text-color_weak instructions-centered">
+                    <p>These bookings contain menu items matching your search for "<strong>{searchedItemName}</strong>".</p>
+                    <p class="slds-m-top_x-small">Click on a booking name to view details, or click on a price to edit it.</p>
+                </div>
+            </div>
+        </template>
+
+        <!-- No Results Message -->
+        <template if:false={hasResults}>
+            <div class="slds-card__body slds-text-align_center slds-p-around_medium">
+                <div class="slds-illustration slds-illustration_small">
+                    <lightning-icon icon-name="utility:search" size="large" class="slds-m-bottom_small"></lightning-icon>
+                    <div class="slds-text-longform">
+                        <h3 class="slds-text-heading_medium">No Bookings Found</h3>
+                        <p class="slds-text-body_regular">
+                            No bookings were found with menu items matching your search criteria.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <!-- Loading Spinner -->
+        <template if:true={isLoading}>
+            <div class="slds-is-relative loading-overlay">
+                <lightning-spinner
+                    alternative-text="Loading"
+                    size="medium">
+                </lightning-spinner>
+            </div>
+        </template>
+    </div>
+</template>

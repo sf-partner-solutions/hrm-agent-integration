@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OwnershipAffiliation__c</fullName>
+    <description>The company that owns the hotel.</description>
+    <inlineHelpText>The company that owns the hotel.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Ownership Affiliation</label>
+    <length>60</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

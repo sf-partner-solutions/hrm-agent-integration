@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableEnhancedPackageManagement__c</fullName>
+    <description>Checking this allows Bookings on this property to use enhanced Package functionality such as, allowing more than one Booking package to be associated with a Room Block.</description>
+    <inlineHelpText>Checking this allows Bookings on this property to use enhanced Package functionality such as, allowing more than one Booking package to be associated with a Room Block.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Enable Enhanced Package Management</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

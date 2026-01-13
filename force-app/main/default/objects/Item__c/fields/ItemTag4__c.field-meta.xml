@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ItemTag4__c</fullName>
+    <description>Item tags for filtering and reporting.</description>
+    <inlineHelpText>Item tags for filtering and reporting.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Item Tag4</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>SetupValue__c</referenceTo>
+    <relationshipLabel>Items</relationshipLabel>
+    <relationshipName>ItemTag4</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

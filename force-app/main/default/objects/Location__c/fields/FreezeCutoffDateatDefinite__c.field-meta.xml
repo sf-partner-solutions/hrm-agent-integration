@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FreezeCutoffDateatDefinite__c</fullName>
+    <description>When selected, changes to the arrival date will not automatically update the cutoff date for definite bookings and room blocks.</description>
+    <inlineHelpText>When selected, changes to the arrival date will not automatically update the cutoff date for definite bookings and room blocks.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Freeze Cutoff Dateat Definite</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

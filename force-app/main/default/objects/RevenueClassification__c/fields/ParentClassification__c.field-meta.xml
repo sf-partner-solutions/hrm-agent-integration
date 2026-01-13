@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ParentClassification__c</fullName>
+    <description>Allows specifying sub-classifications of top-level revenue classifications.</description>
+    <inlineHelpText>Allows specifying sub-classifications of top-level revenue classifications.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Parent Classification</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>RevenueClassification__c</referenceTo>
+    <relationshipLabel>Related Records</relationshipLabel>
+    <relationshipName>ParentClassification</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

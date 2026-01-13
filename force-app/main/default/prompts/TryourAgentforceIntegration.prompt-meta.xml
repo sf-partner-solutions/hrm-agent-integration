@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Prompt xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Try our Agentforce Integration</masterLabel>
+    <promptVersions>
+        <actionButtonLabel>Try Now</actionButtonLabel>
+        <actionButtonLink>https://www.google.com</actionButtonLink>
+        <body>&lt;p&gt;Did you know that Partner A recently launched a collection of Agentforce agentic AI components designed to enhance end users productivity and empower human + agent teams with intelligent automation and seamless collaboration? &lt;/p&gt;</body>
+        <customApplication>Partner_Agentforce_App</customApplication>
+        <delayDays>1</delayDays>
+        <description>Try our Agentforce Integration</description>
+        <dismissButtonLabel>Dismiss</dismissButtonLabel>
+        <displayPosition>MiddleCenter</displayPosition>
+        <displayType>FloatingPanel</displayType>
+        <experience>Lightning</experience>
+        <image>Watch_Demo</image>
+        <imageAltText>Did you know that Partner A recently launched a collection of Agentforce agentic AI components designed to enhance end users productivity and empower human + agent teams with intelligent automation and seamless collaboration?</imageAltText>
+        <imageLocation>Bottom</imageLocation>
+        <isPublished>true</isPublished>
+        <masterLabel>Try our Agentforce Integration</masterLabel>
+        <publishedDate>2025-08-22</publishedDate>
+        <shouldDisplayActionButton>true</shouldDisplayActionButton>
+        <shouldIgnoreGlobalDelay>true</shouldIgnoreGlobalDelay>
+        <startDate>2025-08-22</startDate>
+        <targetPageKey1>API_Login1</targetPageKey1>
+        <targetPageType>standard__navItemPage</targetPageType>
+        <themeColor>Theme1</themeColor>
+        <themeSaturation>Dark</themeSaturation>
+        <timesToDisplay>10</timesToDisplay>
+        <title>Partner Agentforce Suite</title>
+        <uiFormulaRule>
+            <criteria>
+                <leftValue>{!$User.Profile.Key}</leftValue>
+                <operator>EQUAL</operator>
+                <rightValue>Admin</rightValue>
+            </criteria>
+        </uiFormulaRule>
+        <userAccess>Everyone</userAccess>
+        <userProfileAccess>SpecificProfiles</userProfileAccess>
+        <versionNumber>1</versionNumber>
+    </promptVersions>
+</Prompt>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>QuantityCalculation__c</fullName>
+    <description>If Per Event, then quantities will be calculated as per the whole event, e.g. with a factor of 1. If Per Person, then quantities will be calculated by multiplying by number of attendees. VALUE OPTIONS ARE FIXED BY DELPHI.FDC AND SHOULD NOT BE MODIFIED.</description>
+    <inlineHelpText>If Per Event, then quantities will be calculated as per the whole event, e.g. with a factor of 1. If Per Person, then quantities will be calculated by multiplying by number of attendees. VALUE OPTIONS ARE FIXED BY DELPHI.FDC AND SHOULD NOT BE MODIFIED.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Quantity Calculation</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Value1</fullName>
+                <default>false</default>
+                <label>Value 1</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

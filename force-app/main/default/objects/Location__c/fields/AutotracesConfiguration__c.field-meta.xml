@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AutotracesConfiguration__c</fullName>
+    <description>System Field: Do Not Use. JSON with settings for automated business reminders.</description>
+    <inlineHelpText>System Field: Do Not Use. JSON with settings for automated business reminders.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Autotraces Configuration</label>
+    <length>16384</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

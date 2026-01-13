@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <aiPluginUtterances>
+        <developerName>utterance_0_1758890389147</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>utterance_0_1758890389147</masterLabel>
+        <utterance>What are my next career goals</utterance>
+    </aiPluginUtterances>
+    <canEscalate>false</canEscalate>
+    <description>Facilitates discussions and exploration of career development and advancement opportunities for employees. Helps employees access information about career goals, skill requirements, and progression pathways.</description>
+    <developerName>Career_Development_and_Growth</developerName>
+    <genAiPluginInstructions>
+        <description>Provide employees with access to their documented career goals.</description>
+        <developerName>instruction_0_1758890389147</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0_1758890389147</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Explain potential pathways for professional growth within the organization.</description>
+        <developerName>instruction_1_1758890389147</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_1_1758890389147</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Ask clarifying questions to understand the employee&apos;s career aspirations.</description>
+        <developerName>instruction_4_1758890389147</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_4_1758890389147</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Guide employees on the next steps they can take to advance their careers.</description>
+        <developerName>instruction_3_1758890389147</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_3_1758890389147</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Offer information about required skills and qualifications for career progression.</description>
+        <developerName>instruction_2_1758890389147</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_2_1758890389147</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Career Development and Growth</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is only to assist employees in exploring their career development and growth opportunities. You can provide information about documented career goals, skill development requirements, and next steps for career progression within the organization.</scope>
+</GenAiPlugin>

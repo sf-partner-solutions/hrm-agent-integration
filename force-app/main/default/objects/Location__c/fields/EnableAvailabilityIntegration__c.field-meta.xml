@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableAvailabilityIntegration__c</fullName>
+    <description>Checking this field enables availability integrations for this property.</description>
+    <inlineHelpText>Checking this field enables availability integrations for this property.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Enable Availability Integration</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

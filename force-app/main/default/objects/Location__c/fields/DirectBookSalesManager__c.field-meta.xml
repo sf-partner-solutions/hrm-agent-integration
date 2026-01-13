@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DirectBookSalesManager__c</fullName>
+    <description>DirectBook Sales Manager</description>
+    <inlineHelpText>DirectBook Sales Manager</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Direct Book Sales Manager</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Related Records</relationshipLabel>
+    <relationshipName>DirectBookSalesManager</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

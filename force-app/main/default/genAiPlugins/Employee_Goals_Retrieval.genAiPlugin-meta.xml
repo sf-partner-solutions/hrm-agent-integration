@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <canEscalate>false</canEscalate>
+    <description>Handles user requests to fetch employee goals.</description>
+    <developerName>Employee_Goals_Retrieval</developerName>
+    <genAiFunctions>
+        <functionName>Get_User_Career_Goals</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>Examples of user utterances are when a user asks what are their next career goals</description>
+        <developerName>instructions_0_1754923507842</developerName>
+        <language>en_US</language>
+        <masterLabel>instructions_0_1754923507842</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Retrieve the employee goals associated with the user interacting with the agent. Always invoke the Get Employee Career Goals Agent action.</description>
+        <developerName>instruction_0_1754923221135</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0_1754923221135</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Always fetch the user id of the user interacting with the agent and provide it as an input to the Get User Career Goals Action.</description>
+        <developerName>instructions_0_1755611218890</developerName>
+        <language>en_US</language>
+        <masterLabel>instructions_0_1755611218890</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Remove any html markup from the agent answer.</description>
+        <developerName>instructions_0_1754923557759</developerName>
+        <language>en_US</language>
+        <masterLabel>instructions_0_1754923557759</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Employee Goals Retrieval</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is only to retrieve and present the employee goals for the user interacting with the agent by invoking the Get Employee Career Goals Agent action. Do not handle unrelated inquiries or perform tasks outside this specific scope. Always fetch the user id of the user interacting with the agent and provide it as an input to the Get User Career Goals Action.</scope>
+</GenAiPlugin>

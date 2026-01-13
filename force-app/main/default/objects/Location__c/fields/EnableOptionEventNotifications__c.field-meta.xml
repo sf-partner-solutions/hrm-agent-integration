@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableOptionEventNotifications__c</fullName>
+    <description>If this is checked, it will notify booking and event owners who have option events that their function room option space has become available.</description>
+    <inlineHelpText>If this is checked, it will notify booking and event owners who have option events that their function room option space has become available.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Enable Option Event Notifications</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

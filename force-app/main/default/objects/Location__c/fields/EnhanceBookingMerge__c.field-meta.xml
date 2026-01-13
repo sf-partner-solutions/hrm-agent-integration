@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnhanceBookingMerge__c</fullName>
+    <description>Enable if your property wants to merge any of these Room Block fields in Guestroom tables: Housing Method, Billing Instructions, Incidentals Billing, Meal Plan Rate, Meal Plan Type, or Confidential Rate.</description>
+    <inlineHelpText>Enable if your property wants to merge any of these Room Block fields in Guestroom tables: Housing Method, Billing Instructions, Incidentals Billing, Meal Plan Rate, Meal Plan Type, or Confidential Rate.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Enhance Booking Merge</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

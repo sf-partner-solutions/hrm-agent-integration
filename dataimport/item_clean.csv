@@ -1,0 +1,41 @@
+Name,UniqueExternalId__c,ExternalId__c,SourceSystemExternalId__c,Location__r,Location__r.UniqueExternalId__c,RevenueClassification__r,RevenueClassification__r.UniqueExternalId__c,IsActive__c,ItemType__c,UnitPrice__c
+Dinner Menu,,,,[Location__c],,[RevenueClassification__c],,true,Detailed Menu,750
+Continental Breakfast Menu,,,,[Location__c],,[RevenueClassification__c],,true,Detailed Menu,600
+Lunch Menu,,,,[Location__c],,[RevenueClassification__c],,true,Detailed Menu,700
+Coffee & Tea Cart,,,,,,[RevenueClassification__c],,true,Item,40
+Snack Cart,,,,,,[RevenueClassification__c],,true,Detailed Menu,50
+Assorted Frito Lays,,,,,,[RevenueClassification__c],,true,Item,15
+Nutrigrain Bars,,,,,,[RevenueClassification__c],,true,Item,15
+Raisin Nut Mix,,,,,,[RevenueClassification__c],,true,Item,15
+Blue Corn Chips,,,,,,[RevenueClassification__c],,true,Item,15
+8x10 Screen,,,,,,[RevenueClassification__c],,true,Item,30
+HD Projector,,,,,,[RevenueClassification__c],,true,Item,50
+Enhanced Speakers,,,,,,[RevenueClassification__c],,true,Item,
+Cocktail Bar,,,,,,[RevenueClassification__c],,true,Simple Menu,259
+Soft Drink Bar,,,,,,[RevenueClassification__c],,true,Simple Menu,159
+Chicken Tetrazini Dinner,,,,[Location__c],,[RevenueClassification__c],,true,Simple Menu,35
+Southern Steak Dinner,,,,[Location__c],,[RevenueClassification__c],,true,Simple Menu,65
+Vegetarian Dinner,,,,[Location__c],,[RevenueClassification__c],,true,Simple Menu,60
+Classic Old Fashioned,,,,[Location__c],,[RevenueClassification__c],,true,Item,11
+Surfside Margarita,,,,[Location__c],,[RevenueClassification__c],,true,Item,10
+Loaded Nachos,,,,[Location__c],,[RevenueClassification__c],,true,Item,9
+Buffalo Chicken Wings,,,,[Location__c],,[RevenueClassification__c],,true,Item,10
+Spinach & Artichoke Dip,,,,[Location__c],,[RevenueClassification__c],,true,Item,8
+Grilled Chicken Caesar Wrap,,,,[Location__c],,[RevenueClassification__c],,true,Item,14
+Southwest Veggie Burger,,,,[Location__c],,[RevenueClassification__c],,true,Item,13
+Classic Club Sandwich,,,,[Location__c],,[RevenueClassification__c],,true,Item,14
+Strip Steak,,,,[Location__c],,[RevenueClassification__c],,true,Item,28
+Chocolate Lava Cake,,,,[Location__c],,[RevenueClassification__c],,true,Item,8
+BBQ Baby Back Ribs,,,,[Location__c],,[RevenueClassification__c],,true,Item,26
+Herb-Roasted Chicken Breast,,,,[Location__c],,[RevenueClassification__c],,true,Item,19
+Island Breeze Mohito,,,,[Location__c],,[RevenueClassification__c],,true,Item,9
+Sunset Sangria,,,,[Location__c],,[RevenueClassification__c],,true,Item,9
+Pineapple Paradise Mocktail,,,,[Location__c],,[RevenueClassification__c],,true,Item,6
+Key Lime Pie,,,,[Location__c],,[RevenueClassification__c],,true,Item,7
+Fountain Drink,,,,[Location__c],,[RevenueClassification__c],,true,Item,4
+Kid's Chicken Tenders & Fries,,,,[Location__c],,[RevenueClassification__c],,true,Item,9
+Kid's Mini Cheeseburger & Fries,,,,[Location__c],,[RevenueClassification__c],,true,Item,9
+Kid's Mac & Cheese,,,,[Location__c],,[RevenueClassification__c],,true,Item,9
+BBQ Pulled Pork Sliders,,,,[Location__c],,[RevenueClassification__c],,true,Item,9
+Grand Piano,,,,[Location__c],,[RevenueClassification__c],,true,Item,250
+Hotel Information Kiosk,,,,,,[RevenueClassification__c],,true,Item,335

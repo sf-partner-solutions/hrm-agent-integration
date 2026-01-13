@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>StartDaysAfterDeparture__c</fullName>
+    <description>Used to determine the start date range for the Pickup Complete job. The value will be added to the room blocks departure date and if the new date is less than the properties current date the Room Block record will not be processed.</description>
+    <inlineHelpText>Used to determine the start date range for the Pickup Complete job. The value will be added to the room blocks departure date and if the new date is less than the properties current date the Room Block record will not be processed.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Start Days After Departure</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

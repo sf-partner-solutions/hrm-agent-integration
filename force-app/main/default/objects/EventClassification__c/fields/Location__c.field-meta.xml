@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Location__c</fullName>
+    <description>See description on SetupValue.Location.</description>
+    <inlineHelpText>See description on SetupValue.Location.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Location</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>Location__c</referenceTo>
+    <relationshipLabel>Related Records</relationshipLabel>
+    <relationshipName>EventClassificationLocation</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

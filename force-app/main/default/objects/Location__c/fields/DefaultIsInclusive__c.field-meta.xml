@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DefaultIsInclusive__c</fullName>
+    <description>Specifies whether Inclusive Prices are set by default for this property.</description>
+    <inlineHelpText>Specifies whether Inclusive Prices are set by default for this property.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Default Is Inclusive</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

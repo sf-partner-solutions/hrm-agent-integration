@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsPlannerPortalEnabled__c</fullName>
+    <description>System Field: Do Not Use. When selected, property bookings can be shared with PlannerPortal users.</description>
+    <inlineHelpText>System Field: Do Not Use. When selected, property bookings can be shared with PlannerPortal users.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Is Planner Portal Enabled</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

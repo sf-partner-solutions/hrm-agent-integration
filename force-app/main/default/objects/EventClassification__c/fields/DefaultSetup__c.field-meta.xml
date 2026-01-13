@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DefaultSetup__c</fullName>
+    <description>The default FunctionRoomSetup setup value for BookingEvents using this EventClassification.</description>
+    <inlineHelpText>The default FunctionRoomSetup setup value for BookingEvents using this EventClassification.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Default Setup</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>SetupValue__c</referenceTo>
+    <relationshipLabel>Related Records</relationshipLabel>
+    <relationshipName>DefaultSetup</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

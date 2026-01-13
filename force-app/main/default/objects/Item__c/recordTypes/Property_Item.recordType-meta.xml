@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property_Item</fullName>
+    <active>true</active>
+    <description>Items are sold individually and are used to build detailed menus.</description>
+    <label>Property Item</label>
+</RecordType>

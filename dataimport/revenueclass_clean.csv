@@ -1,0 +1,16 @@
+Name,UniqueExternalId__c,ExternalId__c,SourceSystemExternalId__c,Location__r,IsActive__c,IsRootClassification__c
+Food,,,,,true,true
+Beverage,,,,,true,true
+Resource,,,,,true,true
+Audio Visual,,,,,true,true
+Administrative Charge,,,,,true,true
+Other,,,,,true,true
+Function Room Rental,,,,,true,true
+Custom Root 8,,,,,false,true
+Custom Root 9,,,,,false,true
+Custom Root 10,,,,,false,true
+Custom Root 11,,,,,false,true
+Custom Root 12,,,,,false,true
+Custom Root 13,,,,,false,true
+Custom Root 14,,,,,false,true
+Custom Root 15,,,,,false,true

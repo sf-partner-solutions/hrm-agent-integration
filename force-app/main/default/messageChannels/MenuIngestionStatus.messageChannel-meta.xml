@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Menu Ingestion Status</masterLabel>
+    <isExposed>true</isExposed>
+    <description>Message channel for communicating menu ingestion status between components</description>
+    <lightningMessageFields>
+        <fieldName>status</fieldName>
+        <description>Status of the operation (SUCCESS, ERROR, etc)</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>message</fieldName>
+        <description>Message to display</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>itemCount</fieldName>
+        <description>Number of items processed</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>propertyId</fieldName>
+        <description>Property ID associated with the items</description>
+    </lightningMessageFields>
+    <lightningMessageFields>
+        <fieldName>propertyName</fieldName>
+        <description>Property name for display</description>
+    </lightningMessageFields>
+</LightningMessageChannel>

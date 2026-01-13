@@ -1,0 +1,22 @@
+Name,UniqueExternalId__c,ExternalId__c,SourceSystemExternalId__c,Location__r,Location__r.UniqueExternalId__c,IsActive__c,SortOrder__c
+Run of House,,,,[Location__c],,true,1
+Run of House,,,,[Location__c],,true,1
+Run of House,,,,[Location__c],,true,1
+Standard,,,,[Location__c],,true,2
+Presidential Suite,,,,[Location__c],,true,3
+Twin,,,,[Location__c],,true,4
+Deluxe,,,,[Location__c],,true,5
+King,,,,[Location__c],,true,6
+Queen,,,,[Location__c],,true,7
+Studio,,,,[Location__c],,true,8
+Run of House,,,,[Location__c],,true,1
+Run of House,,,,[Location__c],,true,1
+Phoenix Std,,,,[Location__c],,true,2
+North Wing,,,,[Location__c],,true,3
+South Wing,,,,[Location__c],,true,4
+Main,,,,[Location__c],,true,5
+Run of House,,,,[Location__c],,true,1
+Run of House,,,,[Location__c],,true,1
+Run of House,,,,[Location__c],,true,1
+Standard,,,,[Location__c],,true,2
+Presidential Suite,,,,[Location__c],,true,6

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SetupValueTypeIndexed__c</fullName>
+    <description>System Field: Do Not Use. Field that should never be directly edited and hidden on layouts, driven my the master source field and used for queries as an indexed field</description>
+    <inlineHelpText>System Field: Do Not Use. Field that should never be directly edited and hidden on layouts, driven my the master source field and used for queries as an indexed field</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Setup Value Type Indexed</label>
+    <length>40</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

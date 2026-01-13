@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RevenueClassification__c</fullName>
+    <description>When ItemType = Item, controls revenue reporting and some aspects of price calculation, as well as where the item appears on a BEO. When ItemType = Simple Menu, indicates where the item should appear on the BEO. Not used when ItemType = Detailed Menu or Text.</description>
+    <inlineHelpText>When ItemType = Item, controls revenue reporting and some aspects of price calculation, as well as where the item appears on a BEO. When ItemType = Simple Menu, indicates where the item should appear on the BEO. Not used when ItemType = Detailed Menu or Text.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Revenue Classification</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>RevenueClassification__c</referenceTo>
+    <relationshipLabel>Items</relationshipLabel>
+    <relationshipName>RevenueClassification</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,132 @@
+<template>
+    <lightning-card title={cardTitle} icon-name="standard:product_item">
+        <!-- Header actions -->
+        <div slot="actions" class="slds-button-group">
+            <lightning-button
+                label="Add Items"
+                icon-name="utility:add"
+                variant="brand"
+                onclick={handleAddItemsClick}>
+            </lightning-button>
+            <lightning-button
+                label={deleteButtonLabel}
+                icon-name="utility:delete"
+                variant="destructive"
+                onclick={handleDeleteSelected}
+                disabled={isDeleteDisabled}
+                class="slds-m-left_x-small">
+            </lightning-button>
+            <lightning-button-icon
+                icon-name="utility:refresh"
+                alternative-text="Refresh"
+                onclick={handleRefresh}
+                class="slds-m-left_x-small">
+            </lightning-button-icon>
+        </div>
+
+        <!-- Loading spinner -->
+        <template if:true={isLoading}>
+            <div class="slds-is-relative loading-container">
+                <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+            </div>
+        </template>
+
+        <!-- Event Items Data Table -->
+        <div class="slds-p-around_medium">
+            <template if:true={hasEventItems}>
+                <lightning-datatable
+                    key-field="Id"
+                    data={eventItems}
+                    columns={eventItemColumns}
+                    onrowselection={handleRowSelection}
+                    onsave={handleCellChange}
+                    draft-values={draftValues}
+                    show-row-number-column
+                    suppress-bottom-bar
+                    class="event-items-table">
+                </lightning-datatable>
+            </template>
+            <template if:false={hasEventItems}>
+                <div class="slds-illustration slds-illustration_small">
+                    <div class="slds-text-longform">
+                        <h3 class="slds-text-heading_medium">No Menu Items</h3>
+                        <p class="slds-text-body_regular">
+                            Click "Add Items" to select menu items from the catalogue.
+                        </p>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+
+    <!-- Add Items Modal -->
+    <template if:true={showAddItemsModal}>
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_large">
+            <div class="slds-modal__container">
+                <!-- Modal Header -->
+                <header class="slds-modal__header">
+                    <lightning-button-icon
+                        class="slds-modal__close"
+                        icon-name="utility:close"
+                        alternative-text="Close"
+                        onclick={handleCloseModal}>
+                    </lightning-button-icon>
+                    <h2 class="slds-modal__title slds-hyphenate">{modalTitle}</h2>
+                    <p class="slds-m-top_x-small slds-text-body_small slds-text-color_weak">
+                        {catalogueItemCount} items available | {selectedCatalogueCount} selected
+                    </p>
+                </header>
+
+                <!-- Modal Body -->
+                <div class="slds-modal__content slds-p-around_medium">
+                    <!-- Search -->
+                    <div class="slds-m-bottom_medium">
+                        <lightning-input
+                            type="search"
+                            label="Search Items"
+                            placeholder="Search by name, description, category..."
+                            value={searchTerm}
+                            onchange={handleSearchChange}>
+                        </lightning-input>
+                    </div>
+
+                    <!-- Catalogue Items Table -->
+                    <div class="catalogue-table-container">
+                        <template if:true={isLoading}>
+                            <div class="slds-is-relative" style="height: 200px;">
+                                <lightning-spinner alternative-text="Loading..." size="medium"></lightning-spinner>
+                            </div>
+                        </template>
+                        <template if:false={isLoading}>
+                            <lightning-datatable
+                                key-field="Id"
+                                data={filteredCatalogueItems}
+                                columns={catalogueColumns}
+                                onrowselection={handleCatalogueRowSelection}
+                                max-row-selection="100"
+                                show-row-number-column
+                                class="catalogue-table">
+                            </lightning-datatable>
+                        </template>
+                    </div>
+                </div>
+
+                <!-- Modal Footer -->
+                <footer class="slds-modal__footer">
+                    <lightning-button
+                        label="Cancel"
+                        onclick={handleCloseModal}>
+                    </lightning-button>
+                    <lightning-button
+                        label={addButtonLabel}
+                        variant="brand"
+                        onclick={handleAddSelectedItems}
+                        disabled={isAddDisabled}
+                        class="slds-m-left_x-small">
+                    </lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>

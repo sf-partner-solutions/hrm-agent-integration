@@ -1,0 +1,44 @@
+<apex:page lightningStylesheets="true" standardController="Location__c" extensions="PropertyMessageCls">
+    <apex:pageBlock rendered="{!showBlock}" >
+        <div style="text-align: center; font-weight: bold;">
+        <Table>
+        <tr>
+            <td>
+            <img src="/img/msg_icons/warning32.png" style="padding-right: 4px; vertical-align: middle; text-align: center;" />
+            </td>
+            <td style = "width: 100%">
+            <apex:outputPanel >
+                <div style="text-align: center; font-weight: bold;">
+                    <apex:outputText value="{!propertyInactiveTaxGroupMessage}"/>
+                </div>
+
+                <div style="text-align: center; font-weight: bold;">
+                    <apex:outputText value="{!propertyIsInactiveMessage}"/>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!propertyIsLimitedService && !(!propertyIsInactive)}">
+            <div style="text-align: center; font-weight: bold;" >
+                     <apex:outputText value="{!$Label.PropertyIsLimitedServiceEdit&' '}"/>
+                    <apex:outputLink target="_blank" value="{!URLFOR($Page.AmadeusLS)&'#/properties/'&property.Id&'/home'}" >
+                    {!$Label.PropertyInEssentials}
+                    </apex:outputLink>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!propertyIsLimitedService && !propertyIsInactive}">
+            <div style="text-align: center; font-weight: bold;" >
+                     <apex:outputText value="{!$Label.PropertyIsLimitedService}"/>
+                </div>
+            </apex:outputPanel>
+            </td>
+        </tr>
+        </Table>
+        </div>
+    </apex:pageBlock>
+    <apex:pageBlock id="pageBlockDefaultMsg" rendered="{!NOT(showBlock)}">
+        <apex:outputPanel id="defaultMessageSection">
+            <div style="text-align: center; font-weight: bold;">
+                <apex:outputText value="{!defaultMessage}" />
+            </div>
+        </apex:outputPanel>
+    </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CreateOptionsOnConflict__c</fullName>
+    <description>This flag determines if an event&apos;s function room option will be set upon conflict.</description>
+    <inlineHelpText>This flag determines if an event&apos;s function room option will be set upon conflict.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Create Options On Conflict</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

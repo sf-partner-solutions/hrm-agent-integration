@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>RohAllowedStatuses__c</fullName>
+    <description>PICKLIST OPTIONS ARE FIXED BY DELPHI.FDC: DO NOT MODIFY.</description>
+    <inlineHelpText>PICKLIST OPTIONS ARE FIXED BY DELPHI.FDC: DO NOT MODIFY.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Roh Allowed Statuses</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Value1</fullName>
+                <default>false</default>
+                <label>Value 1</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

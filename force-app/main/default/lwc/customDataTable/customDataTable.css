@@ -1,0 +1,59 @@
+/* Custom styles for picklist columns */
+.slds-table .slds-cell-edit.slds-is-edited {
+    background-color: transparent;
+}
+
+/* Ensure picklist cells don't expand unnecessarily */
+lightning-datatable c-datatable-picklist {
+    display: block;
+    width: 100%;
+}
+
+/* Control picklist column width */
+.dt-picklist-column {
+    max-width: 180px;
+    min-width: 120px;
+}
+
+/* Allow overflow for dropdown menus */
+.slds-table tbody tr {
+    position: static !important;
+}
+
+.slds-table tbody td {
+    overflow: visible !important;
+    position: static !important;
+}
+
+/* Ensure dropdowns appear above other elements */
+.slds-scrollable_y {
+    overflow-y: visible !important;
+    overflow-x: auto !important;
+}
+
+.slds-table {
+    overflow: visible !important;
+}
+
+/* Force dropdown to open downwards */
+.picklist-editable-container {
+    position: relative;
+}
+
+/* Target the dropdown within the combobox and force it downwards */
+.picklist-editable-container lightning-combobox .slds-dropdown {
+    top: 100% !important;
+    bottom: auto !important;
+    margin-top: 0.125rem !important;
+    transform: none !important;
+}
+
+/* Ensure dropdown container allows downward expansion */
+.picklist-editable-container .slds-combobox_container {
+    position: relative !important;
+}
+
+/* Override any transform that might flip the dropdown */
+.slds-dropdown_bottom {
+    transform: none !important;
+}

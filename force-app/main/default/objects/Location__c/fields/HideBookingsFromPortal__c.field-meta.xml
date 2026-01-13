@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>HideBookingsFromPortal__c</fullName>
+    <description>System Field: Do Not Use. When selected, bookings default to hidden from PlannerPortal.</description>
+    <inlineHelpText>System Field: Do Not Use. When selected, bookings default to hidden from PlannerPortal.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Hide Bookings From Portal</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

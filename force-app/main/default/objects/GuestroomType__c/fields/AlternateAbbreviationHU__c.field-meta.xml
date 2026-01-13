@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AlternateAbbreviationHU__c</fullName>
+    <description>Room Type Code in Hungarian.</description>
+    <inlineHelpText>Room Type Code in Hungarian.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Alternate Abbreviation HU</label>
+    <length>24</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

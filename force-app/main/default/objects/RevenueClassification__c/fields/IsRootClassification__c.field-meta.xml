@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsRootClassification__c</fullName>
+    <description>Indicates whether this is one of the top-level, predefined revenue classifications. VALUE ASSIGNED BY DELPHI.FDC AND SHOULD NOT BE MODIFIED.</description>
+    <inlineHelpText>Indicates whether this is one of the top-level, predefined revenue classifications. VALUE ASSIGNED BY DELPHI.FDC AND SHOULD NOT BE MODIFIED.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Is Root Classification</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,52 @@
+/* Main container styles */
+.loading-container {
+    min-height: 100px;
+}
+
+/* Event items table styles */
+.event-items-table {
+    --slds-c-datatable-header-cell-color-background: #f3f2f2;
+}
+
+/* Modal styles */
+.slds-modal_large .slds-modal__container {
+    max-width: 80%;
+    width: 80%;
+}
+
+.catalogue-table-container {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.catalogue-table {
+    --slds-c-datatable-header-cell-color-background: #f3f2f2;
+}
+
+/* Empty state illustration */
+.slds-illustration {
+    padding: 2rem;
+    text-align: center;
+}
+
+.slds-illustration h3 {
+    margin-bottom: 0.5rem;
+}
+
+/* Button group spacing */
+.slds-button-group {
+    display: flex;
+    align-items: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .slds-modal_large .slds-modal__container {
+        max-width: 95%;
+        width: 95%;
+    }
+
+    .catalogue-table-container {
+        max-height: 40vh;
+    }
+}

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Property_Simple_Menu</fullName>
+    <active>true</active>
+    <description>A menu where the menu detail is provided in the rich text description.  Does not contain child items.</description>
+    <label>Property Simple Menu</label>
+</RecordType>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TripleAllocation__c</fullName>
+    <description>The percentage of Run of House triples that should be allocated to this room type. Supports a user interface feature that automatically distributes ROH to specific guestroom types.</description>
+    <inlineHelpText>The percentage of Run of House triples that should be allocated to this room type. Supports a user interface feature that automatically distributes ROH to specific guestroom types.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Triple Allocation</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

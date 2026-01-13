@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DistanceToNearestAirport__c</fullName>
+    <description>Distance to nearest airport in miles (if SystemOfMeasurement is Standard) or kilometers (if SystemOfMeasurement is Metric).</description>
+    <inlineHelpText>Distance to nearest airport in miles (if SystemOfMeasurement is Standard) or kilometers (if SystemOfMeasurement is Metric).</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Distance To Nearest Airport</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AlternateRichDescriptionEL__c</fullName>
+    <description>Rich Description in Greek.</description>
+    <inlineHelpText>Rich Description in Greek.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Alternate Rich Description EL</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>Html</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

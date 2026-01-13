@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Corporate_Detailed_Menu</fullName>
+    <active>true</active>
+    <description>A menu where detail is provided by adding child Items or ChoiceGroups to the menu.</description>
+    <label>Corporate Detailed Menu</label>
+</RecordType>

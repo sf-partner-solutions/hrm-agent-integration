@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EnableDefaultOccupancyUpcharge__c</fullName>
+    <description>Guestroom Details, to enable or disable the auto default double, triple and quad occupancy rate from single occupancy rate</description>
+    <inlineHelpText>Guestroom Details, to enable or disable the auto default double, triple and quad occupancy rate from single occupancy rate</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Enable Default Occupancy Upcharge</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,61 @@
+.header-centered {
+    text-align: center;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Amadeus logo styling - 30% max width */
+.amadeus-logo {
+    max-width: 30%;
+    height: auto;
+    object-fit: contain;
+}
+
+.search-criteria-box {
+    border-radius: 0.25rem;
+}
+
+.datatable-container {
+    border: 1px solid #dddbda;
+    border-radius: 0.25rem;
+}
+
+.instructions-centered {
+    text-align: center;
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure the card has relative positioning for the spinner overlay */
+.slds-card {
+    position: relative;
+    min-height: 200px;
+}
+
+/* Button container for Update/Cancel buttons */
+.button-container {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,14 @@
+<template>
+    <div class="picklist-editable-container">
+        <lightning-combobox
+            name="picklist"
+            data-inputable="true"
+            label={typeAttributes.label}
+            value={editedValue}
+            placeholder={typeAttributes.placeholder}
+            options={typeAttributes.options}
+            variant="label-hidden"
+            dropdown-alignment="bottom">
+        </lightning-combobox>
+    </div>
+</template>

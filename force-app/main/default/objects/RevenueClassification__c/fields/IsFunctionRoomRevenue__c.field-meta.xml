@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsFunctionRoomRevenue__c</fullName>
+    <description>Indicates that this classification is the special classification that function room rental revenue should be placed in. Exactly one RevenueClassification can have this checked, and IsAdminChargeRevenue cannot be checked on the same one.</description>
+    <inlineHelpText>Indicates that this classification is the special classification that function room rental revenue should be placed in. Exactly one RevenueClassification can have this checked, and IsAdminChargeRevenue cannot be checked on the same one.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Is Function Room Revenue</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

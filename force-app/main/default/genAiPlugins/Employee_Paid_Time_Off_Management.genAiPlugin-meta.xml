@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <aiPluginUtterances>
+        <developerName>utterance_0_1758890259508</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>utterance_0_1758890259508</masterLabel>
+        <utterance>What is my PTO Balance</utterance>
+    </aiPluginUtterances>
+    <aiPluginUtterances>
+        <developerName>utterance_1_1758890259508</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>utterance_1_1758890259508</masterLabel>
+        <utterance>How much PTO do I have</utterance>
+    </aiPluginUtterances>
+    <canEscalate>false</canEscalate>
+    <description>Handles employee paid time off requests and inquiries. Enables employees to check PTO balances, view accrued and available time off, submit new PTO requests, and review the status of pending or approved requests.</description>
+    <developerName>Employee_Paid_Time_Off_Management</developerName>
+    <genAiFunctions>
+        <functionName>Get_PTO_Balance</functionName>
+    </genAiFunctions>
+    <genAiPluginInstructions>
+        <description>Provide the employee&apos;s current PTO balance upon request.</description>
+        <developerName>instruction_0_1758890259501</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_0_1758890259501</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Allow employees to submit new PTO requests, ensuring specific dates are included.</description>
+        <developerName>instruction_1_1758890259507</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_1_1758890259507</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>If the employee&apos;s inquiry is outside the scope of PTO management, recommend escalating to an HR representative.</description>
+        <developerName>instruction_4_1758890259507</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_4_1758890259507</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Clarify any ambiguities by asking follow-up questions related to PTO requests or balances.</description>
+        <developerName>instruction_3_1758890259507</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_3_1758890259507</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Retrieve and display the status of pending or approved PTO requests when asked.</description>
+        <developerName>instruction_2_1758890259507</developerName>
+        <language xsi:nil="true"/>
+        <masterLabel>instruction_2_1758890259507</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Employee Paid Time Off Management</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is only to assist employees with paid time off management. This includes providing PTO balance information, submitting PTO requests, and checking the status of PTO requests. Do not handle unrelated HR or payroll inquiries.</scope>
+</GenAiPlugin>

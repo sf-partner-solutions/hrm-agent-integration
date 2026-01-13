@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IsInclusive__c</fullName>
+    <description>Indicates that the specified Unit Price includes inclusive taxes, admin charge, and gratuity.</description>
+    <inlineHelpText>Indicates that the specified Unit Price includes inclusive taxes, admin charge, and gratuity.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Is Inclusive</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

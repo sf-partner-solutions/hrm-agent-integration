@@ -1,0 +1,103 @@
+<template>
+    <div class="ai-insights-container">
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="header-row">
+                <div class="logo-container">
+                    <img src={amadeusLogo} alt="Amadeus" class="amadeus-logo" />
+                </div>
+                <div class="title-container">
+                    <h2 class="insights-title">AI Insights</h2>
+                </div>
+            </div>
+            <div class="divider"></div>
+        </div>
+
+        <!-- Scrollable Content Area -->
+        <div class="content-area">
+            <!-- Leads Section -->
+            <section class="insights-section">
+                <h3 class="section-title">
+                    <lightning-icon icon-name="standard:lead" size="small" class="section-icon"></lightning-icon>
+                    Inquiries that need your attention
+                </h3>
+                <div class="cards-container">
+                    <template for:each={mockLeads} for:item="lead">
+                        <article key={lead.id} class="insight-card lead-card">
+                            <div class="card-header">
+                                <span class="lead-company">{lead.company}</span>
+                                <lightning-badge label={lead.priority} variant={lead.variant}></lightning-badge>
+                            </div>
+                            <div class="card-content">
+                                <p class="lead-event">{lead.eventName}</p>
+                                <div class="lead-details">
+                                    <span class="detail-item">
+                                        <lightning-icon icon-name="standard:event" size="x-small"></lightning-icon>
+                                        {lead.dates}
+                                    </span>
+                                    <span class="detail-item">
+                                        <lightning-icon icon-name="standard:groups" size="x-small"></lightning-icon>
+                                        {lead.attendees} attendees
+                                    </span>
+                                </div>
+                                <div class="lead-value">
+                                    <span class="value-label">Est. Value:</span>
+                                    <span class="value-amount">{lead.value}</span>
+                                </div>
+                            </div>
+                            <div class="card-action">
+                                <lightning-button
+                                    label="View Details"
+                                    variant="brand-outline"
+                                    size="small"
+                                    onclick={handleViewLead}
+                                    data-lead-id={lead.id}>
+                                </lightning-button>
+                            </div>
+                        </article>
+                    </template>
+                </div>
+            </section>
+
+            <!-- Property Messages Section -->
+            <section class="insights-section">
+                <h3 class="section-title">
+                    <lightning-icon icon-name="standard:announcement" size="small" class="section-icon"></lightning-icon>
+                    Property Messages
+                </h3>
+                <div class="messages-container">
+                    <template for:each={propertyMessages} for:item="message">
+                        <article key={message.id} class="message-card">
+                            <div class="message-header">
+                                <lightning-icon icon-name={message.icon} size="small" variant={message.iconVariant}></lightning-icon>
+                                <span class="message-type">{message.type}</span>
+                                <span class="message-time">{message.time}</span>
+                            </div>
+                            <h4 class="message-title">{message.title}</h4>
+                            <p class="message-content">{message.content}</p>
+                            <template if:true={message.hasAction}>
+                                <div class="message-action">
+                                    <lightning-button
+                                        label={message.actionLabel}
+                                        variant="neutral"
+                                        size="small"
+                                        onclick={handleMessageAction}
+                                        data-message-id={message.id}>
+                                    </lightning-button>
+                                </div>
+                            </template>
+                        </article>
+                    </template>
+                </div>
+            </section>
+        </div>
+
+        <!-- Footer with AI indicator -->
+        <div class="footer-section">
+            <div class="ai-indicator">
+                <lightning-icon icon-name="standard:einstein" size="x-small"></lightning-icon>
+                <span class="ai-text">Powered by AgentForce • Updated {lastUpdated}</span>
+            </div>
+        </div>
+    </div>
+</template>

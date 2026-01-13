@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SoldByUnit__c</fullName>
+    <description>Unit of measure in which unit prices are expressed.</description>
+    <inlineHelpText>Unit of measure in which unit prices are expressed.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Sold By Unit</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

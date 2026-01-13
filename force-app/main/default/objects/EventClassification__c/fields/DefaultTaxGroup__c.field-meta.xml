@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DefaultTaxGroup__c</fullName>
+    <description>The default TaxGroup for events created with this classification.</description>
+    <inlineHelpText>The default TaxGroup for events created with this classification.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Default Tax Group</label>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <referenceTo>TaxGroup__c</referenceTo>
+    <relationshipLabel>Related Records</relationshipLabel>
+    <relationshipName>DefaultTaxGroup</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

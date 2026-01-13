@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>62.0</apiVersion>
+    <isExposed>true</isExposed>
+    <targets>
+        <target>lightning__UtilityBar</target>
+    </targets>
+    <masterLabel>AI Insights</masterLabel>
+    <description>AI-powered insights for sales teams showing leads and property messages</description>
+</LightningComponentBundle>

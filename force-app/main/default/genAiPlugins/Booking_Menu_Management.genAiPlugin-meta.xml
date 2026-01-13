@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlugin xmlns="http://soap.sforce.com/2006/04/metadata">
+    <canEscalate>false</canEscalate>
+    <description>Help users search for bookings that contain specific menu items and manage menu item details across bookings.</description>
+    <developerName>Booking_Menu_Management</developerName>
+    <genAiPluginInstructions>
+        <description>When a user asks which bookings have a specific menu item (e.g., "which bookings have dry snacks", "find bookings with coffee service"), use the Find Bookings by Menu Item action to search for bookings containing that item.</description>
+        <developerName>instruction_findbookings1</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_findbookings1</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>When searching for menu items on bookings, always ask for or determine the property context first. Use the current record context if the user is on a property record.</description>
+        <developerName>instruction_propertycontext2</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_propertycontext2</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Present search results clearly showing the booking name, event details, menu item name, price, and quantity. Offer to help the user update prices or quantities if they want to make changes.</description>
+        <developerName>instruction_presentresults3</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_presentresults3</masterLabel>
+    </genAiPluginInstructions>
+    <genAiPluginInstructions>
+        <description>Support partial name matching when searching for menu items. For example, if the user says "dry snack", search for items containing "dry snack" in their name.</description>
+        <developerName>instruction_partialmatch4</developerName>
+        <language>en_US</language>
+        <masterLabel>instruction_partialmatch4</masterLabel>
+    </genAiPluginInstructions>
+    <language>en_US</language>
+    <masterLabel>Booking Menu Management</masterLabel>
+    <pluginType>Topic</pluginType>
+    <scope>Your job is to help users find and manage menu items across bookings. You can search for bookings that contain specific menu items by name or price, and help users understand which events have particular items on their menus. Do not address inquiries unrelated to booking menu items.</scope>
+</GenAiPlugin>

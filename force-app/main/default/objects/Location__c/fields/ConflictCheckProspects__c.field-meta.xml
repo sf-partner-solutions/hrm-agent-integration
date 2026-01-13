@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ConflictCheckProspects__c</fullName>
+    <description>This flag determines if conflict checking should be enabled for events with the Status of &apos;Prospect&apos;.</description>
+    <inlineHelpText>This flag determines if conflict checking should be enabled for events with the Status of &apos;Prospect&apos;.</inlineHelpText>
+    <externalId>false</externalId>
+    <label>Conflict Check Prospects</label>
+    <defaultValue>false</defaultValue>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>
