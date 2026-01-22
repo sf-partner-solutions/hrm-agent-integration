@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Booking__c</fullName>
+    <description>The Booking record created from this email thread</description>
+    <externalId>false</externalId>
+    <label>Booking</label>
+    <referenceTo>Booking__c</referenceTo>
+    <relationshipLabel>Email Processing Logs</relationshipLabel>
+    <relationshipName>Email_Processing_Logs</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Gmail_Connection_State__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>The Gmail connection that processed this email</description>
+    <externalId>false</externalId>
+    <label>Gmail Connection State</label>
+    <referenceTo>Gmail_Connection_State__c</referenceTo>
+    <relationshipLabel>Email Processing Logs</relationshipLabel>
+    <relationshipName>Email_Processing_Logs</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

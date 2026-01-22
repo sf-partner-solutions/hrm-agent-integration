@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Generated_Email_Body__c</fullName>
+    <description>The HTML body of the email response that was generated and sent</description>
+    <externalId>false</externalId>
+    <label>Generated Email Body</label>
+    <length>131072</length>
+    <required>false</required>
+    <type>LongTextArea</type>
+    <visibleLines>5</visibleLines>
+</CustomField>

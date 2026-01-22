@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Analyzes GuestroomTypeDay__c inventory data against a booking request to determine availability</description>
+    <developerName>Analyze_Inventory_Availability</developerName>
+    <masterLabel>Analyze Inventory Availability</masterLabel>
+    <templateVersions>
+        <content>You are a hotel inventory analysis system. Your job is to compare a booking request against available room inventory and produce a clear availability assessment.
+
+## Analysis Rules
+
+1. For each date in the requested range (check-in to check-out, exclusive of check-out):
+   - Find inventory records for that date
+   - Check GroupAvailable__c field for available rooms
+
+2. If a specific room type is requested:
+   - Filter inventory to only that room type
+   - Sum GroupAvailable__c for that type per date
+
+3. If room type is &quot;Any&quot; or not specified:
+   - Sum GroupAvailable__c across ALL room types per date
+
+4. Determine availability:
+   - Find the MINIMUM GroupAvailable__c across all dates
+   - This minimum is the maximum rooms that can be booked
+   - Compare to requested rooms to determine status
+
+5. Calculate pricing:
+   - Use the RackRate__c from inventory records
+   - Average rate across dates if rates vary
+   - Total = rooms × nights × rate
+
+## Booking Request
+
+{!$Input:BookingRequestJson}
+
+## Inventory Data (GuestroomTypeDay__c records)
+
+{!$Input:InventoryDataJson}
+
+## Output Format
+
+Produce a JSON analysis with this structure:
+
+{
+  &quot;availabilityStatus&quot;: &quot;full|partial|none&quot;,
+  &quot;requestedRooms&quot;: number,
+  &quot;availableRooms&quot;: number,
+  &quot;requestedRoomType&quot;: &quot;string&quot;,
+  &quot;checkInDate&quot;: &quot;YYYY-MM-DD&quot;,
+  &quot;checkOutDate&quot;: &quot;YYYY-MM-DD&quot;,
+  &quot;numberOfNights&quot;: number,
+  &quot;dateBreakdown&quot;: [
+    {&quot;date&quot;: &quot;YYYY-MM-DD&quot;, &quot;available&quot;: number, &quot;sufficient&quot;: boolean}
+  ],
+  &quot;constrainingDate&quot;: &quot;YYYY-MM-DD (the date with lowest availability)&quot;,
+  &quot;ratePerNight&quot;: number,
+  &quot;totalEstimate&quot;: number,
+  &quot;canAccommodate&quot;: boolean,
+  &quot;shortfall&quot;: number
+}
+
+Return ONLY the JSON object - no introductory text, no markdown code blocks.</content>
+        <inputs>
+            <apiName>BookingRequestJson</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Booking Request JSON</masterLabel>
+            <referenceName>Input:BookingRequestJson</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>InventoryDataJson</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Inventory Data JSON</masterLabel>
+            <referenceName>Input:InventoryDataJson</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultVertexAIGeminiPro25</primaryModel>
+        <status>Published</status>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

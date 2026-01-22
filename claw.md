@@ -556,89 +556,184 @@ global with sharing class RevenueClassificationResource {
 
 ---
 
-## Deployment Instructions
+## Salesforce Deployments (SKILL)
 
-### Deploying to Connected Salesforce Org
+### Overview
 
-The default connected org alias for this project is `fdesdo`.
+**IMPORTANT**: When the user asks to deploy Salesforce metadata (Apex classes, Flows, LWC, etc.), use the Salesforce CLI commands below. Always deploy to the `fdesdo` org unless specified otherwise.
 
-#### Deploy a Single Apex Class
+### Default Org Configuration
+
+- **Org Alias**: `fdesdo`
+- **Project Directory**: `/Users/rreboucas/Documents/SFDX Projects/fdesdo/Fdesdo`
+
+### Quick Deploy Commands
+
+#### Deploy Specific Files (Most Common)
 
 ```bash
-sf project deploy start --source-dir force-app/main/default/classes/YourClassName.cls --target-org fdesdo
+# Deploy Apex class(es) and Flow
+sf project deploy start -o fdesdo -d force-app/main/default/classes/ClassName.cls -d force-app/main/default/classes/ClassName.cls-meta.xml -d force-app/main/default/flows/FlowName.flow-meta.xml
+
+# Deploy just an Apex class (include both .cls and .cls-meta.xml)
+sf project deploy start -o fdesdo -d force-app/main/default/classes/ClassName.cls -d force-app/main/default/classes/ClassName.cls-meta.xml
+
+# Deploy a Flow
+sf project deploy start -o fdesdo -d force-app/main/default/flows/FlowName.flow-meta.xml
+
+# Deploy an LWC component (entire folder)
+sf project deploy start -o fdesdo -d force-app/main/default/lwc/componentName
 ```
 
-#### Deploy Multiple Specific Files
-
-```bash
-sf project deploy start --source-dir force-app/main/default/classes/Class1.cls --source-dir force-app/main/default/classes/Class2.cls --target-org fdesdo
-```
-
-#### Deploy an Entire Directory
+#### Deploy by Directory
 
 ```bash
 # Deploy all classes
-sf project deploy start --source-dir force-app/main/default/classes --target-org fdesdo
+sf project deploy start -o fdesdo -d force-app/main/default/classes
 
 # Deploy all LWC components
-sf project deploy start --source-dir force-app/main/default/lwc --target-org fdesdo
+sf project deploy start -o fdesdo -d force-app/main/default/lwc
 
-# Deploy everything in force-app
-sf project deploy start --source-dir force-app --target-org fdesdo
+# Deploy all flows
+sf project deploy start -o fdesdo -d force-app/main/default/flows
+
+# Deploy everything
+sf project deploy start -o fdesdo -d force-app
 ```
 
-#### Deploy Using a Manifest File
+#### Deploy with Manifest
 
 ```bash
-sf project deploy start --manifest manifest/package.xml --target-org fdesdo
+sf project deploy start -o fdesdo -x manifest/package.xml
 ```
 
-#### Common Deployment Scenarios
+### Metadata Type Reference
+
+| Type | Location | Deploy Pattern |
+|------|----------|----------------|
+| Apex Class | `classes/Name.cls` + `classes/Name.cls-meta.xml` | Deploy both files together |
+| Apex Trigger | `triggers/Name.trigger` + `triggers/Name.trigger-meta.xml` | Deploy both files together |
+| Flow | `flows/Name.flow-meta.xml` | Single file |
+| LWC | `lwc/componentName/` (folder) | Deploy entire folder |
+| Aura | `aura/componentName/` (folder) | Deploy entire folder |
+| Lightning Type | `lightningTypes/typeName/` (folder) | Deploy entire folder |
+| Prompt Template | `genAiPromptTemplates/Name.genAiPromptTemplate-meta.xml` | Single file |
+| GenAI Function | `genAiFunctions/Name.genAiFunction-meta.xml` | Single file |
+| Custom Object | `objects/Name__c/` (folder) | Deploy entire folder |
+| Permission Set | `permissionsets/Name.permissionset-meta.xml` | Single file |
+
+### Common Deployment Scenarios
 
 | Scenario | Command |
 |----------|---------|
-| Deploy single Apex class | `sf project deploy start --source-dir force-app/main/default/classes/ClassName.cls --target-org fdesdo` |
-| Deploy LWC component | `sf project deploy start --source-dir force-app/main/default/lwc/componentName --target-org fdesdo` |
-| Deploy Lightning Type | `sf project deploy start --source-dir force-app/main/default/lightningTypes/typeName --target-org fdesdo` |
-| Deploy Prompt Template | `sf project deploy start --source-dir force-app/main/default/prompts/templateName --target-org fdesdo` |
-| Deploy GenAI Function | `sf project deploy start --source-dir force-app/main/default/genAiFunctions/functionName --target-org fdesdo` |
-| Deploy with validation only | `sf project deploy start --source-dir force-app --target-org fdesdo --dry-run` |
-| Deploy and run tests | `sf project deploy start --source-dir force-app --target-org fdesdo --test-level RunLocalTests` |
+| Single Apex class | `sf project deploy start -o fdesdo -d force-app/main/default/classes/ClassName.cls -d force-app/main/default/classes/ClassName.cls-meta.xml` |
+| Multiple Apex classes | Use multiple `-d` flags for each .cls and .cls-meta.xml file |
+| LWC component | `sf project deploy start -o fdesdo -d force-app/main/default/lwc/componentName` |
+| Flow | `sf project deploy start -o fdesdo -d force-app/main/default/flows/FlowName.flow-meta.xml` |
+| Validation only (no deploy) | Add `--dry-run` flag |
+| Deploy with tests | Add `--test-level RunLocalTests` flag |
+| Skip tests (dev only) | Add `--test-level NoTestRun` flag |
 
-#### Checking Deployment Status
+### Checking & Managing Deployments
 
 ```bash
-# Check status of a specific deployment
+# Check deployment status
 sf project deploy report --job-id <deploymentId>
 
-# Resume a failed/interrupted deployment
+# Resume failed/interrupted deployment
 sf project deploy resume --job-id <deploymentId>
+
+# Cancel a running deployment
+sf project deploy cancel --job-id <deploymentId>
 ```
 
-#### Retrieve Changes from Org
+### Retrieve from Org
 
 ```bash
 # Retrieve specific metadata
-sf project retrieve start --source-dir force-app/main/default/classes/ClassName.cls --target-org fdesdo
+sf project retrieve start -o fdesdo -d force-app/main/default/classes/ClassName.cls
 
 # Retrieve using manifest
-sf project retrieve start --manifest manifest/package.xml --target-org fdesdo
+sf project retrieve start -o fdesdo -x manifest/package.xml
+
+# Retrieve all metadata
+sf project retrieve start -o fdesdo -d force-app
 ```
 
-#### Troubleshooting Deployments
+### Troubleshooting
 
 | Issue | Solution |
 |-------|----------|
 | "Not authorized" error | Run `sf org login web --alias fdesdo` to re-authenticate |
-| Deployment timeout | Add `--wait 30` flag to wait longer (default is 33 minutes) |
+| Deployment timeout | Add `--wait 60` flag to wait longer |
 | Test failures blocking deploy | Use `--test-level NoTestRun` for non-production orgs |
 | Partial deployment needed | Use `--ignore-errors` to continue past failures |
+| "INVALID_TYPE" error | Check if metadata type is enabled in org (e.g., Einstein features) |
+| "Cannot modify managed object" | You're trying to modify a managed package component |
+
+### Best Practices
+
+1. **Always deploy meta.xml files with Apex**: When deploying `.cls` files, always include the corresponding `.cls-meta.xml`
+2. **Use -d for multiple files**: Combine multiple `-d` flags rather than separate commands
+3. **Validate first for large changes**: Use `--dry-run` to validate before deploying
+4. **Check deployment ID**: Save the Deploy ID from output to check status if needed
+5. **Run from project root**: Always run sf commands from the Salesforce project directory
 
 ---
 
-Last Updated: 2026-01-13
+---
+
+## Salesforce CLI SOQL Queries
+
+### Running SOQL Queries from Command Line
+
+Use the Salesforce CLI to run SOQL queries directly against the connected org.
+
+#### Basic Query Syntax
+
+```bash
+sf data query --query "SELECT Id, Name FROM Account LIMIT 10" -o fdesdo
+```
+
+#### Common Query Patterns
+
+| Scenario | Command |
+|----------|---------|
+| Simple query | `sf data query --query "SELECT Id, Name FROM Account LIMIT 10" -o fdesdo` |
+| Query with filter | `sf data query --query "SELECT Id, Name FROM Contact WHERE Email != null" -o fdesdo` |
+| Query with relationship | `sf data query --query "SELECT Id, Account.Name FROM Contact LIMIT 5" -o fdesdo` |
+| JSON output (for parsing) | `sf data query --query "SELECT Id, Name FROM Account" -o fdesdo --json` |
+| Query specific record | `sf data query --query "SELECT Id, Name FROM Account WHERE Id = 'xxxxx'" -o fdesdo` |
+
+#### Useful Queries for This Project
+
+```bash
+# Check Email Processing Logs
+sf data query --query "SELECT Id, Thread_Id__c, Email_Intent__c, Processing_Status__c, Subject__c, CreatedDate FROM Email_Processing_Log__c ORDER BY CreatedDate DESC LIMIT 10" -o fdesdo
+
+# Check Booking records
+sf data query --query "SELECT Id, Name, BookingStatus__c, ArrivalDate__c, DepartureDate__c, Property__c FROM Booking__c ORDER BY CreatedDate DESC LIMIT 10" -o fdesdo
+
+# Check GuestroomTypeDay inventory
+sf data query --query "SELECT Id, EffectiveDate__c, BlockedDefinite__c, GuestroomType__r.Name, Location__r.Name FROM GuestroomTypeDay__c WHERE Location__r.Name LIKE '%Ashworth%' AND EffectiveDate__c >= TODAY ORDER BY EffectiveDate__c LIMIT 20" -o fdesdo
+
+# Check Gmail Connection State
+sf data query --query "SELECT Id, Name, Connection_Developer_Name__c, Last_Poll_Timestamp__c, Last_Error_Message__c FROM Gmail_Connection_State__c" -o fdesdo
+```
+
+#### Tips
+
+- Always use `-o fdesdo` to specify the target org (or your org alias)
+- Use `--json` flag for machine-parseable output
+- Escape special characters in queries if needed
+- Use single quotes for string values in WHERE clauses
+
+---
+
+Last Updated: 2026-01-21
 Pattern Verified Working: Yes
 Critical Value Pattern Added: Yes
 Connect API Pattern Added: Yes
 Apex Resource Pattern Added: Yes (Winter '25)
-Deployment Instructions Added: Yes
+Salesforce Deployments Skill Added: Yes
+Salesforce CLI Queries Added: Yes

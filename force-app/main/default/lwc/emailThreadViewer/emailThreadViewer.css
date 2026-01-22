@@ -1,0 +1,66 @@
+/* Thread Summary Styles */
+.slds-list_horizontal dt {
+    width: 80px;
+    font-size: 12px;
+}
+
+.slds-list_horizontal dd {
+    flex: 1;
+    min-width: 150px;
+    margin-bottom: 8px;
+}
+
+/* Badge Styles */
+.slds-badge_success {
+    background-color: #04844b;
+    color: white;
+}
+
+.slds-badge_warning {
+    background-color: #fe9339;
+    color: white;
+}
+
+.slds-badge_inverse {
+    background-color: #706e6b;
+    color: white;
+}
+
+/* Tree Grid Row Styles */
+lightning-tree-grid {
+    --lwc-colorTextIconBrand: #0176d3;
+}
+
+/* Intent Column Colors */
+.slds-text-color_success {
+    color: #2e844a !important;
+    font-weight: 600;
+}
+
+.slds-text-color_error {
+    color: #ba0517 !important;
+    font-weight: 600;
+}
+
+/* Link Styles */
+.slds-text-link {
+    cursor: pointer;
+    color: #0176d3;
+    text-decoration: underline;
+}
+
+.slds-text-link:hover {
+    color: #014486;
+    text-decoration: none;
+}
+
+/* Card Header */
+:host lightning-card {
+    --slds-c-card-heading-font-size: 1.25rem;
+}
+
+/* Illustration for empty state */
+.slds-illustration {
+    text-align: center;
+    padding: 2rem;
+}

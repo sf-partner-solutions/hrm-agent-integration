@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_Intent__c</fullName>
+    <description>The classified intent of this email determined by AI analysis</description>
+    <externalId>false</externalId>
+    <label>Email Intent</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>New_Inquiry</fullName>
+                <default>false</default>
+                <label>New Inquiry</label>
+            </value>
+            <value>
+                <fullName>Follow_Up_Answer</fullName>
+                <default>false</default>
+                <label>Follow-Up Answer</label>
+            </value>
+            <value>
+                <fullName>Booking_Confirmation</fullName>
+                <default>false</default>
+                <label>Booking Confirmation</label>
+            </value>
+            <value>
+                <fullName>Booking_Rejection</fullName>
+                <default>false</default>
+                <label>Booking Rejection</label>
+            </value>
+            <value>
+                <fullName>General_Question</fullName>
+                <default>false</default>
+                <label>General Question</label>
+            </value>
+            <value>
+                <fullName>Modification_Request</fullName>
+                <default>false</default>
+                <label>Modification Request</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

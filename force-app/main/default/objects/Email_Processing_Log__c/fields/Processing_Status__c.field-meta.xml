@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Processing_Status__c</fullName>
+    <description>Current processing status of this email</description>
+    <externalId>false</externalId>
+    <label>Processing Status</label>
+    <required>false</required>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pending</fullName>
+                <default>true</default>
+                <label>Pending</label>
+            </value>
+            <value>
+                <fullName>Processed</fullName>
+                <default>false</default>
+                <label>Processed</label>
+            </value>
+            <value>
+                <fullName>Error</fullName>
+                <default>false</default>
+                <label>Error</label>
+            </value>
+            <value>
+                <fullName>Manual_Review</fullName>
+                <default>false</default>
+                <label>Manual Review</label>
+            </value>
+            <value>
+                <fullName>Skipped</fullName>
+                <default>false</default>
+                <label>Skipped</label>
+            </value>
+            <value>
+                <fullName>Pending_Email_Send</fullName>
+                <default>false</default>
+                <label>Pending Email Send</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Poll_In_Progress__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Flag to prevent concurrent polling operations</description>
+    <externalId>false</externalId>
+    <label>Poll In Progress</label>
+    <type>Checkbox</type>
+</CustomField>

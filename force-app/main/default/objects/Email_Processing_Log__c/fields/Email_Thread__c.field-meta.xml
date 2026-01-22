@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Email_Thread__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Reference to the Email Thread that groups this email with related messages in the conversation</description>
+    <externalId>false</externalId>
+    <label>Email Thread</label>
+    <referenceTo>Email_Thread__c</referenceTo>
+    <relationshipLabel>Email Processing Logs</relationshipLabel>
+    <relationshipName>Email_Processing_Logs</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

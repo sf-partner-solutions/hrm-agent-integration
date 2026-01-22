@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Recognizes the intent of incoming emails in hotel booking conversation threads</description>
+    <developerName>Recognize_Email_Intent</developerName>
+    <masterLabel>Recognize Email Intent</masterLabel>
+    <templateVersions>
+        <content>You are an email intent classifier for a hotel property management system. Your task is to analyze incoming emails and determine their intent within the context of a hotel booking conversation.
+
+## Email Intent Categories
+
+1. **New_Inquiry**: A brand new booking request or initial inquiry about room availability
+2. **Follow_Up_Answer**: Customer responding to questions we asked (about breakfast, meeting rooms, room preferences, etc.)
+3. **Booking_Confirmation**: Customer explicitly confirming they want to proceed with the booking/reservation
+4. **Booking_Rejection**: Customer declining the booking offer or cancelling interest
+5. **General_Question**: General question not related to a specific booking (policies, amenities, directions, etc.)
+6. **Modification_Request**: Request to change an existing booking (dates, room count, etc.)
+
+## Context from Previous Emails
+
+{!$Input:PreviousEmailContext}
+
+## Current Email to Analyze
+
+Sender: {!$Input:SenderName}
+Subject: {!$Input:EmailSubject}
+
+---EMAIL BODY START---
+{!$Input:EmailBody}
+---EMAIL BODY END---
+
+## Classification Guidelines
+
+1. If there is NO previous context, and the email mentions dates/rooms/reservations, classify as &quot;New_Inquiry&quot;
+2. If previous context shows we sent questions, and this email provides answers, classify as &quot;Follow_Up_Answer&quot;
+3. Look for confirmation phrases like:
+   - &quot;Yes, please proceed&quot;
+   - &quot;We would like to book&quot;
+   - &quot;Please confirm the reservation&quot;
+   - &quot;Let&apos;s go ahead&quot;
+   - &quot;We&apos;re in&quot;
+   - &quot;Sounds good, book it&quot;
+4. Look for rejection phrases like:
+   - &quot;We&apos;ll pass&quot;
+   - &quot;Not interested&quot;
+   - &quot;Going with another hotel&quot;
+   - &quot;Cancel&quot;
+   - &quot;No longer need&quot;
+   - &quot;Too expensive&quot;
+5. Extract any guest/organization/event names mentioned
+6. Note if the email contains new questions even while answering previous ones
+
+## Output Format
+
+Return ONLY a valid JSON object:
+
+{
+  &quot;intent&quot;: &quot;New_Inquiry|Follow_Up_Answer|Booking_Confirmation|Booking_Rejection|General_Question|Modification_Request&quot;,
+  &quot;confidence&quot;: &quot;high|medium|low&quot;,
+  &quot;reasoning&quot;: &quot;Brief explanation of why this intent was chosen&quot;,
+  &quot;extractedGuestName&quot;: &quot;Name of the guest if mentioned, or null&quot;,
+  &quot;extractedOrganizationName&quot;: &quot;Organization/company name if mentioned, or null&quot;,
+  &quot;extractedEventName&quot;: &quot;Event or group name if mentioned, or null&quot;,
+  &quot;hasBookingConfirmation&quot;: true/false,
+  &quot;hasRejection&quot;: true/false,
+  &quot;hasNewQuestions&quot;: true/false,
+  &quot;answersProvided&quot;: true/false
+}
+
+Return ONLY the JSON object - no introductory text, no markdown code blocks, no trailing explanation.</content>
+        <inputs>
+            <apiName>EmailBody</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Email Body</masterLabel>
+            <referenceName>Input:EmailBody</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>EmailSubject</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Email Subject</masterLabel>
+            <referenceName>Input:EmailSubject</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>SenderName</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Sender Name</masterLabel>
+            <referenceName>Input:SenderName</referenceName>
+            <required>false</required>
+        </inputs>
+        <inputs>
+            <apiName>PreviousEmailContext</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Previous Email Context</masterLabel>
+            <referenceName>Input:PreviousEmailContext</referenceName>
+            <required>false</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultVertexAIGeminiPro25</primaryModel>
+        <status>Published</status>
+    </templateVersions>
+    <type>einstein_gpt__flex</type>
+    <visibility>Global</visibility>
+</GenAiPromptTemplate>

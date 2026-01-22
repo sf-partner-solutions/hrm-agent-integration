@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Booking__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Associated booking record created from this email thread</description>
+    <externalId>false</externalId>
+    <label>Booking</label>
+    <referenceTo>Booking__c</referenceTo>
+    <relationshipLabel>Email Threads</relationshipLabel>
+    <relationshipName>Email_Threads</relationshipName>
+    <required>false</required>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>
