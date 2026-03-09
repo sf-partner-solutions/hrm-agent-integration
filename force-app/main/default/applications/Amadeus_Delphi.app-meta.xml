@@ -20,7 +20,8 @@
     <tabs>standard-report</tabs>
     <tabs>standard-B2bHome</tabs>
     <tabs>Item__c</tabs>
-    <tabs>PropertyMessage</tabs>
+    <tabs>GuestroomType__c</tabs>
+    <tabs>GuestroomTypeDay__c</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Amadeus_Delphi_UtilityBar</utilityBar>
 </CustomApplication>

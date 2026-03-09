@@ -48,13 +48,14 @@
     <enableFeeds>false</enableFeeds>
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
-    <enableReports>true</enableReports>
+    <enableReports>false</enableReports>
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
     <label>Guestroom Type</label>
     <nameField>
-        <label>Guestroom Type Name</label>
+        <label>Name</label>
         <type>Text</type>
     </nameField>
     <pluralLabel>Guestroom Types</pluralLabel>

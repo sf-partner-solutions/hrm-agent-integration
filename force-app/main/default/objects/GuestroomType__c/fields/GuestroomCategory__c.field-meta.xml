@@ -5,9 +5,8 @@
     <label>Guestroom Category</label>
     <deleteConstraint>SetNull</deleteConstraint>
     <referenceTo>SetupValue__c</referenceTo>
-    <relationshipLabel>Related Records</relationshipLabel>
-    <relationshipName>GuestroomCategory</relationshipName>
+    <relationshipLabel>Guestroom Types (Category)</relationshipLabel>
+    <relationshipName>GuestroomTypesCategory</relationshipName>
     <required>false</required>
-    <trackTrending>false</trackTrending>
     <type>Lookup</type>
 </CustomField>

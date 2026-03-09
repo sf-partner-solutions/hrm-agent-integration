@@ -2,8 +2,7 @@
 <CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
     <fullName>IsRunOfHouse__c</fullName>
     <externalId>false</externalId>
-    <label>Is Run Of House</label>
+    <label>Is Run of House</label>
     <defaultValue>false</defaultValue>
-    <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>
