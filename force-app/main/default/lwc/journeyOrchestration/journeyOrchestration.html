@@ -1,0 +1,213 @@
+<template>
+    <div class="page">
+        <!-- Header -->
+        <div class="page-header">
+            <div class="page-header-left">
+                <div class="page-icon-wrap">
+                    <svg viewBox="0 0 24 24" class="page-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 3v6a3 3 0 003 3h6a3 3 0 013 3v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="6" cy="3" r="2" fill="currentColor"/>
+                        <circle cx="18" cy="21" r="2" fill="currentColor"/>
+                        <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="page-title">Journey Orchestration</h1>
+                    <p class="page-subtitle">Build and manage automated communication journeys driven by traveler triggers</p>
+                </div>
+            </div>
+            <button class="btn-primary" onclick={handleNewJourney}>
+                <span class="btn-plus">+</span> New Journey
+            </button>
+        </div>
+
+        <!-- KPI Tiles -->
+        <div class="kpi-row">
+            <div class="kpi-tile">
+                <div class="kpi-icon kpi-icon-purple">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 3v6a3 3 0 003 3h6a3 3 0 013 3v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="6" cy="3" r="2" fill="currentColor"/>
+                        <circle cx="18" cy="21" r="2" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="kpi-content">
+                    <div class="kpi-value">{totalJourneys}</div>
+                    <div class="kpi-label">Total Journeys</div>
+                </div>
+            </div>
+            <div class="kpi-tile">
+                <div class="kpi-icon kpi-icon-green">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/>
+                        <path d="M10 9l5 3-5 3V9z" fill="currentColor"/>
+                    </svg>
+                </div>
+                <div class="kpi-content">
+                    <div class="kpi-value">{activeCount}</div>
+                    <div class="kpi-label">Active</div>
+                </div>
+            </div>
+            <div class="kpi-tile">
+                <div class="kpi-icon kpi-icon-amber">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 4h11l3 3v13H5V4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M9 12h6M9 16h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="kpi-content">
+                    <div class="kpi-value">{draftCount}</div>
+                    <div class="kpi-label">Draft</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search + Filter -->
+        <div class="filter-row">
+            <div class="search-box">
+                <svg viewBox="0 0 24 24" class="search-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+                    <path d="M20 20l-3-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <input type="text" placeholder="Search journeys..." value={searchTerm} oninput={handleSearch} />
+            </div>
+            <select class="type-select" value={typeFilter} onchange={handleTypeChange}>
+                <template for:each={typeOptions} for:item="opt">
+                    <option key={opt.value} value={opt.value}>{opt.label}</option>
+                </template>
+            </select>
+        </div>
+
+        <!-- My Journeys -->
+        <div class="section-header">
+            <span class="section-title">My Journeys</span>
+            <span class="section-count">{totalJourneys}</span>
+        </div>
+
+        <template if:true={hasJourneys}>
+            <div class="journey-grid">
+                <template for:each={filteredJourneys} for:item="j">
+                    <div key={j.apiName} class="journey-card">
+                        <div class="journey-card-top">
+                            <div class="journey-category">
+                                <span class="cat-icon">{j.categoryIcon}</span>
+                                <span class="cat-label">{j.categoryLabel}</span>
+                            </div>
+                            <span class={j.statusClass}>{j.statusLabel}</span>
+                        </div>
+                        <h3 class="journey-title">{j.label}</h3>
+                        <p class="journey-desc">{j.cleanedDescription}</p>
+                        <div class="journey-meta">
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" class="meta-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M4 10h16" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                {j.blocksLabel}
+                            </span>
+                            <span class="meta-item">
+                                <svg viewBox="0 0 24 24" class="meta-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="5" width="18" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M3 9h18M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                {j.modifiedLabel}
+                            </span>
+                        </div>
+
+                        <div class="stats-block">
+                            <div class="stats-row">
+                                <span class="stat-figure"><span class="stat-dot stat-dot-launched"></span>{j.launched} <span class="stat-pct">({j.launchedPct})</span></span>
+                                <span class="stat-figure"><span class="stat-dot stat-dot-actioned"></span>{j.actioned} <span class="stat-pct">({j.actionedPct})</span></span>
+                                <span class="stat-figure"><span class="stat-dot stat-dot-converted"></span>{j.converted} <span class="stat-pct">({j.convertedPct})</span></span>
+                            </div>
+                            <template if:true={j.hasAltConverted}>
+                                <div class="stats-row stats-row-alt">
+                                    <span class="stat-figure stat-alt"><span class="stat-dot stat-dot-alt"></span>{j.altConverted} <span class="stat-pct">({j.altConvertedPct})</span></span>
+                                </div>
+                            </template>
+                            <div class="funnel-bar" style={j.funnelStyle}></div>
+                            <div class="legend-row">
+                                <span class="legend-item"><span class="stat-dot stat-dot-launched"></span>Launched</span>
+                                <span class="legend-item"><span class="stat-dot stat-dot-actioned"></span>Actioned</span>
+                                <span class="legend-item"><span class="stat-dot stat-dot-converted"></span>Converted</span>
+                                <template if:true={j.hasAltConverted}>
+                                    <span class="legend-item"><span class="stat-dot stat-dot-alt"></span>Alt. converted</span>
+                                </template>
+                            </div>
+                        </div>
+
+                        <div class="tag-row">
+                            <template for:each={j.tags} for:item="tag">
+                                <span key={tag} class="tag-chip">{tag}</span>
+                            </template>
+                        </div>
+
+                        <div class="action-row">
+                            <button class="icon-btn" title="Edit" data-flowid={j.latestVersionId} onclick={handleEditJourney}>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 20h4l10-10-4-4L4 16v4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+                            </button>
+                            <button class="icon-btn icon-btn-primary" title="Optimize" data-apiname={j.apiName} data-label={j.label} data-category={j.category} onclick={handleOptimize}>
+                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" fill="currentColor"/>
+                                    <path d="M19 14l.7 1.8L21.5 16.5l-1.8.7L19 19l-.7-1.8L16.5 16.5l1.8-.7L19 14z" fill="currentColor"/>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <template if:false={hasJourneys}>
+            <div class="empty-state">No journeys match the current filters. Click <strong>+ New Journey</strong> to create one.</div>
+        </template>
+
+        <!-- Templates -->
+        <div class="template-section">
+            <div class="template-section-header">
+                <svg viewBox="0 0 24 24" class="template-icon" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="4" y="4" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                    <path d="M9 9h6M9 13h6M9 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <span class="template-section-title">Start from a Template</span>
+            </div>
+
+            <template if:true={hasTemplates}>
+                <div class="template-grid">
+                    <template for:each={filteredTemplates} for:item="t">
+                        <div key={t.apiName} class="template-card">
+                            <div class="template-card-top">
+                                <span class="template-card-icon">{t.templateIcon}</span>
+                                <span class="template-card-title">{t.label}</span>
+                            </div>
+                            <p class="template-card-desc">{t.cleanedDescription}</p>
+                            <div class="template-steps">
+                                <template for:each={t.steps} for:item="step">
+                                    <span key={step} class="step-chip">
+                                        <svg viewBox="0 0 24 24" class="step-chip-icon" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h16M4 12h16M4 18h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                                        {step}
+                                    </span>
+                                </template>
+                            </div>
+                            <button class="template-cta" data-flowid={t.latestVersionId} onclick={handleUseTemplate}>
+                                Use Template <span class="cta-arrow">→</span>
+                            </button>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template if:false={hasTemplates}>
+                <div class="empty-state">No templates available yet.</div>
+            </template>
+        </div>
+
+        <template if:true={isOptimizeOpen}>
+            <c-journey-optimization-agent
+                journey-api-name={optimizeJourney.apiName}
+                journey-label={optimizeJourney.label}
+                category={optimizeJourney.category}
+                onclose={handleOptimizeClose}
+                onapplyall={handleOptimizeApplyAll}>
+            </c-journey-optimization-agent>
+        </template>
+    </div>
+</template>

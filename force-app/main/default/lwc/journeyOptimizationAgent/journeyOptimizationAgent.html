@@ -1,0 +1,77 @@
+<template>
+    <div class="agent-backdrop" onclick={handleBackdropClick}>
+        <div class="agent-modal" onclick={stopPropagation} role="dialog" aria-modal="true" aria-labelledby="agent-title">
+            <header class="agent-header">
+                <div class="agent-header-left">
+                    <div class="agent-avatar">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3z" fill="currentColor"/>
+                            <path d="M19 14l.7 1.8L21.5 16.5l-1.8.7L19 19l-.7-1.8L16.5 16.5l1.8-.7L19 14z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h2 id="agent-title" class="agent-title">Journey Optimization Agent</h2>
+                        <p class="agent-subtitle">{journeySubtitle} · powered by Amadeus Data360</p>
+                    </div>
+                </div>
+                <button class="agent-close" title="Close" onclick={handleClose}>
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 6l12 12M6 18L18 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </header>
+
+            <section class="agent-body">
+                <template if:true={isThinking}>
+                    <div class="agent-thinking">
+                        <span class="thinking-icon">🤖</span>
+                        <span class="thinking-text">Analyzing Data360 trends across customer, operations and airline industry signals</span>
+                        <span class="thinking-dots">
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </span>
+                    </div>
+                </template>
+
+                <template if:true={hasAnyDisplayed}>
+                    <ul class="rec-list">
+                        <template for:each={displayedRecs} for:item="rec">
+                            <li key={rec.id} class={rec.cardClass}>
+                                <div class="rec-emoji">{rec.emoji}</div>
+                                <div class="rec-content">
+                                    <h3 class="rec-title">
+                                        {rec.typedTitle}<template if:true={rec.showTitleCursor}><span class="type-cursor">▍</span></template>
+                                    </h3>
+                                    <p class="rec-body">
+                                        {rec.typedBody}<template if:true={rec.showBodyCursor}><span class="type-cursor">▍</span></template>
+                                    </p>
+                                </div>
+                                <div class="rec-cta">
+                                    <template if:true={rec.showAcceptButton}>
+                                        <button class="rec-accept" data-id={rec.id} onclick={handleAccept}>Accept</button>
+                                    </template>
+                                    <template if:true={rec.showAppliedBadge}>
+                                        <span class="rec-applied">
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="check-icon">
+                                                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                            Applied
+                                        </span>
+                                    </template>
+                                </div>
+                            </li>
+                        </template>
+                    </ul>
+                </template>
+            </section>
+
+            <footer class="agent-footer">
+                <button class="btn-secondary" onclick={handleClose}>Cancel</button>
+                <button class="btn-primary" onclick={handleAcceptAll} disabled={acceptAllDisabled}>
+                    Accept All
+                </button>
+            </footer>
+        </div>
+    </div>
+</template>

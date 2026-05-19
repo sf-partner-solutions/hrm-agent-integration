@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <assignments>
+        <name>Build_Re_engagement_Message</name>
+        <label>Build Re-engagement Message</label>
+        <locationX>176</locationX>
+        <locationY>650</locationY>
+        <assignmentItems>
+            <assignToReference>messageBody</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>We saved your trip - complete your booking today and earn bonus miles.</stringValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Mark_Engaged</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Mark_Engaged</name>
+        <label>Mark Engaged</label>
+        <locationX>176</locationX>
+        <locationY>770</locationY>
+        <assignmentItems>
+            <assignToReference>journeyState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>engaged</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <assignments>
+        <name>Skip_Suppress</name>
+        <label>Skip - Suppress</label>
+        <locationX>440</locationX>
+        <locationY>530</locationY>
+        <assignmentItems>
+            <assignToReference>journeyState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>suppressed</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <decisions>
+        <name>Has_Marketing_Consent</name>
+        <label>Has Marketing Consent?</label>
+        <locationX>308</locationX>
+        <locationY>290</locationY>
+        <defaultConnectorLabel>No Consent</defaultConnectorLabel>
+        <defaultConnector>
+            <targetReference>Skip_Suppress</targetReference>
+        </defaultConnector>
+        <rules>
+            <name>Consent_Granted</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>marketingConsent</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Fatigue_Check</targetReference>
+            </connector>
+            <label>Consent Granted</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Fatigue_Check</name>
+        <label>Communication Fatigue Check</label>
+        <locationX>176</locationX>
+        <locationY>410</locationY>
+        <defaultConnectorLabel>Too Many Comms</defaultConnectorLabel>
+        <defaultConnector>
+            <targetReference>Skip_Suppress</targetReference>
+        </defaultConnector>
+        <rules>
+            <name>Fatigue_OK</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>recentCommsCount</leftValueReference>
+                <operator>LessThan</operator>
+                <rightValue>
+                    <numberValue>3.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Build_Re_engagement_Message</targetReference>
+            </connector>
+            <label>Fatigue OK</label>
+        </rules>
+    </decisions>
+    <description>Re-engage travelers who abandoned a cart. Checks fatigue &amp; consent, then sends inspirational re-engagement. [category:CART_RETARGETING]</description>
+    <interviewLabel>Cart Retargeting {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Cart Retargeting</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Account</name>
+        <label>Get Account</label>
+        <locationX>176</locationX>
+        <locationY>170</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Has_Marketing_Consent</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>accountId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Account</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Get_Account</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>accountId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>journeyState</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>messageBody</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>marketingConsent</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>recentCommsCount</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+    </variables>
+</Flow>

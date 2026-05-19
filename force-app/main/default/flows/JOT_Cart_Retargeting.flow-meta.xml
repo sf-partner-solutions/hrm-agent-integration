@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <assignments>
+        <name>Mark_Engaged</name>
+        <label>Mark Engaged</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>journeyState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>engaged</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Re-engage travelers who abandoned a cart. Checks fatigue &amp; consent, then sends inspirational re-engagement. [category:CART_RETARGETING]</description>
+    <interviewLabel>Cart Retargeting Template {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
+    <label>Cart Retargeting Template</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Mark_Engaged</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>journeyState</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

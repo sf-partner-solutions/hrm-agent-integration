@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>64.0</apiVersion>
+    <assignments>
+        <name>Mark_Engaged</name>
+        <label>Mark Engaged</label>
+        <locationX>176</locationX>
+        <locationY>278</locationY>
+        <assignmentItems>
+            <assignToReference>journeyState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>engaged</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <description>Proactively offer ancillaries after order creation. Adapts offer type based on time to departure. [category:UPSELL]</description>
+    <interviewLabel>Post-Booking Upsell Template {!$Flow.CurrentDateTime}</interviewLabel>
+    <isTemplate>true</isTemplate>
+    <label>Post-Booking Upsell Template</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Mark_Engaged</targetReference>
+        </connector>
+    </start>
+    <status>Active</status>
+    <variables>
+        <name>journeyState</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>
