@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sample_Type__c</fullName>
+    <label>Sample Type</label>
+    <externalId>false</externalId>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value><fullName>Tissue</fullName><default>false</default><label>Tissue</label></value>
+            <value><fullName>Blood</fullName><default>false</default><label>Blood</label></value>
+            <value><fullName>Saliva</fullName><default>false</default><label>Saliva</label></value>
+            <value><fullName>Urine</fullName><default>false</default><label>Urine</label></value>
+            <value><fullName>Cells</fullName><default>false</default><label>Cells</label></value>
+            <value><fullName>Cell Pellet</fullName><default>false</default><label>Cell Pellet</label></value>
+            <value><fullName>DNA</fullName><default>false</default><label>DNA</label></value>
+            <value><fullName>RNA</fullName><default>false</default><label>RNA</label></value>
+            <value><fullName>Plasma</fullName><default>false</default><label>Plasma</label></value>
+            <value><fullName>Serum</fullName><default>false</default><label>Serum</label></value>
+            <value><fullName>Other</fullName><default>false</default><label>Other</label></value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

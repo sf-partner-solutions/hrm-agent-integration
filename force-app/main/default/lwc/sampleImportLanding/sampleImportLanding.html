@@ -1,0 +1,26 @@
+<template>
+    <div class="slds-page-header slds-m-bottom_medium">
+        <div class="slds-page-header__row">
+            <div class="slds-page-header__col-title">
+                <div class="slds-media">
+                    <div class="slds-media__figure">
+                        <lightning-icon icon-name="custom:custom31" size="medium"></lightning-icon>
+                    </div>
+                    <div class="slds-media__body">
+                        <h1 class="slds-page-header__title">Import Samples</h1>
+                        <p class="slds-text-color_weak">Add new samples to your lab by AI-parsed TRF or CSV.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slds-grid slds-gutters slds-wrap">
+        <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">
+            <c-sample-import-router></c-sample-import-router>
+        </div>
+        <div class="slds-col slds-size_1-of-1">
+            <c-sample-csv-import-preview></c-sample-csv-import-preview>
+        </div>
+    </div>
+</template>

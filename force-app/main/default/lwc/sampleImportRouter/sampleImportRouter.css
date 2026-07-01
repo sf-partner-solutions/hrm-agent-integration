@@ -1,0 +1,9 @@
+:host {
+    display: block;
+    width: 100%;
+}
+
+.error-box {
+    max-width: 520px;
+    margin: 0 auto;
+}

@@ -1,0 +1,33 @@
+<template>
+    <div class="slds-card slds-p-around_medium">
+        <header class="slds-grid slds-grid_align-spread slds-m-bottom_small">
+            <h2 class="slds-text-heading_medium">
+                <lightning-icon icon-name="utility:upload" size="small" class="slds-m-right_x-small"></lightning-icon>
+                Import from CSV
+            </h2>
+            <span class="slds-text-color_weak slds-text-body_small">Existing functionality</span>
+        </header>
+
+        <div class="slds-grid slds-grid_align-spread slds-m-bottom_medium">
+            <div>
+                <p class="slds-text-body_regular slds-m-bottom_x-small">Upload your CSV file here</p>
+                <lightning-button label="Choose File" onclick={handleChooseFile} icon-name="utility:file" class="slds-m-right_small"></lightning-button>
+                <span class="slds-text-color_weak">{fileName}</span>
+            </div>
+            <div>
+                <template if:true={hasFile}>
+                    <lightning-button variant="brand" label="Looks good, import!" onclick={handleImport}></lightning-button>
+                </template>
+            </div>
+        </div>
+
+        <h3 class="slds-text-heading_small slds-m-bottom_x-small">Data Preview</h3>
+        <lightning-datatable
+            key-field="id"
+            data={rows}
+            columns={columns}
+            hide-checkbox-column>
+        </lightning-datatable>
+        <p class="slds-text-color_weak slds-m-top_x-small">Showing 1 to 10 of 10 entries</p>
+    </div>
+</template>

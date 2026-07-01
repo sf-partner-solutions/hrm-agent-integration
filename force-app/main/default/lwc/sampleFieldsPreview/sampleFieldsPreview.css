@@ -1,0 +1,10 @@
+.preview-card {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.section-heading {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 0.25rem;
+}

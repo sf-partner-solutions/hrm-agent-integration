@@ -1,0 +1,34 @@
+<template>
+    <article class="slds-card">
+        <header class="slds-card__header slds-grid slds-grid_align-spread slds-grid_vertical-align-center banner-header">
+            <div class="slds-media slds-media_center">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="custom:custom20" size="medium"></lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_medium">Samples</span>
+                    </h2>
+                    <p class="slds-text-body_small slds-text-color_weak">Submitted Samples</p>
+                </div>
+            </div>
+            <div class="slds-no-flex">
+                <lightning-button label="New" onclick={handleNew} class="slds-m-right_x-small"></lightning-button>
+                <lightning-button variant="brand" label="Import Samples" icon-name="utility:upload" onclick={handleImport} class="slds-m-right_x-small"></lightning-button>
+                <lightning-button label="Print Labels" onclick={handleNoop} class="slds-m-right_x-small"></lightning-button>
+                <lightning-button label="Freeze" onclick={handleNoop} class="slds-m-right_x-small"></lightning-button>
+                <lightning-button label="Thaw" onclick={handleNoop}></lightning-button>
+            </div>
+        </header>
+
+        <div class="slds-card__body slds-card__body_inner">
+            <p class="slds-text-color_weak slds-m-bottom_x-small">{sampleCount} items · Filtered by All samples</p>
+            <lightning-datatable
+                key-field="Id"
+                data={samples}
+                columns={columns}
+                hide-checkbox-column>
+            </lightning-datatable>
+        </div>
+    </article>
+</template>

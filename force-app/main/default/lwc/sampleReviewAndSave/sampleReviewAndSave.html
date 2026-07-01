@@ -1,0 +1,141 @@
+<template>
+    <div class="slds-grid slds-grid_vertical full-height-container">
+        <!-- Header -->
+        <div class="page-header">
+            <div class="slds-page-header">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <lightning-icon icon-name="utility:einstein" size="medium"></lightning-icon>
+                            </div>
+                            <div class="slds-media__body">
+                                <h1 class="slds-page-header__title slds-truncate">Review &amp; Save Sample</h1>
+                                <p class="slds-text-body_small slds-text-color_weak">
+                                    {fileName}
+                                    <template if:true={extractedDate}> · extracted {extractedDate}</template>
+                                    <template if:true={confidenceNotes}> · <em>{confidenceNotes}</em></template>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-page-header__col-actions">
+                        <div class="slds-page-header__controls">
+                            <div class="slds-page-header__control">
+                                <lightning-button label="Cancel" onclick={handleCancel} disabled={isSaving}></lightning-button>
+                            </div>
+                            <div class="slds-page-header__control">
+                                <lightning-button
+                                    variant="brand"
+                                    label="Import"
+                                    icon-name="utility:upload"
+                                    onclick={handleImport}
+                                    disabled={isSaving}>
+                                </lightning-button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Split body -->
+        <div class="split-view-container">
+            <div class="slds-grid slds-gutters_x-small full-height">
+                <!-- LEFT: editable table -->
+                <div class="slds-col slds-size_1-of-2 panel-container">
+                    <article class="slds-card full-height">
+                        <header class="slds-card__header">
+                            <h2 class="slds-card__header-title">
+                                <lightning-icon icon-name="utility:table" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                Extracted Sample Fields
+                            </h2>
+                            <p class="slds-text-body_small slds-text-color_weak">Edit any value, then click Import.</p>
+                        </header>
+                        <div class="slds-card__body slds-card__body_inner table-scroll">
+                            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_fixed-layout">
+                                <thead>
+                                    <tr class="slds-line-height_reset">
+                                        <th class="slds-text-title_caps" scope="col" style="width:40%;">Field</th>
+                                        <th class="slds-text-title_caps" scope="col">Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <template for:each={rows} for:item="r">
+                                        <tr key={r.api} class="slds-hint-parent">
+                                            <th scope="row" class="field-label-cell">
+                                                <div class="slds-text-body_small slds-text-color_weak">{r.group}</div>
+                                                <div class="slds-text-body_regular">{r.label}</div>
+                                            </th>
+                                            <td>
+                                                <template if:true={r.isText}>
+                                                    <lightning-input variant="label-hidden" label={r.label} type="text" value={r.value} data-field={r.api} data-type="text" onchange={handleChange}></lightning-input>
+                                                </template>
+                                                <template if:true={r.isDate}>
+                                                    <lightning-input variant="label-hidden" label={r.label} type="date" value={r.value} data-field={r.api} data-type="date" onchange={handleChange}></lightning-input>
+                                                </template>
+                                                <template if:true={r.isNumber}>
+                                                    <lightning-input variant="label-hidden" label={r.label} type="number" step="0.01" value={r.value} data-field={r.api} data-type="number" onchange={handleChange}></lightning-input>
+                                                </template>
+                                                <template if:true={r.isTextarea}>
+                                                    <lightning-textarea variant="label-hidden" label={r.label} value={r.value} data-field={r.api} data-type="text" onchange={handleChange}></lightning-textarea>
+                                                </template>
+                                                <template if:true={r.isCheckbox}>
+                                                    <lightning-input variant="label-hidden" label={r.label} type="checkbox" checked={r.checked} data-field={r.api} data-type="checkbox" onchange={handleChange}></lightning-input>
+                                                </template>
+                                                <template if:true={r.isPicklist}>
+                                                    <lightning-combobox variant="label-hidden" label={r.label} value={r.value} options={r.options} data-field={r.api} data-type="text" onchange={handleChange}></lightning-combobox>
+                                                </template>
+                                            </td>
+                                        </tr>
+                                    </template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- RIGHT: PDF preview -->
+                <div class="slds-col slds-size_1-of-2 panel-container">
+                    <article class="slds-card full-height">
+                        <header class="slds-card__header">
+                            <h2 class="slds-card__header-title">
+                                <lightning-icon icon-name="doctype:pdf" size="small" class="slds-m-right_x-small"></lightning-icon>
+                                Original TRF
+                            </h2>
+                            <p class="slds-text-body_small slds-text-color_weak">{fileName}</p>
+                        </header>
+                        <div class="slds-card__body pdf-container">
+                            <template if:true={hasPdf}>
+                                <div class="pdf-viewer">
+                                    <object
+                                        data={pdfUrl}
+                                        type="application/pdf"
+                                        width="100%"
+                                        height="100%"
+                                        aria-label="TRF PDF Document">
+                                        <embed src={pdfUrl} type="application/pdf" width="100%" height="100%" />
+                                    </object>
+                                </div>
+                            </template>
+                            <template if:false={hasPdf}>
+                                <div class="slds-align_absolute-center slds-m-vertical_large">
+                                    <div class="slds-text-align_center">
+                                        <lightning-icon icon-name="utility:file" size="large" class="slds-m-bottom_small"></lightning-icon>
+                                        <p class="slds-text-heading_small">No document available</p>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+
+        <template if:true={isSaving}>
+            <div class="loading-overlay">
+                <lightning-spinner alternative-text="Creating Sample…" size="large"></lightning-spinner>
+            </div>
+        </template>
+    </div>
+</template>

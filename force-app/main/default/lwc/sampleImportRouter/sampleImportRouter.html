@@ -1,0 +1,32 @@
+<template>
+    <template if:true={showUpload}>
+        <c-sample-trf-upload-handler onfileuploaded={handleFileUploaded}></c-sample-trf-upload-handler>
+    </template>
+
+    <template if:true={showPreview}>
+        <c-sample-fields-preview
+            extracted-json={extractedJson}
+            file-name={fileName}
+            content-document-id={contentDocumentId}
+            onimported={handleImported}
+            oncancel={handleCancel}>
+        </c-sample-fields-preview>
+    </template>
+
+    <template if:true={showSuccess}>
+        <c-sample-import-success
+            record-id={createdRecordId}
+            record-name={createdRecordName}
+            onreset={handleReset}>
+        </c-sample-import-success>
+    </template>
+
+    <template if:true={showError}>
+        <div class="slds-box slds-theme_error slds-text-align_center error-box">
+            <lightning-icon icon-name="utility:error" variant="error" size="small"></lightning-icon>
+            <h3 class="slds-text-heading_small slds-m-top_x-small">We hit a snag</h3>
+            <p>{errorMessage}</p>
+            <lightning-button class="slds-m-top_small" label="Try again" onclick={handleReset}></lightning-button>
+        </div>
+    </template>
+</template>

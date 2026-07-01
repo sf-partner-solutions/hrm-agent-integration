@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>Sample Management Admin</label>
+    <description>Full access to Sample Management: Sample__c CRUD, all fields, Apex classes, tabs, and the Sample Management app.</description>
+    <applicationVisibilities>
+        <application>Sample_Management</application>
+        <visible>true</visible>
+    </applicationVisibilities>
+    <objectPermissions>
+        <object>Sample__c</object>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Customer_Sample_Name__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Sample_ID__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Sample_Type__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Frozen__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Date_of_Collection__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Number_of_Aliquots__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Current_Protocol__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Next_Protocol__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Concentration__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Quality_Control_Check__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Freezer_Refrigerator__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Drawer__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Box_ID__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Rack__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Box_Position__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Patient_Name__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Patient_DOB__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Patient_MRN__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Patient_Gender__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Ordering_Physician__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Tests_Requested__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Clinical_Notes__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Priority__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Status__c</field><readable>true</readable></fieldPermissions>
+    <fieldPermissions><editable>true</editable><field>Sample__c.Record_Type_Label__c</field><readable>true</readable></fieldPermissions>
+    <tabSettings><tab>Sample__c</tab><visibility>Visible</visibility></tabSettings>
+    <tabSettings><tab>Sample_Management_Home</tab><visibility>Visible</visibility></tabSettings>
+    <tabSettings><tab>Sample_Import</tab><visibility>Visible</visibility></tabSettings>
+    <classAccesses><apexClass>SampleTrfAgentAction</apexClass><enabled>true</enabled></classAccesses>
+    <classAccesses><apexClass>SampleTrfParser</apexClass><enabled>true</enabled></classAccesses>
+    <classAccesses><apexClass>SampleTrfController</apexClass><enabled>true</enabled></classAccesses>
+    <classAccesses><apexClass>SampleTrfControllerTest</apexClass><enabled>true</enabled></classAccesses>
+</PermissionSet>
